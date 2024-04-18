@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class HelloApplication extends Application {
 
-    // Constants for width and heigh
+    // Constants for width and height
     private static final double WIDTH = 700;
     private static final double HEIGHT = 330;
 
