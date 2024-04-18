@@ -15,8 +15,8 @@ import java.io.IOException;
 public class HelloController {
 
     public Button loginButton;
-    private final int WIDTH = 700;
-    private final int HEIGHT = 350;
+    private final int WIDTH = 580;
+    private final int HEIGHT = 270;
 
     @FXML
     protected void onHelloButtonClick() throws IOException {
@@ -29,7 +29,7 @@ public class HelloController {
         double screenWidth = Screen.getPrimary().getBounds().getWidth();
         double screenHeight = Screen.getPrimary().getBounds().getHeight();
         double bottomRightX = screenWidth - (WIDTH + 9);
-        double bottomRightY = screenHeight - (HEIGHT + 70);
+        double bottomRightY = screenHeight - (HEIGHT + 75);
 
         // Set the position of the stage
         stage.setX(bottomRightX);
