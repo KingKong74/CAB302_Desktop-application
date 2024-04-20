@@ -1,43 +1,23 @@
 package com.example.main_sem_proj.controller;
-
-import com.example.main_sem_proj.HelloApplication;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class HelloController {
 
     public Button loginButton;
+
     private final int WIDTH = 580;
     private final int HEIGHT = 270;
 
     @FXML
-    protected void onHelloButtonClick() throws IOException {
+    protected void onHelloButtonClick() {
         Stage stage = (Stage) loginButton.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("main-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), WIDTH, HEIGHT);
-        stage.setScene(scene);
 
-        // Calculate the X and Y coordinates for bottom right corner
-        double screenWidth = Screen.getPrimary().getBounds().getWidth();
-        double screenHeight = Screen.getPrimary().getBounds().getHeight();
-        double bottomRightX = screenWidth - (WIDTH + 9);
-        double bottomRightY = screenHeight - (HEIGHT + 75);
+        // Go to Main window
+        MainController.ButtonClick();
 
-        // Set the position of the stage
-        stage.setX(bottomRightX);
-        stage.setY(bottomRightY);
-
-        stage.show();
-
-
+        stage.close();
     }
 }
 
