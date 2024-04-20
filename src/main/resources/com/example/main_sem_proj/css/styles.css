@@ -5,6 +5,7 @@
     -fx-padding: 40 0 0 0;
 }
 
+
 .slider-thumb {
     /* -fx-background-radius: 10px; /* Set the radius to make it round */
     /*-fx-pref-height: 20px; /* Set the height of the thumb */
@@ -15,6 +16,7 @@
     -fx-scale-x: 2;
     -fx-scale-y: 2;
 }
+
 
 #mainHbox {
     -fx-padding: 0 65 0 0;
