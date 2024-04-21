@@ -1,58 +1,71 @@
 package com.example.main_sem_proj.controller;
 
 import com.example.main_sem_proj.HelloApplication;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.stage.Window;
+import javafx.util.Duration;
 
 import java.io.IOException;
-
-import static com.example.main_sem_proj.controller.ControllerUtils.popupStage;
-
 
 public class MainController {
 
     /**
-     * Handles the click event of login button to open main GUI
+     * Handles the click event of the login button to open the main GUI.
      */
     @FXML
     protected static void ButtonClick() {
-
         final String TITLE = "Iz.Lumin";
         final int WIDTH = 580;
         final int HEIGHT = 270;
 
         try {
-            Stage stage = new Stage();
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/main-view.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), WIDTH, HEIGHT);
-            stage.setTitle(TITLE);
-            stage.setResizable(false);  // no user resizing
-            stage.setScene(scene);
-
-            // Calculate the X and Y coordinates for bottom right corner
-            double screenWidth = Screen.getPrimary().getBounds().getWidth();
-            double screenHeight = Screen.getPrimary().getBounds().getHeight();
-            double bottomRightX = screenWidth - (WIDTH + 9);
-            double bottomRightY = screenHeight - (HEIGHT + 75);
-
-            // Set the position of the stage
-            stage.setX(bottomRightX);
-            stage.setY(bottomRightY);
-
+            Stage stage = createStage(TITLE, WIDTH, HEIGHT);
+            setStagePosition(stage, WIDTH, HEIGHT);
             stage.show();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Creates a new stage for the main GUI.
+     *
+     * @param title  The title of the stage.
+     * @param width  The width of the stage.
+     * @param height The height of the stage.
+     * @return The created stage.
+     * @throws IOException If an error occurs while loading the FXML file.
+     */
+    private static Stage createStage(String title, int width, int height) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/main-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), width, height);
+        stage.setTitle(title);
+        stage.setResizable(false);  // Disable user resizing
+        stage.setScene(scene);
+        return stage;
+    }
+
+    /**
+     * Sets the position of the stage to the bottom right corner of the screen.
+     *
+     * @param stage The stage to set the position for.
+     */
+    private static void setStagePosition(Stage stage, double width, double height) {
+        double screenWidth = Screen.getPrimary().getBounds().getWidth();
+        double screenHeight = Screen.getPrimary().getBounds().getHeight();
+        double bottomRightX = screenWidth - (width + 9);
+        double bottomRightY = screenHeight - (height + 75);
+        stage.setX(bottomRightX);
+        stage.setY(bottomRightY);
     }
 
     public Setting getCurrentSetting() {
@@ -87,8 +100,8 @@ public class MainController {
         if (currentSetting != setting) {
             currentSetting = setting;
             handleSettingChange(setting);
-        }else {
-            System.out.println( currentSetting + " disabled");
+        } else {
+            System.out.println(currentSetting + " disabled");
             currentSetting = null;
         }
     }
@@ -105,69 +118,98 @@ public class MainController {
         }
     }
 
-    enum Popup {
-        NOTIFICATIONS,
-        SETTINGS
-    }
 
-    static Popup currentPopup = null;
+    //
+    // Pop up windows
+    //
+
+
     public static boolean isPopupOpen = false;
 
     @FXML
     protected void onNotificationsButtonClick(MouseEvent event) {
-        System.out.println("Notifications " + isPopupOpen);
-        double x = event.getScreenX();
-        double y = event.getScreenY();
-        //System.out.println("Mouse clicked at: X=" + x + ", Y=" + y);
+        double[] coordinates = getScreenCoordinates(event);
+        double x = coordinates[0];
+        double y = coordinates[1];
 
-        handlePopupButtonClick(Popup.NOTIFICATIONS, () -> NotificationsController.ButtonClick(x, y));
-
+        NotificationsController.ButtonClick(x, y);
     }
 
     @FXML
     protected void onSettingsButtonClick(MouseEvent event) {
-        System.out.println("Settings " + isPopupOpen);
-        double x = event.getScreenX();
-        double y = event.getScreenY();
-       // System.out.println("Mouse clicked at: X=" + x + ", Y=" + y);
+        double[] coordinates = getScreenCoordinates(event);
+        double x = coordinates[0];
+        double y = coordinates[1];
 
-        handlePopupButtonClick(Popup.SETTINGS, () -> SettingsController.ButtonClick(x, y));
-
+        SettingsController.ButtonClick(x, y);
     }
 
     /**
-     * Handles the button click event for opening or closing a popup window.
-     * If the specified popup type is already open, it closes the popup.
-     * If no popup is currently open, it opens the specified popup and executes the button click action.
-     * If another popup is already open, it closes the current popup and opens the specified one, then executes the button click action.
+     * Get the screen coordinates of the mouse event.
      *
-     * @param popup          The type of popup to handle.
-     * @param buttonClickAction The action to execute when the button is clicked.
+     * @param event The MouseEvent containing the screen coordinates.
+     * @return An array containing the x and y coordinates.
      */
-    private void handlePopupButtonClick(Popup popup, Runnable buttonClickAction) {
-        if (currentPopup == popup) {
-            popupStage.close();
-            System.out.println("Closing popup");
-            currentPopup = null;
-            isPopupOpen = false;
-        } else if (!isPopupOpen) {
-            openPopup(popup);
-            buttonClickAction.run();
-        } else if (isPopupOpen){
-            popupStage.close();
-            openPopup(popup);
-            buttonClickAction.run();
-            System.out.println("hit True");
+    private double[] getScreenCoordinates(MouseEvent event) {
+        double x = event.getScreenX();
+        double y = event.getScreenY();
+        return new double[]{x, y};
+    }
+
+
+    //
+    // Timer
+    //
+
+    @FXML
+    private Button timerButton;
+
+    private Timeline timeline;
+    private int notificationTime = 60 * 60; // Predefined duration in seconds
+
+    @FXML
+    protected void pushedTimer(ActionEvent event) {
+        if (timeline == null) {
+            startTimer();
+            timerButton.setText("⏵");
         } else {
-            System.out.println("Error");
+            stopTimer();
+            //timerButton.setText("⏸");
         }
     }
 
-    protected void openPopup(Popup popup) {
-        System.out.println("Opening " + popup.toString() + " popup");
+    public void startTimer() {
+        timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
+            notificationTime--;
+            updateButtonLabel();
+            if (notificationTime <= 0) {
+                stopTimer();
+                System.out.println("Timer ended!");
+            }
+        }));
+        timeline.setCycleCount(Timeline.INDEFINITE); // Set the cycle count to indefinite
+        timeline.play();
+        updateButtonLabel();
     }
 
+    public void stopTimer() {
+        if (timeline != null) {
+            timeline.stop();
+            timeline = null;
+            notificationTime = 45; // Reset remaining seconds
+            updateButtonLabel();
+        }
+    }
+
+    private void updateButtonLabel() {
+        int hours = notificationTime / 3600;
+        int minutes = (notificationTime % 3600) / 60;
+        int seconds = notificationTime % 60;
+        String timeString = String.format("%02d:%02d:%02d", hours, minutes, seconds);
+        timerButton.setText(timeString);
+    }
 }
+
 
 
 

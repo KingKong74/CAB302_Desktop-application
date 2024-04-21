@@ -29,7 +29,7 @@
             <padding>
                 <Insets left="24.0"/>
             </padding>
-            <Button text="00:00:00" prefWidth="80" /> <!--onAction="#startTimer"-->
+            <Button fx:id="timerButton" text="00:00:00" prefWidth="80" onAction="#pushedTimer" />
         </HBox>
 
         <HBox fx:id="topHbox" alignment="TOP_RIGHT">

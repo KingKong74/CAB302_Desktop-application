@@ -9,6 +9,6 @@ public class SettingsController extends MainController {
 
     @FXML
     protected static void ButtonClick(double x, double y) {
-        ControllerUtils.ButtonClick(VIEW, x, y, TITLE);
+        PopupController.ButtonClick(VIEW, x, y, TITLE);
     }
 }

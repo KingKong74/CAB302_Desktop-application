@@ -36,4 +36,9 @@ public class MainControllerTest {
         controller.handleSwitchClick(MainController.Setting.FOCUS_MODE);
         assertNull(controller.getCurrentSetting());
     }
+
+    @Test
+    void testTimerStarts() {
+
+    }
 }
