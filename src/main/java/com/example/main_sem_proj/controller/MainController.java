@@ -15,7 +15,7 @@ import javafx.stage.Window;
 
 import java.io.IOException;
 
-import static com.example.main_sem_proj.controller.NotificationsController.popupStage;
+import static com.example.main_sem_proj.controller.ControllerUtils.popupStage;
 
 
 public class MainController {
@@ -26,6 +26,7 @@ public class MainController {
     @FXML
     protected static void ButtonClick() {
 
+        final String TITLE = "Iz.Lumin";
         final int WIDTH = 580;
         final int HEIGHT = 270;
 
@@ -33,6 +34,7 @@ public class MainController {
             Stage stage = new Stage();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/main-view.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), WIDTH, HEIGHT);
+            stage.setTitle(TITLE);
             stage.setResizable(false);  // no user resizing
             stage.setScene(scene);
 
@@ -109,22 +111,28 @@ public class MainController {
     }
 
     static Popup currentPopup = null;
-    public static boolean isPopupOpen;
+    public static boolean isPopupOpen = false;
 
     @FXML
     protected void onNotificationsButtonClick(MouseEvent event) {
+        System.out.println("Notifications " + isPopupOpen);
         double x = event.getScreenX();
         double y = event.getScreenY();
-        System.out.println("Mouse clicked at: X=" + x + ", Y=" + y);
+        //System.out.println("Mouse clicked at: X=" + x + ", Y=" + y);
+
         handlePopupButtonClick(Popup.NOTIFICATIONS, () -> NotificationsController.ButtonClick(x, y));
+
     }
 
     @FXML
     protected void onSettingsButtonClick(MouseEvent event) {
+        System.out.println("Settings " + isPopupOpen);
         double x = event.getScreenX();
         double y = event.getScreenY();
-        System.out.println("Mouse clicked at: X=" + x + ", Y=" + y);
-        handlePopupButtonClick(Popup.SETTINGS, SettingsController::ButtonClick);
+       // System.out.println("Mouse clicked at: X=" + x + ", Y=" + y);
+
+        handlePopupButtonClick(Popup.SETTINGS, () -> SettingsController.ButtonClick(x, y));
+
     }
 
     /**
@@ -141,29 +149,24 @@ public class MainController {
             popupStage.close();
             System.out.println("Closing popup");
             currentPopup = null;
+            isPopupOpen = false;
         } else if (!isPopupOpen) {
             openPopup(popup);
             buttonClickAction.run();
-            isPopupOpen = false;
-        } else {
+        } else if (isPopupOpen){
             popupStage.close();
             openPopup(popup);
             buttonClickAction.run();
-            isPopupOpen = false;
+            System.out.println("hit True");
+        } else {
+            System.out.println("Error");
         }
     }
 
     protected void openPopup(Popup popup) {
         System.out.println("Opening " + popup.toString() + " popup");
-        currentPopup = popup;
     }
 
-//    protected static void closePopup() {
-//        if (currentPopup != null) {
-//            System.out.println("Closing " + currentPopup.toString() + " popup");
-//            currentPopup = null;
-//        }
-//    }
 }
 
 
