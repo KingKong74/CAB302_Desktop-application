@@ -4,8 +4,11 @@ import javafx.fxml.FXML;
 
 public class SettingsController extends MainController {
 
-    @FXML
-    protected static void ButtonClick() {
+    private static final String TITLE = "Settings";
+    private static final String VIEW = "settings";
 
+    @FXML
+    protected static void ButtonClick(double x, double y) {
+        ControllerUtils.ButtonClick(VIEW, x, y, TITLE);
     }
 }
