@@ -9,16 +9,16 @@ import java.io.IOException;
     public class HelloApplication extends Application {
 
         // Constants defining the window title and size
-        public static final String TITLE = "Iz.Lumin";
-        public static final int WIDTH = 300;
-        public static final int HEIGHT = 300;
+        private static final String TITLE = "Iz.Lumin";
+        private static final int WIDTH = 300;
+        private static final int HEIGHT = 300;
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), WIDTH, HEIGHT);
         stage.setTitle(TITLE);
-        stage.setResizable(false); // changed to cannot resize (BK)
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }

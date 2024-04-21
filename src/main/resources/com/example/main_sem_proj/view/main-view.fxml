@@ -17,7 +17,7 @@
 <?import javafx.scene.image.Image?>
 <VBox xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.main_sem_proj.controller.MainController"
-      stylesheets="@css/styles.css"
+      stylesheets="@../css/styles.css"
       alignment="CENTER">
 
     <padding>
@@ -55,10 +55,10 @@
 
     <HBox fx:id="mainHbox" alignment="CENTER" spacing="50.0">
         <Label fx:id="mainIcons" styleClass="main-buttons"/>
-        <Button id="darkModeButton" text="DarkMode" styleClass="main-buttons" onAction="#onDarkModeButtonClick" prefWidth="100" prefHeight="100"/>
-        <Button id="focusModeButton" text="FocusMode" styleClass="main-buttons" onAction="#onFocusModeButtonClick" prefWidth="100" prefHeight="100"/>
-        <Button id="notificationsButton" text="Notifications" styleClass="main-buttons" onAction="#onNotificationsButtonClick" prefWidth="100" prefHeight="100"/>
-        <Button id="settingsButton" text="Settings" styleClass="main-buttons" onAction="#onSettingsButtonClick" prefWidth="100" prefHeight="100"/>
+        <Button fx:id="darkModeButton" text="DarkMode" styleClass="main-buttons" onAction="#onDarkModeButtonClick" prefWidth="100" prefHeight="100"/>
+        <Button fx:id="focusModeButton" text="FocusMode" styleClass="main-buttons" onAction="#onFocusModeButtonClick" prefWidth="100" prefHeight="100"/>
+        <Button fx:id="notificationsButton" text="Notifications" styleClass="main-buttons" onMouseClicked="#onNotificationsButtonClick" prefWidth="100" prefHeight="100"/>
+        <Button fx:id="settingsButton" text="Settings" styleClass="main-buttons" onMouseClicked="#onSettingsButtonClick" prefWidth="100" prefHeight="100"/>
     </HBox>
 
     <VBox prefHeight="70.0" />

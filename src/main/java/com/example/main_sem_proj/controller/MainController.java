@@ -1,9 +1,58 @@
 package com.example.main_sem_proj.controller;
 
+import com.example.main_sem_proj.HelloApplication;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.stage.Window;
+
+import java.io.IOException;
+
+import static com.example.main_sem_proj.controller.NotificationsController.popupStage;
 
 
 public class MainController {
+
+    /**
+     * Handles the click event of login button to open main GUI
+     */
+    @FXML
+    protected static void ButtonClick() {
+
+        final int WIDTH = 580;
+        final int HEIGHT = 270;
+
+        try {
+            Stage stage = new Stage();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/main-view.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), WIDTH, HEIGHT);
+            stage.setResizable(false);  // no user resizing
+            stage.setScene(scene);
+
+            // Calculate the X and Y coordinates for bottom right corner
+            double screenWidth = Screen.getPrimary().getBounds().getWidth();
+            double screenHeight = Screen.getPrimary().getBounds().getHeight();
+            double bottomRightX = screenWidth - (WIDTH + 9);
+            double bottomRightY = screenHeight - (HEIGHT + 75);
+
+            // Set the position of the stage
+            stage.setX(bottomRightX);
+            stage.setY(bottomRightY);
+
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public Setting getCurrentSetting() {
         return currentSetting;
     }
@@ -59,35 +108,62 @@ public class MainController {
         SETTINGS
     }
 
-    private Popup currentPopup = null;
+    static Popup currentPopup = null;
+    public static boolean isPopupOpen;
 
     @FXML
-    protected void onNotificationsButtonClick() {
-        handlePopup(Popup.NOTIFICATIONS);
-    }
-    @FXML
-    protected void onSettingsButtonClick() {
-        handlePopup(Popup.SETTINGS);
+    protected void onNotificationsButtonClick(MouseEvent event) {
+        double x = event.getScreenX();
+        double y = event.getScreenY();
+        System.out.println("Mouse clicked at: X=" + x + ", Y=" + y);
+        handlePopupButtonClick(Popup.NOTIFICATIONS, () -> NotificationsController.ButtonClick(x, y));
     }
 
-    private void handlePopup(Popup popup) {
-        if (currentPopup != popup) {
-            closePopup();
+    @FXML
+    protected void onSettingsButtonClick(MouseEvent event) {
+        double x = event.getScreenX();
+        double y = event.getScreenY();
+        System.out.println("Mouse clicked at: X=" + x + ", Y=" + y);
+        handlePopupButtonClick(Popup.SETTINGS, SettingsController::ButtonClick);
+    }
+
+    /**
+     * Handles the button click event for opening or closing a popup window.
+     * If the specified popup type is already open, it closes the popup.
+     * If no popup is currently open, it opens the specified popup and executes the button click action.
+     * If another popup is already open, it closes the current popup and opens the specified one, then executes the button click action.
+     *
+     * @param popup          The type of popup to handle.
+     * @param buttonClickAction The action to execute when the button is clicked.
+     */
+    private void handlePopupButtonClick(Popup popup, Runnable buttonClickAction) {
+        if (currentPopup == popup) {
+            popupStage.close();
+            System.out.println("Closing popup");
+            currentPopup = null;
+        } else if (!isPopupOpen) {
             openPopup(popup);
+            buttonClickAction.run();
+            isPopupOpen = false;
+        } else {
+            popupStage.close();
+            openPopup(popup);
+            buttonClickAction.run();
+            isPopupOpen = false;
         }
     }
 
-    private void openPopup(Popup popup) {
+    protected void openPopup(Popup popup) {
         System.out.println("Opening " + popup.toString() + " popup");
         currentPopup = popup;
     }
 
-    private void closePopup() {
-        if (currentPopup != null) {
-            System.out.println("Closing " + currentPopup.toString() + " popup");
-            currentPopup = null;
-        }
-    }
+//    protected static void closePopup() {
+//        if (currentPopup != null) {
+//            System.out.println("Closing " + currentPopup.toString() + " popup");
+//            currentPopup = null;
+//        }
+//    }
 }
 
 
