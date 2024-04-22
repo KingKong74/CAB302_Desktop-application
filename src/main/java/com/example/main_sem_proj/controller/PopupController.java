@@ -74,13 +74,7 @@ public class PopupController extends MainController {
      * @param y The y-coordinate of the mouse click.
      * @return Array containing the x and y coordinates of the popup window.
      */
-    /**
-     * Calculates the position of the popup window based on the mouse click coordinates.
-     *
-     * @param x The x-coordinate of the mouse click.
-     * @param y The y-coordinate of the mouse click.
-     * @return Array containing the x and y coordinates of the popup window.
-     */
+
     public static double[] calculatePopupPosition(double x, double y) {
         double popupX = x - WIDTH / 2;
         double popupY = y - HEIGHT / 2 - 80;
