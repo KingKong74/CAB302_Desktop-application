@@ -21,7 +21,7 @@ public class MainController {
      * Handles the click event of the login button to open the main GUI.
      */
     @FXML
-    protected static void ButtonClick() {
+    public static void ButtonClick() {
         final String TITLE = "Iz.Lumin";
         final int WIDTH = 580;
         final int HEIGHT = 270;

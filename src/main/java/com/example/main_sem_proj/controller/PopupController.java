@@ -52,7 +52,7 @@ public class PopupController extends MainController {
      * @return FXMLLoader object for the loaded FXML file.
      * @throws IOException If an error occurs while loading the FXML file.
      */
-    private static FXMLLoader loadFXML(String view) throws IOException {
+    public static FXMLLoader loadFXML(String view) throws IOException {
         return new FXMLLoader(HelloApplication.class.getResource("view/" + view + "-view.fxml"));
     }
 
@@ -63,7 +63,7 @@ public class PopupController extends MainController {
      * @return Scene object for the popup.
      * @throws IOException If an error occurs while creating the scene.
      */
-    private static Scene createScene(FXMLLoader fxmlLoader) throws IOException {
+    public static Scene createScene(FXMLLoader fxmlLoader) throws IOException {
         return new Scene(fxmlLoader.load(), WIDTH, HEIGHT);
     }
 
@@ -74,13 +74,33 @@ public class PopupController extends MainController {
      * @param y The y-coordinate of the mouse click.
      * @return Array containing the x and y coordinates of the popup window.
      */
-    private static double[] calculatePopupPosition(double x, double y) {
+    /**
+     * Calculates the position of the popup window based on the mouse click coordinates.
+     *
+     * @param x The x-coordinate of the mouse click.
+     * @param y The y-coordinate of the mouse click.
+     * @return Array containing the x and y coordinates of the popup window.
+     */
+    public static double[] calculatePopupPosition(double x, double y) {
         double popupX = x - WIDTH / 2;
         double popupY = y - HEIGHT / 2 - 80;
 
-        // Adjust if the popup goes out of the screen bounds
         double screenWidth = Screen.getPrimary().getBounds().getWidth();
         double screenHeight = Screen.getPrimary().getBounds().getHeight();
+
+        return adjustPopupPosition(popupX, popupY, screenWidth, screenHeight);
+    }
+
+    /**
+     * Adjusts the position of the popup window if it goes out of the screen bounds.
+     *
+     * @param popupX       The calculated x-coordinate of the popup window.
+     * @param popupY       The calculated y-coordinate of the popup window.
+     * @param screenWidth  The width of the screen.
+     * @param screenHeight The height of the screen.
+     * @return Array containing the adjusted x and y coordinates of the popup window.
+     */
+    private static double[] adjustPopupPosition(double popupX, double popupY, double screenWidth, double screenHeight) {
         if (popupX < 0) {
             popupX = 0;
         } else if (popupX + WIDTH > screenWidth) {
@@ -122,7 +142,7 @@ public class PopupController extends MainController {
     /**
      * Closes the popup window.
      */
-    private static void closePopup() {
+    public static void closePopup() {
         popupStage.close();
         isPopupOpen = false;
     }
