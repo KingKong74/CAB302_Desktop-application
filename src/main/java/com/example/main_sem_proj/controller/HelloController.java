@@ -35,7 +35,7 @@ public class HelloController {
         Stage stage = (Stage) loginButton.getScene().getWindow();
 
         // Go to Main window
-        MainController.ButtonClick();
+        MainController.LogOnButtonClick();
 
         stage.close();
     }
