@@ -18,7 +18,7 @@ public class LoginController extends MainController {
 
     public static void start() {
         Stage primaryStage = new Stage();
-        primaryStage.setTitle("LOGIN");
+        primaryStage.setTitle("Iz.Lumin");
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
@@ -29,8 +29,8 @@ public class LoginController extends MainController {
         Scene scene = new Scene(grid, 350, 200);
         primaryStage.setScene(scene);
 
-        Text scenetitle = new Text("Welcome");
-        scenetitle.setFont(Font.font("Calibri", FontWeight.NORMAL, 20));
+        Text scenetitle = new Text("Welcome to Iz.Lumin");
+        scenetitle.setFont(Font.font("Calibri", 22));
         grid.add(scenetitle, 0,0,2,1);
 
         Label userName = new Label("Username");
@@ -49,11 +49,11 @@ public class LoginController extends MainController {
         Hbutton.getChildren().add(signButton);
         grid.add(Hbutton, 1, 4);
         primaryStage.show();
+        // CREATING ONACTION OF SIGNON TO OPEN MAINGUI
         signButton.setOnAction( e ->  {
             MainController.ButtonClick();
+            //CLOSES SIGN ON PAGE
+            primaryStage.close();
         });
-
     }
-
-
 }
