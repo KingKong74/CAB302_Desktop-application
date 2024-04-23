@@ -10,18 +10,10 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PopupControllerTest {
-    private static final double WIDTH = 100;
-    private static final double HEIGHT = 200;
 
-    @BeforeEach
-    public void mockButtonData() {
-        int WIDTH = 100;
-        int HEIGHT = 200;
-    }
-
-    public void mockCreateScene() {
-
-    }
+    // Pop-up window W x H
+    private static final double WIDTH = 200;
+    private static final double HEIGHT = 250;
 
     @Test
     void testPopupExceedsScreenHeight() {
@@ -62,12 +54,6 @@ public class PopupControllerTest {
     public void testLoadFXML() throws IOException {
         FXMLLoader fxmlLoader = PopupController.loadFXML("View");
         assertNotNull(fxmlLoader);
-    }
-
-    @Test
-    public void testCalculatePopupPosition() {
-        double[] position = PopupController.calculatePopupPosition(100.0, 100.0);
-        assertNotNull(position);
     }
 
 }

@@ -33,7 +33,11 @@ public class PopupController extends MainController {
             FXMLLoader fxmlLoader = loadFXML(VIEW);
             Scene scene = createScene(fxmlLoader);
 
-            double[] popupPosition = calculatePopupPosition(x, y);
+            double[] screenParams = getScreenParams();
+            double screenWidth = screenParams[0];
+            double screenHeight = screenParams[1];
+
+            double[] popupPosition = calculatePopupPosition(x, y, screenWidth, screenHeight);
             double popupX = popupPosition[0];
             double popupY = popupPosition[1];
 
@@ -67,6 +71,13 @@ public class PopupController extends MainController {
         return new Scene(fxmlLoader.load(), WIDTH, HEIGHT);
     }
 
+
+    public static double[] getScreenParams() {
+        double screenWidth = Screen.getPrimary().getBounds().getWidth();
+        double screenHeight = Screen.getPrimary().getBounds().getHeight();
+        return new double [] {screenWidth, screenHeight};
+    }
+
     /**
      * Calculates the position of the popup window based on the mouse click coordinates.
      *
@@ -75,12 +86,9 @@ public class PopupController extends MainController {
      * @return Array containing the x and y coordinates of the popup window.
      */
 
-    public static double[] calculatePopupPosition(double x, double y) {
+    public static double[] calculatePopupPosition(double x, double y, double screenWidth, double screenHeight) {
         double popupX = x - WIDTH / 2;
         double popupY = y - HEIGHT / 2 - 80;
-
-        double screenWidth = Screen.getPrimary().getBounds().getWidth();
-        double screenHeight = Screen.getPrimary().getBounds().getHeight();
 
         return adjustPopupPosition(popupX, popupY, screenWidth, screenHeight);
     }
