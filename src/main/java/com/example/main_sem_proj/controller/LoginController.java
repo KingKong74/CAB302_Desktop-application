@@ -17,7 +17,7 @@ public class LoginController extends MainController {
 
     public static void Register() {
         Stage registerScreen = new Stage();
-        registerScreen.setTitle("REGISTER");
+        registerScreen.setTitle("Iz.Lumin");
         GridPane Regi = new GridPane();
         Regi.setAlignment(Pos.CENTER);
         Regi.setHgap(10);
@@ -51,7 +51,7 @@ public class LoginController extends MainController {
         HBox registration = new HBox(10);
         registration.setAlignment(Pos.CENTER);
         registration.getChildren().add(Confirm);
-        Regi.add(registration, 2,3);
+        Regi.add(registration, 3,3);
 
         registerScreen.show();
 
