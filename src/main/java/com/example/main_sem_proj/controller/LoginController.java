@@ -15,6 +15,51 @@ import javafx.stage.Stage;
 
 public class LoginController extends MainController {
 
+    public static void Register() {
+        Stage registerScreen = new Stage();
+        registerScreen.setTitle("REGISTER");
+        GridPane Regi = new GridPane();
+        Regi.setAlignment(Pos.CENTER);
+        Regi.setHgap(10);
+        Regi.setVgap(10);
+        Regi.setPadding(new Insets(25, 25, 25, 25));
+
+        Button Confirm = new Button("Confirm");
+
+        Scene scene = new Scene(Regi, 350, 150 );
+        registerScreen.setScene(scene);
+
+        Text scenetitle = new Text("REGISTER FORM");
+        scenetitle.setFont(Font.font("Calibri", 22));
+        Regi.add(scenetitle, 0, 0, 2, 1);
+
+        Label Email = new Label("Email:");
+        Regi.add(Email,0,1);
+        TextField emailTextField = new TextField();
+        Regi.add(emailTextField, 1, 1);
+
+        Label Username = new Label("Username:");
+        Regi.add(Username, 0, 2);
+        TextField usernameTextField = new TextField();
+        Regi.add(usernameTextField, 1, 2);
+
+        Label Password = new Label("Password:");
+        Regi.add(Password, 0, 3);
+        TextField passwordTextField = new TextField();
+        Regi.add(passwordTextField, 1, 3);
+
+        HBox registration = new HBox(10);
+        registration.setAlignment(Pos.CENTER);
+        registration.getChildren().add(Confirm);
+        Regi.add(registration, 2,3);
+
+        registerScreen.show();
+
+        Confirm.setOnAction( e -> {
+            registerScreen.close();
+        });
+
+    }
     public static void start() {
         Stage primaryStage = new Stage();
         primaryStage.setTitle("Iz.Lumin");
@@ -43,24 +88,30 @@ public class LoginController extends MainController {
         grid.add(passwordBox, 1, 2);
 
         Button signButton = new Button("Sign in");
+        Button registerButton = new Button("Register");
+
         HBox Sbutton = new HBox(10);
         Sbutton.setAlignment(Pos.BOTTOM_LEFT);
         Sbutton.getChildren().add(signButton);
         grid.add(Sbutton, 1, 3);
 
-        Button registerButton = new Button("Register");
         HBox Rbutton = new HBox(10);
-        Rbutton.setAlignment(Pos.BOTTOM_RIGHT);
+        Rbutton.setAlignment(Pos.BOTTOM_LEFT);
         Rbutton.getChildren().add(registerButton);
-        grid.add(Rbutton,2,3);
-
-
+        grid.add(Rbutton, 2, 3);
         primaryStage.show();
+
+        registerButton.setOnAction(e -> {
+            Register();
+        });
         // CREATING ONACTION OF SIGNON TO OPEN MAINGUI
         signButton.setOnAction( e ->  {
             MainController.ButtonClick();
             //CLOSES SIGN ON PAGE
             primaryStage.close();
         });
+
+
+
     }
 }
