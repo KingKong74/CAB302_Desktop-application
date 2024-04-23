@@ -10,8 +10,8 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PopupControllerTest {
-   private int WIDTH = 100;
-   private int HEIGHT = 200;
+   private static final double WIDTH = 100;
+    private static final double HEIGHT = 200;
 
     @BeforeEach
     public void mockButtonData() {
@@ -23,6 +23,16 @@ public class PopupControllerTest {
 
     }
 
+    @Test
+    void testPopupWithinBounds() {
+        double screenWidth = 800;
+        double screenHeight = 600;
+        double popupX = 300;
+        double popupY = 200;
+
+        double[] adjusted = PopupController.adjustPopupPosition(popupX, popupY, screenWidth, screenHeight);
+        assertArrayEquals(new double[]{300, 200}, adjusted, "Popup should not adjust when within bounds");
+    }
     @Test
     public void testLoadFXML() throws IOException {
             FXMLLoader fxmlLoader = PopupController.loadFXML("View");
