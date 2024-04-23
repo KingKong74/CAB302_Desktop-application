@@ -94,7 +94,7 @@ public class PopupController extends MainController {
      * @param screenHeight The height of the screen.
      * @return Array containing the adjusted x and y coordinates of the popup window.
      */
-    private static double[] adjustPopupPosition(double popupX, double popupY, double screenWidth, double screenHeight) {
+    public static double[] adjustPopupPosition(double popupX, double popupY, double screenWidth, double screenHeight) {
         if (popupX < 0) {
             popupX = 0;
         } else if (popupX + WIDTH > screenWidth) {
