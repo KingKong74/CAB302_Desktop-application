@@ -3,7 +3,7 @@ package com.example.main_sem_proj.controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 
-public class AControlller {
+public class TrollControlller {
     @FXML
     private TextArea asciiTextArea;
 
