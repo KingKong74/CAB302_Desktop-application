@@ -10,7 +10,7 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PopupControllerTest {
-   private static final double WIDTH = 100;
+    private static final double WIDTH = 100;
     private static final double HEIGHT = 200;
 
     @BeforeEach
@@ -19,8 +19,32 @@ public class PopupControllerTest {
         int HEIGHT = 200;
     }
 
-    public void mockCreateScene(){
+    public void mockCreateScene() {
 
+    }
+
+    @Test
+    void testPopupExceedsScreenHeight() {
+        double screenWidth = 800;
+        double screenHeight = 600;
+        double popupX = 200;
+        double popupY = 550; // This would cause the popup to exceed the screen height
+
+        double[] adjusted = PopupController.adjustPopupPosition(popupX, popupY, screenWidth, screenHeight);
+        assertArrayEquals(new double[]{200, screenHeight - HEIGHT}, adjusted, "Popup should adjust upward " +
+                "to fit on screen");
+    }
+
+    @Test
+    void testPopupExceedsScreenWidth() {
+        double screenWidth = 800;
+        double screenHeight = 600;
+        double popupX = 700; // This would cause the popup to exceed the screen width
+        double popupY = 200;
+
+        double[] adjusted = PopupController.adjustPopupPosition(popupX, popupY, screenWidth, screenHeight);
+        assertArrayEquals(new double[]{screenWidth - WIDTH, 200}, adjusted, "Popup should adjust to the " +
+                "left to fit on screen");
     }
 
     @Test
@@ -33,10 +57,11 @@ public class PopupControllerTest {
         double[] adjusted = PopupController.adjustPopupPosition(popupX, popupY, screenWidth, screenHeight);
         assertArrayEquals(new double[]{300, 200}, adjusted, "Popup should not adjust when within bounds");
     }
+
     @Test
     public void testLoadFXML() throws IOException {
-            FXMLLoader fxmlLoader = PopupController.loadFXML("View");
-            assertNotNull(fxmlLoader);
+        FXMLLoader fxmlLoader = PopupController.loadFXML("View");
+        assertNotNull(fxmlLoader);
     }
 
     @Test
