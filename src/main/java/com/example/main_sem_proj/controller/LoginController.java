@@ -10,7 +10,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -29,7 +28,7 @@ public class LoginController extends MainController {
         Scene scene = new Scene(grid, 350, 200);
         primaryStage.setScene(scene);
 
-        Text scenetitle = new Text("Welcome to Iz.Lumin");
+        Text scenetitle = new Text("Welcome");
         scenetitle.setFont(Font.font("Calibri", 22));
         grid.add(scenetitle, 0,0,2,1);
 
@@ -44,10 +43,18 @@ public class LoginController extends MainController {
         grid.add(passwordBox, 1, 2);
 
         Button signButton = new Button("Sign in");
-        HBox Hbutton = new HBox(10);
-        Hbutton.setAlignment(Pos.BOTTOM_RIGHT);
-        Hbutton.getChildren().add(signButton);
-        grid.add(Hbutton, 1, 4);
+        HBox Sbutton = new HBox(10);
+        Sbutton.setAlignment(Pos.BOTTOM_LEFT);
+        Sbutton.getChildren().add(signButton);
+        grid.add(Sbutton, 1, 3);
+
+        Button registerButton = new Button("Register");
+        HBox Rbutton = new HBox(10);
+        Rbutton.setAlignment(Pos.BOTTOM_RIGHT);
+        Rbutton.getChildren().add(registerButton);
+        grid.add(Rbutton,2,3);
+
+
         primaryStage.show();
         // CREATING ONACTION OF SIGNON TO OPEN MAINGUI
         signButton.setOnAction( e ->  {
