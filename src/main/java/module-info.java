@@ -6,4 +6,5 @@ module com.example.main_sem_proj {
     opens com.example.main_sem_proj.controller to javafx.fxml;
     exports com.example.main_sem_proj;
     exports com.example.main_sem_proj.controller;
+    exports com.example.main_sem_proj.model;
 }
