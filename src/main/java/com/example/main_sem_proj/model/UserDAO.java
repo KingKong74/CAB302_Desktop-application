@@ -5,6 +5,6 @@ public interface UserDAO {
 
     void addUser(UserDetails user);
 
-    public UserDetails getUser(String email);
+    public Boolean getUser(String email);
     public List<UserDetails> getAllUsers();
 }

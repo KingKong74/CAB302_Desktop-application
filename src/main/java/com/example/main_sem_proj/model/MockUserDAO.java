@@ -9,10 +9,10 @@ public class MockUserDAO implements UserDAO {
         users.add(user);
     }
     @Override
-    public UserDetails getUser(String email) {
+    public Boolean getUser(String email) {
         for (UserDetails user : users) {
             if (user.getEmail() == email) {
-                return user;
+                return true;
             }
         }
         return null;

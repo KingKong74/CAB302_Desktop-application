@@ -32,7 +32,7 @@ public class ValidateEmailTest {
     }
     @Test
     void validateEmail_withAtSymbolButNoDotCom(){
-        String Test = "Trainrunner47.com";
+        String Test = "Trainrunner47@gmail";
         Boolean result = validation.ValidateEmail(Test);
         assertEquals(false, result);
     }
