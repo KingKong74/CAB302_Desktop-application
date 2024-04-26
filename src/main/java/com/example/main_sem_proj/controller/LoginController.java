@@ -15,9 +15,13 @@ import javafx.stage.Stage;
 
 public class LoginController extends MainController {
 
+    /**
+     * Set
+     */
     public static void Register() {
         Stage registerScreen = new Stage();
         registerScreen.setTitle("Iz.Lumin");
+        registerScreen.setResizable(false);
         GridPane Regi = new GridPane();
         Regi.setAlignment(Pos.CENTER);
         Regi.setHgap(10);
@@ -60,9 +64,14 @@ public class LoginController extends MainController {
         });
 
     }
+
+    /**
+     * Starts
+     */
     public static void start() {
         Stage primaryStage = new Stage();
         primaryStage.setTitle("Iz.Lumin");
+        primaryStage.setResizable(false);
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);

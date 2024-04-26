@@ -20,11 +20,6 @@ public class MainController {
     /**
      * Handles the click event of the login button to open the main GUI.
      */
-    @FXML
-    public static void LogOnButtonClick() {
-        LoginController.start();
-    }
-
     public static void ButtonClick() {
         final String TITLE = "Iz.Lumin";
         final int WIDTH = 580;

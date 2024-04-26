@@ -34,8 +34,8 @@ public class HelloController {
     protected void onHelloButtonClick() {
         Stage stage = (Stage) loginButton.getScene().getWindow();
 
-        // Go to Main window
-        MainController.LogOnButtonClick();
+        // Go to Log in Window
+        LoginController.start();
 
         stage.close();
     }
