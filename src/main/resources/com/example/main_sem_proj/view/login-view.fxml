@@ -1,0 +1,33 @@
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Button?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Hyperlink?>
+<VBox xmlns:fx="http://javafx.com/javafx"
+      fx:controller="com.example.main_sem_proj.controller.LoginController"
+      alignment="CENTER"
+      spacing="5">
+
+    <Label text="Login" style="-fx-font-size: 18px;"/>
+
+    <HBox alignment="CENTER">
+        <TextField fx:id="usernameField" promptText="Email" styleClass="Hbox_Login"/>
+    </HBox>
+
+    <HBox alignment="CENTER">
+        <PasswordField fx:id="passwordField" promptText="Password" styleClass="Hbox_Login"/>
+    </HBox>
+
+    <HBox alignment="CENTER">
+        <Label text="No Account? Register" style="-fx-font-size: 9px;"/>
+        <Hyperlink text="Here" onAction="#handleRegisterHyperlink" style="-fx-font-size: 9px;"/>
+    </HBox>
+
+    <HBox alignment="CENTER">
+        <Button text="Login" onAction="#handleSignIn" styleClass="Hbox_Login" prefWidth="100" />
+    </HBox>
+
+</VBox>

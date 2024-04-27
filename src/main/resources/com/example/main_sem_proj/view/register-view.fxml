@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.CheckBox?>
+
+<?import javafx.scene.control.Hyperlink?>
+<VBox xmlns:fx="http://javafx.com/javafx"
+      fx:controller="com.example.main_sem_proj.controller.LoginController"
+      alignment="CENTER"
+      spacing="5">
+
+    <HBox alignment="CENTER" spacing="30">
+        <VBox spacing="0" alignment="TOP_LEFT">
+            <Label text="Full Name:"/>
+            <TextField fx:id="firstNameField" promptText="Enter your first name" prefWidth="135" maxWidth="135"/>
+        </VBox>
+
+        <HBox spacing="0" alignment="BOTTOM_CENTER">
+            <TextField fx:id="lastNameField" promptText="Enter your last name" prefWidth="135" maxWidth="135"/>
+        </HBox>
+    </HBox>
+
+    <HBox alignment="CENTER">
+        <VBox spacing="0" alignment="TOP_LEFT">
+            <Label text="Email:"/>
+            <TextField fx:id="emailField" promptText="Enter your email" prefWidth="300" maxWidth="300"/>
+        </VBox>
+    </HBox>
+
+    <HBox alignment="CENTER">
+        <VBox spacing="0" alignment="TOP_LEFT">
+            <Label text="Password:"/>
+            <PasswordField fx:id="passwordField" promptText="Enter your password" prefWidth="300" maxWidth="300"/>
+        </VBox>
+    </HBox>
+
+    <HBox alignment="CENTER" spacing="10">
+            <PasswordField fx:id="confirmPasswordField" promptText="Confirm your password" prefWidth="300" maxWidth="300"/>
+    </HBox>
+
+    <CheckBox fx:id="agreeCheckBox"
+              text="I agree to the terms and conditions."
+              onAction="#onAgreeCheckBoxClick"
+    />
+
+    <VBox spacing="0">
+        <HBox  alignment="CENTER" >
+            <Button fx:id="registerButton" text="Register" onAction="#handleRegisterUser" prefWidth="150"  disable="true" />
+        </HBox>
+
+        <HBox alignment="CENTER">
+            <Label text="Already Registered? Login" style="-fx-font-size: 9px;"/>
+            <Hyperlink text="Here" onAction="#handleLoginHyperlink" style="-fx-font-size: 9px;"/>
+        </HBox>
+    </VBox>
+
+
+</VBox>
+
+
+

@@ -1,6 +1,7 @@
 module com.example.main_sem_proj {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.sql;
 
     opens com.example.main_sem_proj to javafx.fxml;
     opens com.example.main_sem_proj.controller to javafx.fxml;
