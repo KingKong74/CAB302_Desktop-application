@@ -35,7 +35,7 @@ public class HelloController {
         Stage stage = (Stage) loginButton.getScene().getWindow();
 
         // Go to Log in Window
-        LoginController.start();
+        LoginController.start(stage);
 
         stage.close();
     }
@@ -43,8 +43,5 @@ public class HelloController {
 
 }
 
-// (BK)....
-// Set the application icon
-// stage.getIcons().add(new Image("path for image"));
 
 

@@ -1,7 +1,7 @@
 package com.example.main_sem_proj.model;
 import java.util.ArrayList;
 import java.util.List;
-public class MockUserDAO implements UserDAO {
+public class MockUserDAO implements IUserDAO {
     private List<UserDetails> users = new ArrayList<>();
 
     @Override

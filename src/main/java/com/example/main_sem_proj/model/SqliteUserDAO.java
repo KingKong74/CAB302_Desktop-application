@@ -5,26 +5,42 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.List;
 
-public class sqliteUserDAO implements UserDAO {
+public class SqliteUserDAO implements IUserDAO {
     private Connection connection;
-    public sqliteUserDAO(){
-        connection = SqliteConnection.getInstance();
 
+    /**
+     * Constructs a new SQliteContactDAO with a connection to the SQLite database,
+     * and creates the users table if it does not exist.
+     */
+    public SqliteUserDAO(){
+        connection = SqliteConnection.getInstance();
+        createTable();
     }
 
+    /**
+     * Creates a table in DB
+     */
     private void createTable() {
-
+        // Create table if not exists
         try {
             Statement statement = connection.createStatement();
             String query =
-                    "CREATE TABLE IF NOT EXISTS users (" + "email VARCHAR PRIMARY KEY,"
+                    "CREATE TABLE IF NOT EXISTS users ("
+                    + "email VARCHAR PRIMARY KEY,"
+//                    + "firstName VARCHAR NOT NULL,"
+//                    + "lastName VARCHAR NOT NULL,"
                     + "password VARCHAR NOT NULL"
-                    +")";
+                    + ")";
             statement.execute(query);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Add user to DB
+     * @param user
+     */
     @Override
     public void addUser(UserDetails user) {
         String email = user.getEmail();
@@ -32,7 +48,8 @@ public class sqliteUserDAO implements UserDAO {
         try {
             Statement insertStatement = connection.createStatement();
             String insertQuery = "INSERT INTO users (email, password) VALUES "
-                    + "('" + email + "', '" + password + "')";
+                    + "('" + email + "', " +
+                    "'" + password + "')";
             insertStatement.execute(insertQuery);
         } catch (Exception e) {
             e.printStackTrace();
@@ -41,7 +58,6 @@ public class sqliteUserDAO implements UserDAO {
 
     @Override
     public Boolean getUser(String email) {
-
         try {
             Statement getStatement = connection.createStatement();
             String getQuery = "SELECT email FROM users "

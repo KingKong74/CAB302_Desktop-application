@@ -1,11 +1,13 @@
 package com.example.main_sem_proj.controller;
 
 import com.example.main_sem_proj.HelloApplication;
+import com.example.main_sem_proj.model.SqliteUserDAO;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
@@ -15,6 +17,10 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 
+/**
+ * The controller class for the Main view of the application.
+ * This class handles the user interactions in the Main view.
+ */
 public class MainController {
 
     /**
@@ -205,6 +211,17 @@ public class MainController {
         int seconds = notificationTime % 60;
         String timeString = String.format("%02d:%02d:%02d", hours, minutes, seconds);
         timerButton.setText(timeString);
+    }
+
+
+    //
+    // Sign out
+    //
+    @FXML
+    protected void onSignoutButtonClick(ActionEvent event) {
+        System.out.println("User Signed out");
+        Stage stageToClose = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        LoginController.start(stageToClose);
     }
 }
 
