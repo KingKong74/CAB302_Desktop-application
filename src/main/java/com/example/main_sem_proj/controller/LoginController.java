@@ -1,13 +1,15 @@
 package com.example.main_sem_proj.controller;
 
 import com.example.main_sem_proj.HelloApplication;
+import com.example.main_sem_proj.model.IUserDAO;
+import com.example.main_sem_proj.model.SqliteUserDAO;
+import com.example.main_sem_proj.model.UserDetails;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -20,10 +22,39 @@ public class LoginController {
 
     private static String VIEW;
 
+    SqliteUserDAO userDAO = new SqliteUserDAO();
+
+    // Default constructor
+    public LoginController() {
+        // can initialize default values here
+    }
+
+    @FXML
+    private TextField firstNameField;
+
+    @FXML
+    private TextField lastNameField;
+
+    @FXML
+    private TextField emailField;
+
+    @FXML
+    private PasswordField passwordField;
+
+    @FXML
+    private PasswordField confirmPasswordField;
+
     @FXML
     private CheckBox agreeCheckBox;
+
     @FXML
-    public Button registerButton;
+    private Button registerButton;
+
+    @FXML
+    private Label errorMessageLabel;
+
+    @FXML
+    public TextField usernameField;
 
     /**
      * Opens the registration form window.
@@ -68,16 +99,61 @@ public class LoginController {
         return stage;
     }
 
+    @FXML
     public void handleSignIn(ActionEvent actionEvent) {
-        Stage stageToClose = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        stageToClose.close();
-        MainController.ButtonClick();
+        try {
+            String email = usernameField.getText();
+            String password = passwordField.getText();
+
+            // Validate email and password
+            if (email.isEmpty() || password.isEmpty()) {
+                errorMessageLabel.setText("Please enter your email and password");
+                return;
+            }
+
+            // Authenticate user
+            UserDetails user = userDAO.getUser(email, password);
+            if (user != null) {
+                Stage stageToClose = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                stageToClose.close();
+                MainController.ButtonClick();
+            } else {
+                errorMessageLabel.setText("Invalid email or password");
+            }
+        } catch (Exception e) {
+            errorMessageLabel.setText("An error occurred. Please try again later.");
+        }
     }
 
 
+    /**
+     * Handles the registration of a new user.
+     * This method is invoked when the register button is clicked.
+     */
+    @FXML
     public void handleRegisterUser(ActionEvent actionEvent) {
+        // Retrieve data from text fields
+        String firstName = firstNameField.getText();
+        String lastName = lastNameField.getText();
+        String email = emailField.getText();
+        String password = passwordField.getText();
+        String confirmPassword = confirmPasswordField.getText();
+        boolean agreeToTerms = agreeCheckBox.isSelected();
 
-        handleLoginHyperlink(actionEvent); // route to other method that already goes to register
+        // Validate user input
+        if (!password.equals(confirmPassword)) {
+            errorMessageLabel.setText("Passwords do not match");
+            return;
+        }
+
+        if (!agreeToTerms) {
+            errorMessageLabel.setText("Please agree to the terms and conditions");
+            return;
+        }
+
+        userDAO.addUser(new UserDetails(email, firstName, lastName, password ));
+
+        handleLoginHyperlink(actionEvent);
     }
 
     public void handleLoginHyperlink(ActionEvent actionEvent) {

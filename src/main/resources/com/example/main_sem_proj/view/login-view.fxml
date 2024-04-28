@@ -13,6 +13,8 @@
 
     <Label text="Login" style="-fx-font-size: 18px;"/>
 
+    <Label fx:id="errorMessageLabel" style="-fx-text-fill: red;" />
+
     <HBox alignment="CENTER">
         <TextField fx:id="usernameField" promptText="Email" styleClass="Hbox_Login"/>
     </HBox>
