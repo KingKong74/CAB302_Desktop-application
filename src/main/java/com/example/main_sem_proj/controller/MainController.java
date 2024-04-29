@@ -1,21 +1,21 @@
 package com.example.main_sem_proj.controller;
 
-import com.example.main_sem_proj.HelloApplication;
-import com.example.main_sem_proj.model.SqliteUserDAO;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
-import java.io.IOException;
 
 /**
  * The controller class for the Main view of the application.
@@ -23,47 +23,24 @@ import java.io.IOException;
  */
 public class MainController {
 
-    /**
-     * Handles the click event of the login button to open the main GUI.
-     */
-    public static void ButtonClick() {
-        final String TITLE = "Iz.Lumin";
-        final int WIDTH = 580;
-        final int HEIGHT = 270;
+    @FXML
+    private Slider colourSlider;
+    @FXML
+    public Label sliderValue;
+    @FXML
+    private Label welcomeLabel;
+    @FXML
+    private Pane mainPane;
 
-        try {
-            Stage stage = createStage(TITLE, WIDTH, HEIGHT);
-            setStagePosition(stage, WIDTH, HEIGHT);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void setWelcomeLabel(String welcomeMessage) {
+        welcomeLabel.setText(welcomeMessage);
     }
-    /**
-     * Creates a new stage for the main GUI.
-     *
-     * @param title  The title of the stage.
-     * @param width  The width of the stage.
-     * @param height The height of the stage.
-     * @return The created stage.
-     * @throws IOException If an error occurs while loading the FXML file.
-     */
-    private static Stage createStage(String title, int width, int height) throws IOException {
-        Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/main-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), width, height);
-        stage.setTitle(title);
-        stage.setResizable(false);  // Disable user resizing
-        stage.setScene(scene);
-        return stage;
-    }
-
     /**
      * Sets the position of the stage to the bottom right corner of the screen.
      *
      * @param stage The stage to set the position for.
      */
-    private static void setStagePosition(Stage stage, double width, double height) {
+    public static void setStagePosition(Stage stage, double width, double height) {
         double screenWidth = Screen.getPrimary().getBounds().getWidth();
         double screenHeight = Screen.getPrimary().getBounds().getHeight();
         double bottomRightX = screenWidth - (width + 9);
@@ -71,6 +48,65 @@ public class MainController {
         stage.setX(bottomRightX);
         stage.setY(bottomRightY);
     }
+
+    //
+    // Colour Slider
+    //
+
+    public void initialize() {
+        if (colourSlider != null) {
+            colourSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+                // Update the label text with the integer value
+                sliderValue.setText(String.format("%.0fK", newValue.doubleValue()));  // Format the value as a whole number
+            });
+        } else {
+            System.err.println("An error occurred");
+        }
+    }
+
+//    public void initialize() {
+//        colourSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+//            // Get the value of the slider
+//            double sliderValue = newValue.doubleValue();
+//
+//            // Calculate the color temperature based on the slider value
+//            double temperature = calculateColorTemperature(sliderValue);
+//
+//            // Map the color temperature to a color gradient from dark orange to normal (white)
+//            Color color = mapColorTemperatureToGradient(temperature);
+//
+//            // Set the background color of the main pane
+//            mainPane.setBackground(new Background(new BackgroundFill(
+//                    color,
+//                    null,
+//                    null
+//            )));
+//        });
+//    }
+
+//    private double calculateColorTemperature(double sliderValue) {
+//        // Implement your calculation logic here
+//        // Example: Linear mapping from slider value to color temperature range
+//        double minSliderValue = 1900;
+//        double maxSliderValue = 6500;
+//        double minTemperature = 1900;
+//        double maxTemperature = 6500;
+//        return minTemperature + (maxTemperature - minTemperature) * ((sliderValue - minSliderValue) / (maxSliderValue - minSliderValue));
+//    }
+//
+//    private Color mapColorTemperatureToGradient(double temperature) {
+//        // Implement your color mapping logic here
+//        // Example: Linear interpolation from dark orange to white
+//        Color darkOrange = Color.rgb(255, 140, 0);
+//        Color normalWhite = Color.WHITE;
+//        double ratio = (temperature - 1900) / (6500 - 1900);
+//        return darkOrange.interpolate(normalWhite, ratio);
+//    }
+
+
+    //
+    // Switches
+    //
 
     public Setting getCurrentSetting() {
         return currentSetting;
@@ -127,7 +163,6 @@ public class MainController {
     // Pop up windows
     //
 
-
     public static boolean isPopupOpen = false;
 
     @FXML
@@ -144,7 +179,6 @@ public class MainController {
         double[] coordinates = getScreenCoordinates(event);
         double x = coordinates[0];
         double y = coordinates[1];
-
         SettingsController.ButtonClick(x, y);
     }
 
@@ -200,7 +234,6 @@ public class MainController {
         if (timeline != null) {
             timeline.stop();
             timeline = null;
-            notificationTime = 45; // Reset remaining seconds
             updateButtonLabel();
         }
     }

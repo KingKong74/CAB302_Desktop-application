@@ -1,12 +1,9 @@
 package com.example.main_sem_proj.model;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.List;
+import java.sql.*;
 
 public class SqliteUserDAO implements IUserDAO {
-    private Connection connection;
+    private static Connection connection;
 
     /**
      * Constructs a new SQliteContactDAO with a connection to the SQLite database,
@@ -20,68 +17,81 @@ public class SqliteUserDAO implements IUserDAO {
     /**
      * Creates a table in DB
      */
-    private void createTable() {
+    public void createTable() {
         // Create table if not exists
         try {
             Statement statement = connection.createStatement();
             String query =
                     "CREATE TABLE IF NOT EXISTS users ("
                     + "email VARCHAR PRIMARY KEY,"
-//                    + "firstName VARCHAR NOT NULL,"
-//                    + "lastName VARCHAR NOT NULL,"
+                    + "firstName VARCHAR NOT NULL,"
+                    + "lastName VARCHAR NOT NULL,"
                     + "password VARCHAR NOT NULL"
                     + ")";
             statement.execute(query);
         } catch (Exception e) {
+            System.err.println("Error creating table: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
     /**
-     * Add user to DB
-     * @param user
+     * Adds a new user to the database.
+     *
+     * @param userDetails The UserDetails object representing the user to be added.
      */
     @Override
-    public void addUser(UserDetails user) {
-        String email = user.getEmail();
-        String password = user.getPassword();
+    public void addUser(UserDetails userDetails) {
         try {
-            Statement insertStatement = connection.createStatement();
-            String insertQuery = "INSERT INTO users (email, password) VALUES "
-                    + "('" + email + "', " +
-                    "'" + password + "')";
-            insertStatement.execute(insertQuery);
-        } catch (Exception e) {
-            e.printStackTrace();
+            PreparedStatement insertDetails = connection.prepareStatement(
+                    "INSERT INTO users (email, firstName, lastName, password) VALUES (?, ?, ?, ?)"
+            );
+            insertDetails.setString(1, userDetails.getEmail());
+            insertDetails.setString(2, userDetails.getFirstName());
+            insertDetails.setString(3, userDetails.getLastName());
+            insertDetails.setString(4, userDetails.getPassword());
+            insertDetails.execute();
+        } catch (Exception ex) {
+            System.err.println(ex);
         }
     }
 
+    /**
+     * Retrieves a user from the database based on the provided email and password.
+     *
+     * @param email The email address of the user to retrieve.
+     * @param password The password of the user to retrieve.
+     * @return A UserDetails object representing the retrieved user if found, or null if the user is not found or an error occurs.
+     */
     @Override
-    public Boolean getUser(String email) {
+    public UserDetails getUser(String email, String password) {
         try {
-            Statement getStatement = connection.createStatement();
-            String getQuery = "SELECT email FROM users "
-                    + "WHERE email = " + "'" + email + "'" +"')";
-            //tries to get the email form database
-            ResultSet SqlEmail = getStatement.executeQuery(getQuery);
-            try { while (SqlEmail.next()) {
-                //turns the email into a string that can be read (hopefully)
-                String ResultEmail = SqlEmail.getString(1);
+            PreparedStatement getUser = connection.prepareStatement("SELECT * FROM users WHERE email = ? AND password = ?");
+            getUser.setString(1, email);
+            getUser.setString(2, password);
+            ResultSet rs = getUser.executeQuery();
+            if (rs.next()) {
+                String firstName = rs.getString("firstName");
+                String lastName = rs.getString("lastName");
+                return new UserDetails(email, firstName, lastName, password);
+            } else {
+                // User with the provided email and password not found
+                return null;
             }
-            } catch (Exception e){
-                //if it can't do that (cause there is no string) should mean that email is not in the database, therefore it should return false
-                return false;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            System.err.println(ex);
+            return null;
         }
-
-        //if it passes the error traps it means that there should be an email in the database
-        return true;
     }
 
-    @Override
-    public List<UserDetails> getAllUsers() {
-        return List.of();
-    }
+        /**
+         * Handles closing of DB
+         */
+        public void close () {
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                System.err.println(ex);
+            }
+        }
 }

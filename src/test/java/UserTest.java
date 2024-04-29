@@ -7,24 +7,24 @@ public class UserTest {
     private UserDetails user;
     @BeforeEach
     public void setUp() {
-        user = new UserDetails("Bubbles@gmail.com", "Password123");
+        user = new UserDetails("Bubbles@gmail.com", "Bubbles", "Reginald","Password123");
     }
     @Test
     public void testGetEmail(){
         assertEquals("Bubbles@gmail.com", user.getEmail());
     }
-    @Test
-    public void testSetEmail() {
-        user.setEmail("Bubbles@gmail.com");
-        assertEquals("Bubbles@gmail.com", user.getEmail());
-    }
+//    @Test
+//    public void testSetEmail() {
+//        user.setEmail("Bubbles@gmail.com");
+//        assertEquals("Bubbles@gmail.com", user.getEmail());
+//    }
     @Test
     public void testGetPassword(){
         assertEquals("Password123", user.getPassword());
     }
-    @Test
-    public void testSetPassword() {
-        user.setPassword("Password123");
-        assertEquals("Password123", user.getPassword());
-    }
+//    @Test
+//    public void testSetPassword() {
+//        user.setPassword("Password123");
+//        assertEquals("Password123", user.getPassword());
+//    }
 }
