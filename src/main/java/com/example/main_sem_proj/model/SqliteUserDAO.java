@@ -83,6 +83,25 @@ public class SqliteUserDAO implements IUserDAO {
             return null;
         }
     }
+    public boolean CheckEmailTaken(String email) {
+        try {
+            PreparedStatement getUser = connection.prepareStatement("SELECT email FROM users WHERE email = ?");
+            getUser.setString(1, email);
+
+            ResultSet rs = getUser.executeQuery();
+            if (rs.next()) {
+                return true;
+               }
+             else {
+                // User with the provided email and password not found
+                return false;
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex);
+            return true;
+        }
+    }
+
 
         /**
          * Handles closing of DB

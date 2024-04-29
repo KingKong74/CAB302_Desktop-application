@@ -166,6 +166,11 @@ public class LoginController {
             errorMessageLabel.setText("Invalid Email");
             return;
         }
+        if(userDAO.CheckEmailTaken(email)){
+            errorMessageLabel.setText("Email has been taken");
+            return;
+        }
+
 
         userDAO.addUser(new UserDetails(email, firstName, lastName, password ));
 
