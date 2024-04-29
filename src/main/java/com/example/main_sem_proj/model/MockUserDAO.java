@@ -9,7 +9,7 @@
 //        users.add(user);
 //    }
 //    @Override
-//    public Boolean getUser(String email) {
+//    public Boolean getUser(String email, String password) {
 //        for (UserDetails user : users) {
 //            if (user.getEmail() == email) {
 //                return true;

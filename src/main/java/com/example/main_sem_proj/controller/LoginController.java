@@ -1,24 +1,30 @@
 package com.example.main_sem_proj.controller;
 
 import com.example.main_sem_proj.HelloApplication;
-import com.example.main_sem_proj.model.IUserDAO;
 import com.example.main_sem_proj.model.SqliteUserDAO;
 import com.example.main_sem_proj.model.UserDetails;
+import com.example.main_sem_proj.model.Validation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import static com.example.main_sem_proj.controller.MainController.setStagePosition;
+
 /**
  * The Controller class for the Login/Register view of the application.
  * This class handles the user interactions to login GUIs.
  */
 public class LoginController {
+
+
+    Validation validation = new Validation();
 
     private static String VIEW;
 
@@ -29,6 +35,8 @@ public class LoginController {
         // can initialize default values here
     }
 
+    public Hyperlink GuestButton;
+    public Button signInButton;
     @FXML
     private TextField firstNameField;
 
@@ -116,7 +124,8 @@ public class LoginController {
             if (user != null) {
                 Stage stageToClose = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
                 stageToClose.close();
-                MainController.ButtonClick();
+                Stage stage = (Stage) signInButton.getScene().getWindow();
+                mainGUI(stage, "Welcome " + user.getFirstName() + " " + user.getLastName() + "!");
             } else {
                 errorMessageLabel.setText("Invalid email or password");
             }
@@ -151,6 +160,13 @@ public class LoginController {
             return;
         }
 
+        boolean EmailValidityCheck = false;
+        EmailValidityCheck = validation.ValidateEmail(email);
+        if (!EmailValidityCheck){
+            errorMessageLabel.setText("Invalid Email");
+            return;
+        }
+
         userDAO.addUser(new UserDetails(email, firstName, lastName, password ));
 
         handleLoginHyperlink(actionEvent);
@@ -166,6 +182,13 @@ public class LoginController {
         Register(stageToClose);
     }
 
+    public void handleGuestHyperlink(ActionEvent actionEvent) {
+        Stage stageToClose = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        stageToClose.close();
+        Stage stage = (Stage) GuestButton.getScene().getWindow();
+        mainGUI(stage, "Welcome Guest!" );
+    }
+
     /**
      * Handles the action of clicking the agree checkbox.
      * Enables or disables the next button based on the checkbox state.
@@ -173,6 +196,36 @@ public class LoginController {
     @FXML
     public void onAgreeCheckBoxClick() {
         registerButton.setDisable(!agreeCheckBox.isSelected());
+    }
+
+    /**
+     * Sets up and displays the main graphical user interface (GUI) for the application within the provided stage.
+     * This method loads the main-view.fxml file, creates a scene, configures the stage, positions it on the screen,
+     * and shows it to the user.
+     *
+     * @param stage The stage in which the main GUI will be displayed.
+     */
+    public void mainGUI(Stage stage, String welcomeMessage) {
+        final String TITLE = "Iz.Lumin";
+        final int WIDTH = 580;
+        final int HEIGHT = 280;
+
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/main_sem_proj/view/main-view.fxml"));
+            Parent root = fxmlLoader.load();
+
+            MainController mainController = fxmlLoader.getController();
+            mainController.setWelcomeLabel(welcomeMessage);
+
+            Scene scene = new Scene(root, WIDTH, HEIGHT);
+            stage.setScene(scene);
+            stage.setTitle(TITLE);
+            stage.setResizable(false);
+            setStagePosition(stage, WIDTH, HEIGHT);
+            stage.show();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
     }
 
 }

@@ -28,8 +28,14 @@
         <Hyperlink text="Here" onAction="#handleRegisterHyperlink" style="-fx-font-size: 9px;"/>
     </HBox>
 
-    <HBox alignment="CENTER">
-        <Button text="Login" onAction="#handleSignIn" styleClass="Hbox_Login" prefWidth="100" />
-    </HBox>
+    <VBox>
+        <HBox alignment="CENTER">
+            <Button fx:id="signInButton" text="Login" onAction="#handleSignIn" styleClass="Hbox_Login" prefWidth="100" />
+        </HBox>
+        <HBox alignment="CENTER">
+            <Label text="Continue as" style="-fx-font-size: 7px;"/>
+            <Hyperlink fx:id="GuestButton" text="Guest" onAction="#handleGuestHyperlink" style="-fx-font-size: 7px;"/>
+        </HBox>
+    </VBox>
 
 </VBox>

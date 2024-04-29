@@ -39,17 +39,13 @@ public class HelloController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/main_sem_proj/view/login-view.fxml"));
             Parent root = fxmlLoader.load();
 
-            // Get the LoginController instance and set the userDAO
-//            LoginController loginController = fxmlLoader.getController();
-//            loginController.setUserDAO(new SqliteUserDAO());
-
             // Set the scene with the login window
             Scene scene = new Scene(root, 350, 200);
             stage.setScene(scene);
             stage.setTitle("Login");
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e);
         }
     }
 

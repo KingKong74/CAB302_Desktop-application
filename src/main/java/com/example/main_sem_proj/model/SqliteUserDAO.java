@@ -29,7 +29,6 @@ public class SqliteUserDAO implements IUserDAO {
                     + "password VARCHAR NOT NULL"
                     + ")";
             statement.execute(query);
-            System.out.println("line reached");
         } catch (Exception e) {
             System.err.println("Error creating table: " + e.getMessage());
             e.printStackTrace();
