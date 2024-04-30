@@ -1,6 +1,7 @@
 package com.example.main_sem_proj.model;
 
 import java.sql.*;
+import java.util.List;
 
 public class SqliteUserDAO implements IUserDAO {
     private static Connection connection;
@@ -41,7 +42,7 @@ public class SqliteUserDAO implements IUserDAO {
      * @param userDetails The UserDetails object representing the user to be added.
      */
     @Override
-    public void addUser(UserDetails userDetails) {
+    public void addUser(User userDetails) {
         try {
             PreparedStatement insertDetails = connection.prepareStatement(
                     "INSERT INTO users (email, firstName, lastName, password) VALUES (?, ?, ?, ?)"
@@ -64,7 +65,7 @@ public class SqliteUserDAO implements IUserDAO {
      * @return A UserDetails object representing the retrieved user if found, or null if the user is not found or an error occurs.
      */
     @Override
-    public UserDetails getUser(String email, String password) {
+    public User getUser(String email, String password) {
         try {
             PreparedStatement getUser = connection.prepareStatement("SELECT * FROM users WHERE email = ? AND password = ?");
             getUser.setString(1, email);
@@ -73,7 +74,7 @@ public class SqliteUserDAO implements IUserDAO {
             if (rs.next()) {
                 String firstName = rs.getString("firstName");
                 String lastName = rs.getString("lastName");
-                return new UserDetails(email, firstName, lastName, password);
+                return new User(email, firstName, lastName, password);
             } else {
                 // User with the provided email and password not found
                 return null;
@@ -83,6 +84,12 @@ public class SqliteUserDAO implements IUserDAO {
             return null;
         }
     }
+
+    @Override
+    public List<User> getAllUsers() {
+        return null;
+    }
+
     public boolean CheckEmailTaken(String email) {
         try {
             PreparedStatement getUser = connection.prepareStatement("SELECT email FROM users WHERE email = ?");

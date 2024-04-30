@@ -2,7 +2,7 @@ package com.example.main_sem_proj.controller;
 
 import com.example.main_sem_proj.HelloApplication;
 import com.example.main_sem_proj.model.SqliteUserDAO;
-import com.example.main_sem_proj.model.UserDetails;
+import com.example.main_sem_proj.model.User;
 import com.example.main_sem_proj.model.Validation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -120,7 +120,7 @@ public class LoginController {
             }
 
             // Authenticate user
-            UserDetails user = userDAO.getUser(email, password);
+            User user = userDAO.getUser(email, password);
             if (user != null) {
                 Stage stageToClose = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
                 stageToClose.close();
@@ -172,7 +172,7 @@ public class LoginController {
         }
 
 
-        userDAO.addUser(new UserDetails(email, firstName, lastName, password ));
+        userDAO.addUser(new User(email, firstName, lastName, password ));
 
         handleLoginHyperlink(actionEvent);
     }
