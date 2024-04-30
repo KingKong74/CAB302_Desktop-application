@@ -109,7 +109,6 @@ public class SqliteUserDAO implements IUserDAO {
         }
     }
 
-
         /**
          * Handles closing of DB
          */

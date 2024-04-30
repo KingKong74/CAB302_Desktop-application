@@ -64,46 +64,6 @@ public class MainController {
         }
     }
 
-//    public void initialize() {
-//        colourSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
-//            // Get the value of the slider
-//            double sliderValue = newValue.doubleValue();
-//
-//            // Calculate the color temperature based on the slider value
-//            double temperature = calculateColorTemperature(sliderValue);
-//
-//            // Map the color temperature to a color gradient from dark orange to normal (white)
-//            Color color = mapColorTemperatureToGradient(temperature);
-//
-//            // Set the background color of the main pane
-//            mainPane.setBackground(new Background(new BackgroundFill(
-//                    color,
-//                    null,
-//                    null
-//            )));
-//        });
-//    }
-
-//    private double calculateColorTemperature(double sliderValue) {
-//        // Implement your calculation logic here
-//        // Example: Linear mapping from slider value to color temperature range
-//        double minSliderValue = 1900;
-//        double maxSliderValue = 6500;
-//        double minTemperature = 1900;
-//        double maxTemperature = 6500;
-//        return minTemperature + (maxTemperature - minTemperature) * ((sliderValue - minSliderValue) / (maxSliderValue - minSliderValue));
-//    }
-//
-//    private Color mapColorTemperatureToGradient(double temperature) {
-//        // Implement your color mapping logic here
-//        // Example: Linear interpolation from dark orange to white
-//        Color darkOrange = Color.rgb(255, 140, 0);
-//        Color normalWhite = Color.WHITE;
-//        double ratio = (temperature - 1900) / (6500 - 1900);
-//        return darkOrange.interpolate(normalWhite, ratio);
-//    }
-
-
     //
     // Switches
     //
@@ -254,7 +214,7 @@ public class MainController {
     protected void onSignoutButtonClick(ActionEvent event) {
         System.out.println("User Signed out");
         Stage stageToClose = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        LoginController.start(stageToClose);
+        LoginController.openLoginWindow(stageToClose);
     }
 }
 
