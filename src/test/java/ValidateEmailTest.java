@@ -62,11 +62,4 @@ public class ValidateEmailTest {
         Boolean result = validation.ValidatePassword(Test);
         assertEquals(false,result);
     }
-
-    //Other Register Tests
-    @Test
-    void testRegistrationButton(){
-
-    }
-
 }

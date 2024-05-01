@@ -6,16 +6,14 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-//Tests will fail cause added first/last name to user details..
-//
 public class UserManagerTest {
     private UserManager userManager;
     private User[] users = {
-            new User("JohnGreen@gmail.com", "Green123", "John", "Green"),
-            new User("JayGreen@gmail.com", "Green1234", "Jay", "Green"),
-            new User("SammyJane@gmail.com", "Jane123", "Sammy", "Jane"),
-            new User("SammyJam@gmail.com", "Jam123", "Sammy", "Jam"),
-            new User("JosephBarn@gmail.com", "Barn123","Joseph", "Barn")
+            new User("JohnGreen@gmail.com","John", "Green", "Green123"),
+            new User("JayGreen@gmail.com", "Jay", "Green", "Green1234"),
+            new User("SammyJane@gmail.com", "Sammy", "Jane", "Jane123"),
+            new User("SammyJam@gmail.com", "Sammy", "Jam", "Jam123"),
+            new User("JosephBarn@gmail.com","Joseph", "Barn", "Barn123")
     };
     private User[] EmptyUsers = {};
 
@@ -100,7 +98,6 @@ public class UserManagerTest {
             userManager.addUser(user);
         }
         List<User> users = userManager.searchUsers("SammyJane@gmail.com");
-        List<User> usersPass = userManager.searchUsers("Jane123");
         assertEquals("SammyJane@gmail.com", users.get(0).getEmail());
         assertEquals("Jane123", users.get(0).getPassword());
     }
