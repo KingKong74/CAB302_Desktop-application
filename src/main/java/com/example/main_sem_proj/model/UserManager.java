@@ -19,9 +19,9 @@ private boolean isUserMatched(User user, String query) {
         if (query == null || query.isEmpty()) return true;
         query = query.toLowerCase();
         String searchString = user.getEmail()
-                + " " + user.getPassword()
                 + " " + user.getFirstName()
-                + " " + user.getLastName();
+                + " " + user.getLastName()
+                + " " + user.getPassword();
         return searchString.toLowerCase().contains(query);
 }
 
