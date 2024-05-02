@@ -2,7 +2,7 @@ package com.example.main_sem_proj.controller;
 
 import com.example.main_sem_proj.HelloApplication;
 import com.example.main_sem_proj.model.SqliteUserDAO;
-import com.example.main_sem_proj.model.UserDetails;
+import com.example.main_sem_proj.model.User;
 import com.example.main_sem_proj.model.Validation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,85 +18,70 @@ import java.io.IOException;
 import static com.example.main_sem_proj.controller.MainController.setStagePosition;
 
 /**
- * The Controller class for the Login/Register view of the application.
+ * The Controller class for the Login/Registration view of the application.
  * This class handles the user interactions to login GUIs.
  */
 public class LoginController {
+    private final Validation validation = new Validation();
+    private final SqliteUserDAO userDAO = new SqliteUserDAO();
+    @FXML private Label errorMessageLabel;
+    @FXML private Button signInButton;
+    @FXML private Button registerButton;
+    @FXML private CheckBox agreeCheckBox;
+    @FXML private TextField usernameField;
+    @FXML private PasswordField passwordField;
+    @FXML private TextField firstNameField;
+    @FXML private TextField lastNameField;
+    @FXML private TextField emailField;
+    @FXML private PasswordField confirmPasswordField;
+    @FXML private Hyperlink GuestButton;
 
-
-    Validation validation = new Validation();
-
-    private static String VIEW;
-
-    SqliteUserDAO userDAO = new SqliteUserDAO();
-
-    // Default constructor
-    public LoginController() {
-        // can initialize default values here
+    /**
+     * Opens a window with the specified view.
+     */
+    public static void openWindow(String view, String title, int width, int height, Stage stageToClose) {
+        try {
+            Stage windowStage = createStage(view, title, width, height);
+            windowStage.show();
+            closeStage(stageToClose);
+        } catch (IOException e) {
+            System.out.println(e);
+        }
     }
 
-    public Hyperlink GuestButton;
-    public Button signInButton;
-    @FXML
-    private TextField firstNameField;
-
-    @FXML
-    private TextField lastNameField;
-
-    @FXML
-    private TextField emailField;
-
-    @FXML
-    private PasswordField passwordField;
-
-    @FXML
-    private PasswordField confirmPasswordField;
-
-    @FXML
-    private CheckBox agreeCheckBox;
-
-    @FXML
-    private Button registerButton;
-
-    @FXML
-    private Label errorMessageLabel;
-
-    @FXML
-    public TextField usernameField;
+    /**
+     * Closes the specified stage.
+     */
+    public static void closeStage(Stage stageToClose) {
+        if (stageToClose != null) {
+            stageToClose.close();
+        }
+    }
 
     /**
      * Opens the registration form window.
      */
-    public static void Register(Stage stageToClose) {
-        try {
-            VIEW = "register";
-            Stage registerStage = createStage(VIEW,"Register", 450, 300);
-            registerStage.show();
-            if (stageToClose != null) {
-                stageToClose.close(); // Close the stage passed as a parameter
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public static void openRegistrationWindow(Stage stageToClose) {
+        openWindow("register", "Register", 450, 300, stageToClose);
     }
 
     /**
      * Opens the login window.
      */
-    public static void start(Stage stageToClose) {
-        try {
-            VIEW = "login";
-            Stage loginStage = createStage(VIEW, "Login", 350, 200);
-            loginStage.show();
-            if (stageToClose != null) {
-                stageToClose.close(); // Close the stage passed as a parameter
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public static void openLoginWindow(Stage stageToClose) {
+        openWindow("login", "Login", 350, 200, stageToClose);
     }
 
-
+    /**
+     * Creates a new stage with the specified view, title, width, and height.
+     *
+     * @param VIEW   The name of the FXML view file to load.
+     * @param title  The title of the stage.
+     * @param width  The width of the stage.
+     * @param height The height of the stage.
+     * @return The newly created stage.
+     * @throws IOException If an error occurs while loading the FXML file.
+     */
     private static Stage createStage(String VIEW, String title, int width, int height) throws IOException {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/" + VIEW +"-view.fxml"));
@@ -115,22 +100,22 @@ public class LoginController {
 
             // Validate email and password
             if (email.isEmpty() || password.isEmpty()) {
-                errorMessageLabel.setText("Please enter your email and password");
+                setErrorMessage("Please enter your email and password");
                 return;
             }
 
             // Authenticate user
-            UserDetails user = userDAO.getUser(email, password);
+            User user = userDAO.getUser(email, password);
             if (user != null) {
                 Stage stageToClose = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
                 stageToClose.close();
                 Stage stage = (Stage) signInButton.getScene().getWindow();
                 mainGUI(stage, "Welcome " + user.getFirstName() + " " + user.getLastName() + "!");
             } else {
-                errorMessageLabel.setText("Invalid email or password");
+                setErrorMessage("Invalid email or password");
             }
         } catch (Exception e) {
-            errorMessageLabel.setText("An error occurred. Please try again later.");
+            setErrorMessage("An error occurred. Please try again later.");
         }
     }
 
@@ -141,7 +126,6 @@ public class LoginController {
      */
     @FXML
     public void handleRegisterUser(ActionEvent actionEvent) {
-        // Retrieve data from text fields
         String firstName = firstNameField.getText();
         String lastName = lastNameField.getText();
         String email = emailField.getText();
@@ -149,42 +133,42 @@ public class LoginController {
         String confirmPassword = confirmPasswordField.getText();
         boolean agreeToTerms = agreeCheckBox.isSelected();
 
-        // Validate user input
         if (!password.equals(confirmPassword)) {
-            errorMessageLabel.setText("Passwords do not match");
+            setErrorMessage("Passwords do not match");
             return;
         }
 
         if (!agreeToTerms) {
-            errorMessageLabel.setText("Please agree to the terms and conditions");
+            setErrorMessage("Please agree to the terms and conditions");
             return;
         }
 
-        boolean EmailValidityCheck = false;
-        EmailValidityCheck = validation.ValidateEmail(email);
-        if (!EmailValidityCheck){
-            errorMessageLabel.setText("Invalid Email");
-            return;
-        }
-        if(userDAO.CheckEmailTaken(email)){
-            errorMessageLabel.setText("Email has been taken");
+        if (!validation.ValidateEmail(email)) {
+            setErrorMessage("Invalid Email");
             return;
         }
 
+        if (userDAO.CheckEmailTaken(email)) {
+            setErrorMessage("Email has been taken");
+            return;
+        }
 
-        userDAO.addUser(new UserDetails(email, firstName, lastName, password ));
-
+        userDAO.addUser(new User(email, firstName, lastName, password));
         handleLoginHyperlink(actionEvent);
+    }
+
+    private void setErrorMessage(String string) {
+        errorMessageLabel.setText(string);
     }
 
     public void handleLoginHyperlink(ActionEvent actionEvent) {
         Stage stageToClose = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        start(stageToClose);
+        openLoginWindow(stageToClose);
     }
 
     public void handleRegisterHyperlink(ActionEvent actionEvent) {
         Stage stageToClose = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        Register(stageToClose);
+        openRegistrationWindow(stageToClose);
     }
 
     public void handleGuestHyperlink(ActionEvent actionEvent) {
@@ -232,5 +216,7 @@ public class LoginController {
             System.out.println(e);
         }
     }
+
+
 
 }
