@@ -7,7 +7,7 @@ public class UserTest {
     private User user;
     @BeforeEach
     public void setUp() {
-        user = new User("DanSmith@gmail.com", "Password123", "Dan","Smith");
+        user = new User("DanSmith@gmail.com","Dan","Smith", "Password123");
     }
     @Test
     public void testGetEmail(){
