@@ -1,8 +1,5 @@
 import com.example.main_sem_proj.controller.PopupController;
-import com.example.main_sem_proj.controller.MainController;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 import org.junit.jupiter.api.*;
 
 import java.io.IOException;

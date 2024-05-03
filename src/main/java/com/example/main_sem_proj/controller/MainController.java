@@ -17,6 +17,8 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.IOException;
+
 /**
  * The controller class for the Main view of the application.
  * This class handles the user interactions in the Main view.
@@ -35,19 +37,7 @@ public class MainController {
     public void setWelcomeLabel(String welcomeMessage) {
         welcomeLabel.setText(welcomeMessage);
     }
-    /**
-     * Sets the position of the stage to the bottom right corner of the screen.
-     *
-     * @param stage The stage to set the position for.
-     */
-    public static void setStagePosition(Stage stage, double width, double height) {
-        double screenWidth = Screen.getPrimary().getBounds().getWidth();
-        double screenHeight = Screen.getPrimary().getBounds().getHeight();
-        double bottomRightX = screenWidth - (width + 9);
-        double bottomRightY = screenHeight - (height + 75);
-        stage.setX(bottomRightX);
-        stage.setY(bottomRightY);
-    }
+
 
     //
     // Colour Slider
@@ -211,7 +201,7 @@ public class MainController {
     // Sign out
     //
     @FXML
-    protected void onSignoutButtonClick(ActionEvent event) {
+    protected void onSignoutButtonClick(ActionEvent event) throws IOException {
         System.out.println("User Signed out");
         Stage stageToClose = (Stage) ((Node) event.getSource()).getScene().getWindow();
         LoginController.openLoginWindow(stageToClose);
