@@ -38,7 +38,7 @@ public class MainControllerTest {
     }
 
     @Test
-    void testTimerStarts() {
+    void testSignout() {
 
     }
 }
