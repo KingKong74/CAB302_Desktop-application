@@ -1,6 +1,5 @@
 package com.example.main_sem_proj.controller;
 
-import com.example.main_sem_proj.HelloApplication;
 import com.example.main_sem_proj.model.SqliteUserDAO;
 import com.example.main_sem_proj.model.User;
 import com.example.main_sem_proj.model.Validation;
@@ -21,7 +20,7 @@ import static com.example.main_sem_proj.controller.MainController.setStagePositi
  * The Controller class for the Login/Registration view of the application.
  * This class handles the user interactions to login GUIs.
  */
-public class LoginController {
+public class LoginController extends StageController{
     private final Validation validation = new Validation();
     private final SqliteUserDAO userDAO = new SqliteUserDAO();
     @FXML private Label errorMessageLabel;
@@ -37,59 +36,17 @@ public class LoginController {
     @FXML private Hyperlink GuestButton;
 
     /**
-     * Opens a window with the specified view.
-     */
-    public static void openWindow(String view, String title, int width, int height, Stage stageToClose) {
-        try {
-            Stage windowStage = createStage(view, title, width, height);
-            windowStage.show();
-            closeStage(stageToClose);
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-    }
-
-    /**
-     * Closes the specified stage.
-     */
-    public static void closeStage(Stage stageToClose) {
-        if (stageToClose != null) {
-            stageToClose.close();
-        }
-    }
-
-    /**
      * Opens the registration form window.
      */
     public static void openRegistrationWindow(Stage stageToClose) {
-        openWindow("register", "Register", 450, 300, stageToClose);
+        openStage("register", "Register", 450, 300, stageToClose);
     }
 
     /**
      * Opens the login window.
      */
     public static void openLoginWindow(Stage stageToClose) {
-        openWindow("login", "Login", 350, 200, stageToClose);
-    }
-
-    /**
-     * Creates a new stage with the specified view, title, width, and height.
-     *
-     * @param VIEW   The name of the FXML view file to load.
-     * @param title  The title of the stage.
-     * @param width  The width of the stage.
-     * @param height The height of the stage.
-     * @return The newly created stage.
-     * @throws IOException If an error occurs while loading the FXML file.
-     */
-    private static Stage createStage(String VIEW, String title, int width, int height) throws IOException {
-        Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/" + VIEW +"-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), width, height);
-        stage.setTitle(title);
-        stage.setResizable(false);
-        stage.setScene(scene);
-        return stage;
+        openStage("login", "Login", 350, 200, stageToClose);
     }
 
     @FXML
@@ -157,20 +114,36 @@ public class LoginController {
         handleLoginHyperlink(actionEvent);
     }
 
+
     private void setErrorMessage(String string) {
         errorMessageLabel.setText(string);
     }
 
+    /**
+     * Handles the login hyperlink action event by closing the current window and opening the login window.
+     *
+     * @param actionEvent The action event triggered by clicking the login hyperlink.
+     */
     public void handleLoginHyperlink(ActionEvent actionEvent) {
         Stage stageToClose = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         openLoginWindow(stageToClose);
     }
 
+    /**
+     * Handles the register hyperlink action event by closing the current window and opening the registration window.
+     *
+     * @param actionEvent The action event triggered by clicking the register hyperlink.
+     */
     public void handleRegisterHyperlink(ActionEvent actionEvent) {
         Stage stageToClose = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         openRegistrationWindow(stageToClose);
     }
 
+    /**
+     * Handles the guest hyperlink action event by closing the current window and opening the main GUI window with a welcome message for the guest.
+     *
+     * @param actionEvent The action event triggered by clicking the guest hyperlink.
+     */
     public void handleGuestHyperlink(ActionEvent actionEvent) {
         Stage stageToClose = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stageToClose.close();
@@ -216,7 +189,5 @@ public class LoginController {
             System.out.println(e);
         }
     }
-
-
 
 }
