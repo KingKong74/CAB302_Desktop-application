@@ -26,7 +26,9 @@ import java.io.IOException;
  */
 public class MainController {
 
+    @FXML
     public VBox mainPage;
+    public Button darkModeButton;
     @FXML
     private Slider colourSlider;
     @FXML
@@ -79,14 +81,26 @@ public class MainController {
         handleSwitchClick(Setting.DARK_MODE);
         if (count == 1)
         {
+            darkModeButton.setText("Light Mode");
+
             mainPage.setStyle("-fx-background-color:#252525");
             welcomeLabel.setStyle("-fx-text-fill: white");
 
+            sliderValue.setStyle("-fx-text-fill: white");
+            //colourSlider.setStyle(("-fx-control-inner-background:white"));
+            colourSlider.lookup(".thumb").setStyle("-fx-background-color: grey;");
         }
-        if (count == 2)
+        if (count == 2 || count == 0)
         {
-            mainPage.setStyle("-fx-background-color:#white");
+            darkModeButton.setText("Dark Mode");
+
+            mainPage.setStyle("-fx-background-color: white");
             welcomeLabel.setStyle("-fx-text-fill: black");
+
+            sliderValue.setStyle("-fx-text-fill: black");
+            //colourSlider.setStyle(("-fx-base:white"));
+            colourSlider.lookup(".thumb").setStyle("-fx-background-color: white;");
+
             count = count - 2;
         }
     }
