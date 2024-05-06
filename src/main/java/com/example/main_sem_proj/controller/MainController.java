@@ -12,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -25,6 +26,7 @@ import java.io.IOException;
  */
 public class MainController {
 
+    public VBox mainPage;
     @FXML
     private Slider colourSlider;
     @FXML
@@ -70,10 +72,23 @@ public class MainController {
     }
 
     private Setting currentSetting = null;
-
+    private int count;
     @FXML
     protected void onDarkModeButtonClick() {
+        count++;
         handleSwitchClick(Setting.DARK_MODE);
+        if (count == 1)
+        {
+            mainPage.setStyle("-fx-background-color:#252525");
+            welcomeLabel.setStyle("-fx-text-fill: white");
+
+        }
+        if (count == 2)
+        {
+            mainPage.setStyle("-fx-background-color:#white");
+            welcomeLabel.setStyle("-fx-text-fill: black");
+            count = count - 2;
+        }
     }
 
     @FXML
