@@ -10,7 +10,7 @@
 
 <?import javafx.scene.control.Hyperlink?>
 <VBox xmlns:fx="http://javafx.com/javafx"
-      fx:controller="com.example.main_sem_proj.controller.LoginController"
+      fx:controller="com.example.main_sem_proj.controller.authentication.LoginController"
       alignment="CENTER"
       spacing="5">
 

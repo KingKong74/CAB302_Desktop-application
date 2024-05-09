@@ -1,6 +1,8 @@
-package com.example.main_sem_proj.model;
+package com.example.main_sem_proj.model.users;
 
-import java.util.ArrayList;
+import com.example.main_sem_proj.model.users.IUserDAO;
+import com.example.main_sem_proj.model.users.User;
+
 import java.util.List;
 
 public class UserManager {

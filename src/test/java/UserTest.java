@@ -1,4 +1,4 @@
-import com.example.main_sem_proj.model.User;
+import com.example.main_sem_proj.model.users.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -1,4 +1,4 @@
-package com.example.main_sem_proj.model;
+package com.example.main_sem_proj.model.users;
 
 import java.util.List;
 

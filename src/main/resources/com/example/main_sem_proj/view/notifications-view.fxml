@@ -1,27 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
 
-<VBox xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.main_sem_proj.controller.NotificationsController"
-            stylesheets="@../css/styles.css">
+<HBox xmlns:fx="http://javafx.com/fxml"
+        fx:controller="com.example.main_sem_proj.controller.mainGUI.NotificationsController"
+        stylesheets="@../css/styles.css"
+        alignment="CENTER">
 
-    <!-- Custom top bar -->
-    <HBox styleClass="title-bar">
+    <Label fx:id="messageLabel" />
 
-    </HBox>
-
-    <!-- Main content area -->
-    <VBox>
-        <!-- Content of the popup window -->
-        <Button text="Notifications Tester" prefWidth="200" prefHeight="200"> </Button>
-        <TextField promptText="Enter something..." />
-    </VBox>
-
-</VBox>
-
+</HBox>

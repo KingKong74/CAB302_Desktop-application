@@ -1,4 +1,4 @@
-package com.example.main_sem_proj.controller;
+package com.example.main_sem_proj.controller.authentication;
 import com.example.main_sem_proj.model.SqliteUserDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

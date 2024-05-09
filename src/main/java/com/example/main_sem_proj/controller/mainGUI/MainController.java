@@ -1,5 +1,6 @@
-package com.example.main_sem_proj.controller;
+package com.example.main_sem_proj.controller.mainGUI;
 
+import com.example.main_sem_proj.controller.authentication.LoginController;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -9,11 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -25,88 +21,27 @@ import java.io.IOException;
  */
 public class MainController {
 
-    @FXML
-    private Slider colourSlider;
-    @FXML
-    public Label sliderValue;
+    public Label scheduleLabel;
+
     @FXML
     private Label welcomeLabel;
-    @FXML
-    private Pane mainPane;
 
     public void setWelcomeLabel(String welcomeMessage) {
         welcomeLabel.setText(welcomeMessage);
     }
 
+    public void setScheduleLabel(String scheduleMessage) {scheduleLabel.setText(scheduleMessage);}
 
     //
-    // Colour Slider
+    // Switch
     //
-
-    public void initialize() {
-        if (colourSlider != null) {
-            colourSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
-                // Update the label text with the integer value
-                sliderValue.setText(String.format("%.0fK", newValue.doubleValue()));  // Format the value as a whole number
-            });
-        } else {
-            System.err.println("An error occurred");
-        }
-    }
-
-    //
-    // Switches
-    //
-
-    public Setting getCurrentSetting() {
-        return currentSetting;
-    }
-
-    public enum Setting {
-        DARK_MODE,
-        FOCUS_MODE,
-
-        // TODO: add more settings later...
-    }
-
-    private Setting currentSetting = null;
 
     @FXML
     protected void onDarkModeButtonClick() {
-        handleSwitchClick(Setting.DARK_MODE);
+        System.out.println("Dark mode enabled");
+        setScheduleLabel("Working");
     }
 
-    @FXML
-    protected void onFocusModeButtonClick() {
-        handleSwitchClick(Setting.FOCUS_MODE);
-    }
-
-    //
-    //TODO add others...
-    //
-
-    @FXML
-    public void handleSwitchClick(Setting setting) {
-        if (currentSetting != setting) {
-            currentSetting = setting;
-            handleSettingChange(setting);
-        } else {
-            System.out.println(currentSetting + " disabled");
-            currentSetting = null;
-        }
-    }
-
-    private void handleSettingChange(Setting setting) {
-        switch (setting) {
-            case DARK_MODE:
-                System.out.println("Dark Mode enabled");
-                break;
-            case FOCUS_MODE:
-                System.out.println("Focus Mode enabled");
-                break;
-            // TODO more settings for the other presets
-        }
-    }
 
 
     //
@@ -121,7 +56,7 @@ public class MainController {
         double x = coordinates[0];
         double y = coordinates[1];
 
-        NotificationsController.ButtonClick(x, y);
+        NotificationsPopController.ButtonClick(x, y);
     }
 
     @FXML
@@ -129,7 +64,7 @@ public class MainController {
         double[] coordinates = getScreenCoordinates(event);
         double x = coordinates[0];
         double y = coordinates[1];
-        SettingsController.ButtonClick(x, y);
+        SettingsPopController.ButtonClick(x, y);
     }
 
     /**

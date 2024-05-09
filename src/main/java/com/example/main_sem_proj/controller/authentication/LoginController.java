@@ -1,7 +1,9 @@
-package com.example.main_sem_proj.controller;
+package com.example.main_sem_proj.controller.authentication;
 
+import com.example.main_sem_proj.controller.StageController;
+import com.example.main_sem_proj.controller.mainGUI.MainController;
 import com.example.main_sem_proj.model.SqliteUserDAO;
-import com.example.main_sem_proj.model.User;
+import com.example.main_sem_proj.model.users.User;
 import com.example.main_sem_proj.model.Validation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,7 +19,7 @@ import java.io.IOException;
  * The Controller class for the Login/Registration view of the application.
  * This class handles the user interactions to login GUIs.
  */
-public class LoginController extends StageController{
+public class LoginController extends StageController {
     static StageController stageController = new StageController();
     private final Validation validation = new Validation();
     private final SqliteUserDAO userDAO = new SqliteUserDAO();
@@ -200,8 +202,8 @@ public class LoginController extends StageController{
      * @throws IOException If an error occurs while loading the FXML file.
      */
     private void openMainGUI(Stage stageToClose, String welcomeMessage) throws IOException {
-        final int WIDTH = 580;
-        final int HEIGHT = 280;
+        final int WIDTH = 460;
+        final int HEIGHT = 240;
 
         Point2D bottomRightPosition = calculateBottomRightPosition(WIDTH, HEIGHT);
         FXMLLoader fxmlLoader = loadFXML("main");

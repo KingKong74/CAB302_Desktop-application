@@ -1,4 +1,4 @@
-package com.example.main_sem_proj.model;
+package com.example.main_sem_proj.model.users;
 
 public class User {
     private String email;
