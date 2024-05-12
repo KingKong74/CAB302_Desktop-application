@@ -4,7 +4,7 @@
 <?import javafx.scene.control.Label?>
 
 <HBox xmlns:fx="http://javafx.com/fxml"
-        fx:controller="com.example.main_sem_proj.controller.mainGUI.NotificationsController"
+        fx:controller="com.example.main_sem_proj.controller.NotificationsController"
         stylesheets="@../css/styles.css"
         alignment="CENTER">
 

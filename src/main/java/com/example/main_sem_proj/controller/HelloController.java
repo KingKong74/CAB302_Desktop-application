@@ -1,4 +1,4 @@
-package com.example.main_sem_proj.controller.authentication;
+package com.example.main_sem_proj.controller;
 import com.example.main_sem_proj.model.SqliteUserDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,24 +12,7 @@ import java.io.IOException;
 public class HelloController {
 
     public Button loginButton;
-    public Button trollButton;
 
-    private final int WIDTH = 580;
-    private final int HEIGHT = 270;
-
-    @FXML
-    protected void onTrollButtonClick() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/main_sem_proj/view/troll-view.fxml"));
-            Parent root = fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Troll'd'");
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     @FXML
     protected void onHelloButtonClick() {
@@ -48,8 +31,6 @@ public class HelloController {
             System.out.println(e);
         }
     }
-
-
 
 }
 

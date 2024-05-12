@@ -1,4 +1,4 @@
-package com.example.main_sem_proj.controller.mainGUI;
+package com.example.main_sem_proj.controller;
 
 import javafx.fxml.FXML;
 

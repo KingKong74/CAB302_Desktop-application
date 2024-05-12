@@ -1,6 +1,5 @@
-package com.example.main_sem_proj.controller.mainGUI;
+package com.example.main_sem_proj.controller;
 
-import com.example.main_sem_proj.controller.mainGUI.MainController;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 

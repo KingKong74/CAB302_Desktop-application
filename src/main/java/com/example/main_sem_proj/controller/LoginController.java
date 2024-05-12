@@ -1,7 +1,5 @@
-package com.example.main_sem_proj.controller.authentication;
+package com.example.main_sem_proj.controller;
 
-import com.example.main_sem_proj.controller.StageController;
-import com.example.main_sem_proj.controller.mainGUI.MainController;
 import com.example.main_sem_proj.model.SqliteUserDAO;
 import com.example.main_sem_proj.model.users.User;
 import com.example.main_sem_proj.model.Validation;

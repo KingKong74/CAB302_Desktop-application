@@ -1,6 +1,6 @@
-package com.example.main_sem_proj.controller.mainGUI;
+package com.example.main_sem_proj.controller;
 
-import com.example.main_sem_proj.controller.mainGUI.PopupController;
+import com.example.main_sem_proj.controller.PopupController;
 import javafx.fxml.FXML;
 
 public class SettingsPopController extends PopupController {

@@ -8,7 +8,7 @@
 
 <VBox xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.main_sem_proj.controller.mainGUI.SettingsPopController"
+            fx:controller="com.example.main_sem_proj.controller.SettingsPopController"
             stylesheets="@../css/styles.css">
 
     <!-- Custom top bar -->

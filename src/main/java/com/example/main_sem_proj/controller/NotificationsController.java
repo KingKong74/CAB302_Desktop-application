@@ -1,6 +1,6 @@
-package com.example.main_sem_proj.controller.mainGUI;
+package com.example.main_sem_proj.controller;
 
-import com.example.main_sem_proj.model.Notifications.DisplayComponent;
+import com.example.main_sem_proj.controller.MainController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import javafx.scene.control.Label;
 
-public class NotificationsController extends MainController{
+public class NotificationsController extends MainController {
     @FXML
     private Label messageLabel;
 

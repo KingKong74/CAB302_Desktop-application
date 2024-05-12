@@ -1,6 +1,5 @@
-package com.example.main_sem_proj.controller.mainGUI;
+package com.example.main_sem_proj.controller;
 
-import com.example.main_sem_proj.controller.authentication.LoginController;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -8,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -39,7 +37,7 @@ public class MainController {
     @FXML
     protected void onDarkModeButtonClick() {
         System.out.println("Dark mode enabled");
-        setScheduleLabel("Working");
+        setScheduleLabel("Sunrise in 8hrs, Bedtime in 1hr ...");
     }
 
 

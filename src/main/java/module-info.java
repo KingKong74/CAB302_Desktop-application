@@ -10,8 +10,4 @@ module com.example.main_sem_proj {
     exports com.example.main_sem_proj.model;
     exports com.example.main_sem_proj.model.Notifications;
     exports com.example.main_sem_proj.model.users;
-    exports com.example.main_sem_proj.controller.mainGUI;
-    opens com.example.main_sem_proj.controller.mainGUI to javafx.fxml;
-    exports com.example.main_sem_proj.controller.authentication;
-    opens com.example.main_sem_proj.controller.authentication to javafx.fxml;
 }

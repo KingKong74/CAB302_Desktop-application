@@ -1,6 +1,7 @@
-package com.example.main_sem_proj.controller.mainGUI;
+package com.example.main_sem_proj.controller;
 
 import com.example.main_sem_proj.HelloApplication;
+import com.example.main_sem_proj.controller.MainController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
