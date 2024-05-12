@@ -1,5 +1,5 @@
 import com.example.main_sem_proj.controller.NotificationsController;
-import com.example.main_sem_proj.model.Notifications.MockDisplayComponent;
+import com.example.main_sem_proj.model.notifications.MockDisplayComponent;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 

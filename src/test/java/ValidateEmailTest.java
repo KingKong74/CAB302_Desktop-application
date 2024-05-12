@@ -1,4 +1,4 @@
-import com.example.main_sem_proj.model.Validation;
+import com.example.main_sem_proj.model.database.Validation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

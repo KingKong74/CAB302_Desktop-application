@@ -1,5 +1,4 @@
 package com.example.main_sem_proj.controller;
-import com.example.main_sem_proj.model.SqliteUserDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
