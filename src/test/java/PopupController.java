@@ -1,4 +1,4 @@
-package com.example.main_sem_proj.controller;
+package com.example.main_sem_proj.controller.mainGUI;
 
 import com.example.main_sem_proj.HelloApplication;
 import com.example.main_sem_proj.controller.MainController;
@@ -19,31 +19,19 @@ public class PopupController extends MainController {
     /**
      * Handles the button click to open or close the popup window.
      *
-     * @param view  The name of the FXML view file for the popup.
+     * @param VIEW  The name of the FXML view file for the popup.
      * @param x     The x-coordinate of the mouse click event.
      * @param y     The y-coordinate of the mouse click event.
-     * @param title The title of the popup window.
+     * @param TITLE The title of the popup window.
      */
     @FXML
-    public static void handleOpenPopup(String view, double x, double y, String title) {
+    public static void ButtonClick(String VIEW, double x, double y, String TITLE) {
         if (isPopupOpen) {
             closePopup();
             return;
         }
-        openPopup(view, x, y, title);
-    }
-
-    /**
-     * Opens the popup window.
-     *
-     * @param view  The name of the FXML view file for the popup.
-     * @param x     The x-coordinate of the mouse click event.
-     * @param y     The y-coordinate of the mouse click event.
-     * @param title The title of the popup window.
-     */
-    private static void openPopup(String view, double x, double y, String title) {
         try {
-            FXMLLoader fxmlLoader = loadFXML(view);
+            FXMLLoader fxmlLoader = loadFXML(VIEW);
             Scene scene = createScene(fxmlLoader);
 
             double[] screenParams = getScreenParams();
@@ -54,7 +42,7 @@ public class PopupController extends MainController {
             double popupX = popupPosition[0];
             double popupY = popupPosition[1];
 
-            popupStage = createPopupStage(scene, popupX, popupY, title);
+            popupStage = createPopupStage(scene, popupX, popupY, TITLE);
 
             popupStage.showAndWait();
         } catch (IOException e) {

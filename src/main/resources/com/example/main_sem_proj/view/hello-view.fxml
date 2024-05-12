@@ -15,6 +15,5 @@
   </padding>
 
   <Label fx:id="welcomeText"/>
-  <Button fx:id="loginButton" text="Login" onAction="#onHelloButtonClick" prefWidth="100" prefHeight="50"/>
-  <Button fx:id="trollButton" text="DO NOT PRESS" onAction="#onTrollButtonClick" prefWidth="100" prefHeight="50"/>
+  <Button fx:id="loginButton" text="Start" onAction="#onHelloButtonClick" prefWidth="100" prefHeight="50"/>
 </HBox>

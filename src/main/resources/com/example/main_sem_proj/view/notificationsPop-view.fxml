@@ -8,21 +8,20 @@
 
 <VBox xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.main_sem_proj.controller.SettingsController"
+            fx:controller="com.example.main_sem_proj.controller.NotificationsPopController"
             stylesheets="@../css/styles.css">
 
     <!-- Custom top bar -->
-    <HBox styleClass="title-bar" prefHeight="50">
+    <HBox styleClass="title-bar">
 
     </HBox>
 
     <!-- Main content area -->
     <VBox>
         <!-- Content of the popup window -->
-        <Button text="Settings Tester" prefWidth="200" prefHeight="200"> </Button>
+        <Button text="Notifications Tester" prefWidth="200" prefHeight="200"> </Button>
         <TextField promptText="Enter something..." />
     </VBox>
 
 </VBox>
-
 

@@ -1,5 +1,8 @@
 package com.example.main_sem_proj.model;
 
+import com.example.main_sem_proj.model.users.IUserDAO;
+import com.example.main_sem_proj.model.users.User;
+
 import java.sql.*;
 import java.util.List;
 

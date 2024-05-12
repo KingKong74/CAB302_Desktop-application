@@ -1,4 +1,6 @@
-import com.example.main_sem_proj.model.*;
+import com.example.main_sem_proj.model.users.MockUserDAO;
+import com.example.main_sem_proj.model.users.User;
+import com.example.main_sem_proj.model.users.UserManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
