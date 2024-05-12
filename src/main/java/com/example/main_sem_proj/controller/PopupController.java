@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class PopupController extends MainController {
     private static final double WIDTH = 200;
-    private static final double HEIGHT = 250;
+    private static final double HEIGHT = 300;
     public static Stage popupStage;
 
     /**
