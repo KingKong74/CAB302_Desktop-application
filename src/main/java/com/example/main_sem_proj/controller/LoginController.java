@@ -35,6 +35,7 @@ public class LoginController extends StageController {
     // User login
     //
 
+
     @FXML
     public void handleSignIn(ActionEvent actionEvent) {
         try {

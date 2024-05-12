@@ -92,10 +92,9 @@ public class MainController {
     protected void pushedTimer(ActionEvent event) {
         if (timeline == null) {
             startTimer();
-            timerButton.setText("⏵");
+            timerButton.setText("");
         } else {
             stopTimer();
-            //timerButton.setText("⏸");
         }
     }
 
