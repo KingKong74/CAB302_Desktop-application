@@ -24,6 +24,7 @@ public class MainController {
     @FXML
     private Label welcomeLabel;
     NotificationsController notification = new NotificationsController();
+
     public void setWelcomeLabel(String welcomeMessage) {
         welcomeLabel.setText(welcomeMessage);
     }
@@ -99,18 +100,42 @@ public class MainController {
     }
 
     public void startTimer() {
+        if (timeline != null) {
+            timeline.stop();
+            timeline = null; // Reset the timeline reference
+            updateButtonLabel(); // Update the button label
+        }
         timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
             notificationTime--;
-            updateButtonLabel();
-            if (notificationTime <= 0) {
-                stopTimer();
+            System.out.println(notificationTime);
+            if (notificationTime == 0) {
+                System.out.println("It is in the if statement!");
+//                stopTimer(); // Stop the timer when notificationTime reaches 0
+                notification.displayNotification();
+                System.out.println("Notification displayed!");
+                timeline.stop(); // Stop the timeline after displaying the notification
+                hideNotificationAfterDelay(); // Call a method to hide the notification after a delay
                 System.out.println("Timer ended!");
             }
+            updateButtonLabel();
         }));
-        timeline.setCycleCount(Timeline.INDEFINITE); // Set the cycle count to indefinite
+        timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
-        updateButtonLabel();
     }
+
+    private void hideNotificationAfterDelay() {
+        int hide_notificationTime = 3;
+        Timeline hideTimeline = new Timeline(new KeyFrame(Duration.seconds(hide_notificationTime), e -> {
+            try {
+                notification.hideNotification();
+                System.out.println("Notification hidden!");
+            } catch (Exception ex) {
+                System.out.println("Window already closed.");
+            }
+        }));
+        hideTimeline.play();
+    }
+
 
     public void stopTimer() {
         if (timeline != null) {
