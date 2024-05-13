@@ -24,6 +24,8 @@ public class MainController {
     @FXML
     private Label welcomeLabel;
     NotificationsController notification = new NotificationsController();
+
+
     public void setWelcomeLabel(String welcomeMessage) {
         welcomeLabel.setText(welcomeMessage);
     }
@@ -38,8 +40,7 @@ public class MainController {
     @FXML
     protected void onDarkModeButtonClick() {
         System.out.println("Dark mode enabled");
-        setScheduleLabel("Sunrise in 8hrs, Bedtime in 1hr ...");
-        notification.displayNotification();
+//        setScheduleLabel("Sunrise in 8hrs, Bedtime in 1hr ...");
     }
 
     //
@@ -102,10 +103,6 @@ public class MainController {
         timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
             notificationTime--;
             updateButtonLabel();
-            if (notificationTime <= 0) {
-                stopTimer();
-                System.out.println("Timer ended!");
-            }
         }));
         timeline.setCycleCount(Timeline.INDEFINITE); // Set the cycle count to indefinite
         timeline.play();
@@ -121,10 +118,10 @@ public class MainController {
     }
 
     private void updateButtonLabel() {
-        if (notificationTime <= 0) {
+        if (notificationTime <= -1) {
             // Reset the timer
             notificationTime = 6;
-//            stopTimer();
+            notification.displayNotification();
         }
 
         int hours = notificationTime / 3600;

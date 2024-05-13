@@ -8,6 +8,6 @@
         stylesheets="@../css/styles.css"
         alignment="CENTER">
 
-    <Label fx:id="messageLabel" />
+    <Label fx:id="messageLabel" text="Give your eyes a rest!" />
 
 </HBox>
