@@ -9,10 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -29,6 +26,11 @@ public class MainController {
     @FXML
     public VBox mainPage;
     public Button darkModeButton;
+    public Button focusModeButton;
+    public Button notificationsButton;
+    public Button settingsButton;
+    public Button signoutButton;
+    public HBox timerBox;
     @FXML
     private Slider colourSlider;
     @FXML
@@ -81,28 +83,46 @@ public class MainController {
         handleSwitchClick(Setting.DARK_MODE);
         if (count == 1)
         {
-            darkModeButton.setText("Light Mode");
-
-            mainPage.setStyle("-fx-background-color:#252525");
-            welcomeLabel.setStyle("-fx-text-fill: white");
-
-            sliderValue.setStyle("-fx-text-fill: white");
-            //colourSlider.setStyle(("-fx-control-inner-background:white"));
-            colourSlider.lookup(".thumb").setStyle("-fx-background-color: grey;");
+            darkMode();
         }
         if (count == 2 || count == 0)
         {
-            darkModeButton.setText("Dark Mode");
-
-            mainPage.setStyle("-fx-background-color: white");
-            welcomeLabel.setStyle("-fx-text-fill: black");
-
-            sliderValue.setStyle("-fx-text-fill: black");
-            //colourSlider.setStyle(("-fx-base:white"));
-            colourSlider.lookup(".thumb").setStyle("-fx-background-color: white;");
-
-            count = count - 2;
+            lightMode();
         }
+    }
+    protected void lightMode(){
+        darkModeButton.setText("Dark Mode");
+
+        timerButton.setStyle("-fx-background-color: E0E0E0;");
+
+        mainPage.setStyle("-fx-background-color: white");
+        welcomeLabel.setStyle("-fx-text-fill: black");
+
+        sliderValue.setStyle("-fx-text-fill: black");
+        colourSlider.lookup(".thumb").setStyle("-fx-background-color: white;");
+
+        darkModeButton.setStyle("-fx-background-radius: 10; -fx-background-color: E0E0E0; -fx-text-fill: black;");
+        focusModeButton.setStyle("-fx-background-radius: 10; -fx-background-color: E0E0E0; -fx-text-fill: black;");
+        notificationsButton.setStyle("-fx-background-radius: 10; -fx-background-color: E0E0E0; -fx-text-fill: black;");
+        settingsButton.setStyle("-fx-background-radius: 10; -fx-background-color: E0E0E0; -fx-text-fill: black;");
+
+        count = count - 2;
+    }
+    protected void darkMode(){
+        darkModeButton.setText("Light Mode");
+
+        timerButton.setStyle("-fx-background-color: #414141; -fx-text-fill: white;");
+
+        mainPage.setStyle("-fx-background-color:#252525");
+        welcomeLabel.setStyle("-fx-text-fill: white");
+
+        sliderValue.setStyle("-fx-text-fill: white");
+        colourSlider.lookup(".thumb").setStyle("-fx-background-color: grey;");
+
+        darkModeButton.setStyle("-fx-background-radius: 10; -fx-background-color: #414141; -fx-text-fill: white;");
+        focusModeButton.setStyle("-fx-background-radius: 10; -fx-background-color: #414141;-fx-text-fill: white;");
+        notificationsButton.setStyle("-fx-background-radius: 10; -fx-background-color: #414141;-fx-text-fill: white;");
+        settingsButton.setStyle("-fx-background-radius: 10; -fx-background-color: #414141;-fx-text-fill: white;");
     }
 
     @FXML

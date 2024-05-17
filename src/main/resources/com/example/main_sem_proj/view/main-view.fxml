@@ -28,7 +28,7 @@
             <padding>
                 <Insets left="24.0" />
             </padding>
-            <Button fx:id="timerButton" onAction="#pushedTimer" prefWidth="80" text="00:00:00" />
+            <Button fx:id="timerButton" onAction="#pushedTimer" prefWidth="80" style="-fx-background-color: E0E0E0;" text="00:00:00" />
         </HBox>
 
         <HBox fx:id="topHbox" alignment="TOP_RIGHT">
@@ -67,16 +67,16 @@
 
     <HBox fx:id="mainHbox" alignment="CENTER_LEFT" spacing="40.0">
         <Label fx:id="mainIcons" styleClass="main-buttons" />
-        <Button fx:id="darkModeButton" onAction="#onDarkModeButtonClick" prefHeight="110" prefWidth="110" styleClass="main-buttons" text="DarkMode" />
-        <Button fx:id="focusModeButton" onAction="#onFocusModeButtonClick" prefHeight="110" prefWidth="110" styleClass="main-buttons" text="FocusMode" />
-        <Button fx:id="notificationsButton" onMouseClicked="#onNotificationsButtonClick" prefHeight="110" prefWidth="110" styleClass="main-buttons" text="Notifications" />
-        <Button fx:id="settingsButton" onMouseClicked="#onSettingsButtonClick" prefHeight="110" prefWidth="110" styleClass="main-buttons" text="Settings" />
+        <Button fx:id="darkModeButton" onAction="#onDarkModeButtonClick" prefHeight="110" prefWidth="110" style="-fx-background-radius: 10; -fx-background-color: E0E0E0;" styleClass="main-buttons" text="DarkMode" />
+        <Button fx:id="focusModeButton" onAction="#onFocusModeButtonClick" prefHeight="110" prefWidth="110" style="-fx-background-radius: 10; -fx-background-color: E0E0E0;" styleClass="main-buttons" text="FocusMode" />
+        <Button fx:id="notificationsButton" onMouseClicked="#onNotificationsButtonClick" prefHeight="110" prefWidth="110" style="-fx-background-radius: 10; -fx-background-color: E0E0E0;" styleClass="main-buttons" text="Notifications" />
+        <Button fx:id="settingsButton" onMouseClicked="#onSettingsButtonClick" prefHeight="110" prefWidth="110" style="-fx-background-radius: 10; -fx-background-color: E0E0E0;" styleClass="main-buttons" text="Settings" />
     </HBox>
 
     <VBox prefHeight="55.0" />
 
     <HBox fx:id="signoutHbox" alignment="BOTTOM_LEFT">
-        <Button fx:id="signoutButton" onAction="#onSignoutButtonClick" prefHeight="15" prefWidth="55" text="Sign out" />
+        <Button fx:id="signoutButton" onAction="#onSignoutButtonClick" prefHeight="15" prefWidth="55" style="-fx-background-color: BFBEBE;" text="Sign out" />
     </HBox>
 
     <VBox prefHeight="20.0" />

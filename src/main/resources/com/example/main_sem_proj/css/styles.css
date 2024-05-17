@@ -1,7 +1,7 @@
 /* styles.css */
 .main-buttons {
     -fx-alignment: center;
-    -fx-font-size: 8px;
+    -fx-font-size: 10px;
     -fx-padding: 40 0 0 0;
 }
 
@@ -17,6 +17,9 @@
     -fx-scale-y: 2;
     -fx-background-color: white;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
+}
+.slider-thumb .track {
+    -fx-background-color: #5D93E2;
 }
 
 #mainHbox {
