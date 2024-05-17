@@ -23,12 +23,15 @@ public class MainController {
 
     @FXML
     private Label welcomeLabel;
+    NotificationsController notification = new NotificationsController();
+
 
     public void setWelcomeLabel(String welcomeMessage) {
         welcomeLabel.setText(welcomeMessage);
     }
 
     public void setScheduleLabel(String scheduleMessage) {scheduleLabel.setText(scheduleMessage);}
+
 
     //
     // Switch
@@ -37,10 +40,8 @@ public class MainController {
     @FXML
     protected void onDarkModeButtonClick() {
         System.out.println("Dark mode enabled");
-        setScheduleLabel("Sunrise in 8hrs, Bedtime in 1hr ...");
+//        setScheduleLabel("Sunrise in 8hrs, Bedtime in 1hr ...");
     }
-
-
 
     //
     // Pop up windows
@@ -85,14 +86,14 @@ public class MainController {
     @FXML
     private Button timerButton;
 
-    private Timeline timeline;
-    private int notificationTime = 60 * 60; // Predefined duration in seconds
+    public Timeline timeline;
+    private int notificationTime = 6; // Predefined duration in seconds
 
     @FXML
-    protected void pushedTimer(ActionEvent event) {
+    public void pushedTimer(ActionEvent event) {
         if (timeline == null) {
             startTimer();
-            timerButton.setText("▶");
+            timerButton.setText("⏵");
         } else {
             stopTimer();
         }
@@ -102,10 +103,6 @@ public class MainController {
         timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
             notificationTime--;
             updateButtonLabel();
-            if (notificationTime <= 0) {
-                stopTimer();
-                System.out.println("Timer ended!");
-            }
         }));
         timeline.setCycleCount(Timeline.INDEFINITE); // Set the cycle count to indefinite
         timeline.play();
@@ -120,11 +117,21 @@ public class MainController {
         }
     }
 
+    public String formatTime(int seconds) {
+        int hours = seconds / 3600;
+        int minutes = (seconds % 3600) / 60;
+        int remainingSeconds = seconds % 60;
+        return String.format("%02d:%02d:%02d", hours, minutes, remainingSeconds);
+    }
+
     private void updateButtonLabel() {
-        int hours = notificationTime / 3600;
-        int minutes = (notificationTime % 3600) / 60;
-        int seconds = notificationTime % 60;
-        String timeString = String.format("%02d:%02d:%02d", hours, minutes, seconds);
+        if (notificationTime <= -1) {
+            // Reset the timer
+            notificationTime = 6;
+            notification.displayNotification();
+        }
+
+        String timeString = formatTime(notificationTime);
         timerButton.setText(timeString);
     }
 
@@ -134,12 +141,9 @@ public class MainController {
     //
     @FXML
     protected void onSignoutButtonClick(ActionEvent event) throws IOException {
+        stopTimer();
         System.out.println("User Signed out");
         Stage stageToClose = (Stage) ((Node) event.getSource()).getScene().getWindow();
         LoginController.openLoginWindow(stageToClose);
     }
 }
-
-
-
-
