@@ -86,11 +86,11 @@ public class MainController {
     @FXML
     private Button timerButton;
 
-    private Timeline timeline;
+    public Timeline timeline;
     private int notificationTime = 6; // Predefined duration in seconds
 
     @FXML
-    protected void pushedTimer(ActionEvent event) {
+    public void pushedTimer(ActionEvent event) {
         if (timeline == null) {
             startTimer();
             timerButton.setText("⏵");
@@ -117,6 +117,13 @@ public class MainController {
         }
     }
 
+    public String formatTime(int seconds) {
+        int hours = seconds / 3600;
+        int minutes = (seconds % 3600) / 60;
+        int remainingSeconds = seconds % 60;
+        return String.format("%02d:%02d:%02d", hours, minutes, remainingSeconds);
+    }
+
     private void updateButtonLabel() {
         if (notificationTime <= -1) {
             // Reset the timer
@@ -124,10 +131,7 @@ public class MainController {
             notification.displayNotification();
         }
 
-        int hours = notificationTime / 3600;
-        int minutes = (notificationTime % 3600) / 60;
-        int seconds = notificationTime % 60;
-        String timeString = String.format("%02d:%02d:%02d", hours, minutes, seconds);
+        String timeString = formatTime(notificationTime);
         timerButton.setText(timeString);
     }
 
@@ -137,6 +141,7 @@ public class MainController {
     //
     @FXML
     protected void onSignoutButtonClick(ActionEvent event) throws IOException {
+        stopTimer();
         System.out.println("User Signed out");
         Stage stageToClose = (Stage) ((Node) event.getSource()).getScene().getWindow();
         LoginController.openLoginWindow(stageToClose);
