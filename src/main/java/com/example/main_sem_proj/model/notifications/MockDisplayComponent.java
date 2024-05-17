@@ -1,6 +1,4 @@
-package com.example.main_sem_proj.model.Notifications;
-
-import com.example.main_sem_proj.model.Notifications.DisplayComponent;
+package com.example.main_sem_proj.model.notifications;
 
 public class MockDisplayComponent implements DisplayComponent {
     private boolean popupDisplayed = false;

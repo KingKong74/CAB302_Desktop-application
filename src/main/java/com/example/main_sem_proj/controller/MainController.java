@@ -147,7 +147,3 @@ public class MainController {
         LoginController.openLoginWindow(stageToClose);
     }
 }
-
-
-
-

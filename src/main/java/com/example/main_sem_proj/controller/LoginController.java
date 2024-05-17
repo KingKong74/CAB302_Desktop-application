@@ -1,8 +1,8 @@
 package com.example.main_sem_proj.controller;
 
-import com.example.main_sem_proj.model.SqliteUserDAO;
+import com.example.main_sem_proj.model.database.SqliteUserDAO;
 import com.example.main_sem_proj.model.users.User;
-import com.example.main_sem_proj.model.Validation;
+import com.example.main_sem_proj.model.database.Validation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,6 +34,7 @@ public class LoginController extends StageController {
     //
     // User login
     //
+
 
     @FXML
     public void handleSignIn(ActionEvent actionEvent) {

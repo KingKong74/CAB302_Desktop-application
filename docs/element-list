@@ -1,0 +1,6 @@
+module:com.example.main_sem_proj
+com.example.main_sem_proj
+com.example.main_sem_proj.controller
+com.example.main_sem_proj.model.database
+com.example.main_sem_proj.model.notifications
+com.example.main_sem_proj.model.users

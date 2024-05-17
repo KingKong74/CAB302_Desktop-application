@@ -1,0 +1,1 @@
+moduleSearchIndex = [{"l":"com.example.main_sem_proj"}];updateSearchResults();

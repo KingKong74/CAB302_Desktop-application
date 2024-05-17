@@ -1,5 +1,6 @@
-package com.example.main_sem_proj.model;
+package com.example.main_sem_proj.model.database;
 
+import com.example.main_sem_proj.model.database.SqliteConnection;
 import com.example.main_sem_proj.model.users.IUserDAO;
 import com.example.main_sem_proj.model.users.User;
 
