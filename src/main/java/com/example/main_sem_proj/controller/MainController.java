@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
@@ -31,6 +32,7 @@ public class MainController {
     public Button settingsButton;
     public Button signoutButton;
     public HBox timerBox;
+    public ChoiceBox dropdownMenu;
     @FXML
     private Slider colourSlider;
     @FXML
@@ -95,11 +97,16 @@ public class MainController {
 
         timerButton.setStyle("-fx-background-color: E0E0E0;");
 
+        dropdownMenu.setStyle("-fx-background-color: E0E0E0;");
+        dropdownMenu.lookup(".label").setStyle("-fx-text-fill: black;");
+
         mainPage.setStyle("-fx-background-color: white");
         welcomeLabel.setStyle("-fx-text-fill: black");
 
         sliderValue.setStyle("-fx-text-fill: black");
         colourSlider.lookup(".thumb").setStyle("-fx-background-color: white;");
+
+        signoutButton.setStyle("-fx-background-color: BFBEBE; -fx-text-fill: black;");
 
         darkModeButton.setStyle("-fx-background-radius: 10; -fx-background-color: E0E0E0; -fx-text-fill: black;");
         focusModeButton.setStyle("-fx-background-radius: 10; -fx-background-color: E0E0E0; -fx-text-fill: black;");
@@ -113,11 +120,16 @@ public class MainController {
 
         timerButton.setStyle("-fx-background-color: #414141; -fx-text-fill: white;");
 
+        dropdownMenu.setStyle("-fx-background-color: #414141;");
+        dropdownMenu.lookup(".label").setStyle("-fx-text-fill: white;");
+
         mainPage.setStyle("-fx-background-color:#252525");
         welcomeLabel.setStyle("-fx-text-fill: white");
 
         sliderValue.setStyle("-fx-text-fill: white");
         colourSlider.lookup(".thumb").setStyle("-fx-background-color: grey;");
+
+        signoutButton.setStyle("-fx-background-color: #353435; -fx-text-fill: white;");
 
         darkModeButton.setStyle("-fx-background-radius: 10; -fx-background-color: #414141; -fx-text-fill: white;");
         focusModeButton.setStyle("-fx-background-radius: 10; -fx-background-color: #414141;-fx-text-fill: white;");

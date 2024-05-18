@@ -5,6 +5,9 @@
     -fx-padding: 40 0 0 0;
 }
 
+.choice-box .label {
+     -fx-text-fill: black;
+}
 
 .slider-thumb {
     /* -fx-background-radius: 10px; /* Set the radius to make it round */
