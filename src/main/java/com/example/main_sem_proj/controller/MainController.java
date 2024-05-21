@@ -23,7 +23,8 @@ public class MainController {
 
     @FXML
     private Label welcomeLabel;
-    NotificationsController notification = new NotificationsController();
+
+    private final TimerController timerController = new TimerController(this::updateButtonLabel);
 
 
     public void setWelcomeLabel(String welcomeMessage) {
@@ -86,62 +87,27 @@ public class MainController {
     @FXML
     private Button timerButton;
 
-    public Timeline timeline;
-    private int notificationTime = 6; // Predefined duration in seconds
-
     @FXML
     public void pushedTimer(ActionEvent event) {
-        if (timeline == null) {
-            startTimer();
+        if (timerController.getTimeline() == null) {
+            timerController.startTimer();
             timerButton.setText("⏵");
         } else {
-            stopTimer();
+            timerController.stopTimer();
         }
-    }
-
-    public void startTimer() {
-        timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
-            notificationTime--;
-            updateButtonLabel();
-        }));
-        timeline.setCycleCount(Timeline.INDEFINITE); // Set the cycle count to indefinite
-        timeline.play();
-        updateButtonLabel();
-    }
-
-    public void stopTimer() {
-        if (timeline != null) {
-            timeline.stop();
-            timeline = null;
-            updateButtonLabel();
-        }
-    }
-
-    public String formatTime(int seconds) {
-        int hours = seconds / 3600;
-        int minutes = (seconds % 3600) / 60;
-        int remainingSeconds = seconds % 60;
-        return String.format("%02d:%02d:%02d", hours, minutes, remainingSeconds);
     }
 
     private void updateButtonLabel() {
-        if (notificationTime <= -1) {
-            // Reset the timer
-            notificationTime = 6;
-            notification.displayNotification();
-        }
-
-        String timeString = formatTime(notificationTime);
+        String timeString = timerController.formatTime(timerController.getNotificationTime());
         timerButton.setText(timeString);
     }
-
 
     //
     // Sign out
     //
     @FXML
     protected void onSignoutButtonClick(ActionEvent event) throws IOException {
-        stopTimer();
+//        stopTimer();
         System.out.println("User Signed out");
         Stage stageToClose = (Stage) ((Node) event.getSource()).getScene().getWindow();
         LoginController.openLoginWindow(stageToClose);
