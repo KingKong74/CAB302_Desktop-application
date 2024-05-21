@@ -9,6 +9,8 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Slider?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -67,10 +69,31 @@
 
     <HBox fx:id="mainHbox" alignment="CENTER_LEFT" spacing="40.0">
         <Label fx:id="mainIcons" styleClass="main-buttons" />
-        <Button fx:id="darkModeButton" onAction="#onDarkModeButtonClick" prefHeight="110" prefWidth="110" style="-fx-background-radius: 10; -fx-background-color: E0E0E0;" styleClass="main-buttons" text="DarkMode" />
+        <Button fx:id="darkModeButton" contentDisplay="TOP" graphicTextGap="0.0" onAction="#onDarkModeButtonClick" prefHeight="110" prefWidth="110" style="-fx-background-radius: 10; -fx-background-color: E0E0E0; -fx-padding: 0 0 0 0;" styleClass="main-buttons" text="DarkMode">
+         <graphic>
+            <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../imgs/moon.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
         <Button fx:id="focusModeButton" onAction="#onFocusModeButtonClick" prefHeight="110" prefWidth="110" style="-fx-background-radius: 10; -fx-background-color: E0E0E0;" styleClass="main-buttons" text="FocusMode" />
-        <Button fx:id="notificationsButton" onMouseClicked="#onNotificationsButtonClick" prefHeight="110" prefWidth="110" style="-fx-background-radius: 10; -fx-background-color: E0E0E0;" styleClass="main-buttons" text="Notifications" />
-        <Button fx:id="settingsButton" onMouseClicked="#onSettingsButtonClick" prefHeight="110" prefWidth="110" style="-fx-background-radius: 10; -fx-background-color: E0E0E0;" styleClass="main-buttons" text="Settings" />
+        <Button fx:id="notificationsButton" contentDisplay="TOP" onMouseClicked="#onNotificationsButtonClick" prefHeight="110" prefWidth="110" style="-fx-background-radius: 10; -fx-background-color: E0E0E0; -fx-padding: 0 0 0 0;" styleClass="main-buttons" text="Notifications">
+         <graphic>
+            <ImageView fitHeight="150.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../imgs/Notification%20Icon.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+        <Button fx:id="settingsButton" contentDisplay="TOP" onMouseClicked="#onSettingsButtonClick" prefHeight="110" prefWidth="110" style="-fx-background-radius: 10; -fx-background-color: E0E0E0; -fx-padding: 0 0 0 0;" styleClass="main-buttons" text="Settings">
+         <graphic>
+            <ImageView fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../imgs/SettingsIcon.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
     </HBox>
 
     <VBox prefHeight="55.0" />

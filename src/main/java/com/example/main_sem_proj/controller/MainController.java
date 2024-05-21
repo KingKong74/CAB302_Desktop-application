@@ -108,10 +108,10 @@ public class MainController {
 
         signoutButton.setStyle("-fx-background-color: BFBEBE; -fx-text-fill: black;");
 
-        darkModeButton.setStyle("-fx-background-radius: 10; -fx-background-color: E0E0E0; -fx-text-fill: black;");
+        darkModeButton.setStyle("-fx-background-radius: 10; -fx-background-color: E0E0E0; -fx-text-fill: black; -fx-padding: 0 0 0 0;");
         focusModeButton.setStyle("-fx-background-radius: 10; -fx-background-color: E0E0E0; -fx-text-fill: black;");
-        notificationsButton.setStyle("-fx-background-radius: 10; -fx-background-color: E0E0E0; -fx-text-fill: black;");
-        settingsButton.setStyle("-fx-background-radius: 10; -fx-background-color: E0E0E0; -fx-text-fill: black;");
+        notificationsButton.setStyle("-fx-background-radius: 10; -fx-background-color: E0E0E0; -fx-text-fill: black; -fx-padding: 0 0 0 0;");
+        settingsButton.setStyle("-fx-background-radius: 10; -fx-background-color: E0E0E0; -fx-text-fill: black; -fx-padding: 0 0 0 0;");
 
         count = count - 2;
     }
@@ -131,10 +131,10 @@ public class MainController {
 
         signoutButton.setStyle("-fx-background-color: #353435; -fx-text-fill: white;");
 
-        darkModeButton.setStyle("-fx-background-radius: 10; -fx-background-color: #414141; -fx-text-fill: white;");
+        darkModeButton.setStyle("-fx-background-radius: 10; -fx-background-color: #414141; -fx-text-fill: white; -fx-padding: 0 0 0 0;");
         focusModeButton.setStyle("-fx-background-radius: 10; -fx-background-color: #414141;-fx-text-fill: white;");
-        notificationsButton.setStyle("-fx-background-radius: 10; -fx-background-color: #414141;-fx-text-fill: white;");
-        settingsButton.setStyle("-fx-background-radius: 10; -fx-background-color: #414141;-fx-text-fill: white;");
+        notificationsButton.setStyle("-fx-background-radius: 10; -fx-background-color: #414141;-fx-text-fill: white; -fx-padding: 0 0 0 0;");
+        settingsButton.setStyle("-fx-background-radius: 10; -fx-background-color: #414141;-fx-text-fill: white; -fx-padding: 0 0 0 0;");
     }
 
     @FXML
