@@ -21,7 +21,6 @@ public class MainController {
     @FXML
     public VBox mainPage;
     public Button darkModeButton;
-    public Button focusModeButton;
     public Button notificationsButton;
     public Button settingsButton;
     public Button signoutButton;

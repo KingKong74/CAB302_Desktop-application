@@ -1,12 +1,16 @@
 package com.example.main_sem_proj.controller;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+
+import static com.example.main_sem_proj.controller.LoginController.openRegistrationWindow;
 
 public class HelloController {
 
@@ -29,6 +33,10 @@ public class HelloController {
         } catch (IOException e) {
             System.out.println(e);
         }
+    }
+    public void handleSigninHyperlink(ActionEvent actionEvent) throws IOException {
+        Stage stageToClose = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        openRegistrationWindow(stageToClose);
     }
 
 }
