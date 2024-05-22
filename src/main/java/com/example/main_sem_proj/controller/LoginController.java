@@ -35,11 +35,10 @@ public class LoginController extends StageController {
     // User login
     //
 
-
     @FXML
     public void handleSignIn(ActionEvent actionEvent) {
         try {
-            String email = usernameField.getText();
+            String email = usernameField.getText().toLowerCase();
             String password = passwordField.getText();
 
             // Validate email and password
@@ -99,7 +98,7 @@ public class LoginController extends StageController {
     public void handleRegisterUser(ActionEvent actionEvent) throws IOException {
         String firstName = firstNameField.getText();
         String lastName = lastNameField.getText();
-        String email = emailField.getText();
+        String email = emailField.getText().toLowerCase();
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
         boolean agreeToTerms = agreeCheckBox.isSelected();

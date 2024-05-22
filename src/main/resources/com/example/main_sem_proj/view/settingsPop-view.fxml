@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -23,45 +20,45 @@
             <Label style="-fx-font-size: 14px;">Set Schedule:</Label>
             <VBox prefHeight="4"/>
             <HBox spacing="45">
-                <Label>Start Time:</Label>
-                <Label>End Time:</Label>
+                <Label fx:id="startTimeLabel">Start Time:</Label>
+                <Label fx:id="endTimeLabel">End Time:</Label>
             </HBox>
             <HBox spacing="30">
-                <ComboBox prefWidth="70" promptText="18:00" editable="true"/>
-                <ComboBox prefWidth="70" promptText="22:00" editable="true"/>
+                <ComboBox fx:id="startTimeComboBox" prefWidth="70" promptText="06:00" editable="true"/>
+                <ComboBox fx:id="endTimeComboBox" prefWidth="70" promptText="10:00" editable="true"/>
             </HBox>
             <VBox prefHeight="6"/>
             <HBox spacing="15">
                 <Label style="-fx-font-size: 10px;" >Enable Alerts Schedule: </Label>
-                <CheckBox />
+                <CheckBox fx:id="alertsCheckBox" onAction="#handleEnableAlerts"/>
             </HBox>
             <VBox prefHeight="9"/>
             <Label style="-fx-font-size: 14px;">Set Bedtime / Wakeup: </Label>
             <VBox prefHeight="4"/>
             <HBox spacing="55">
-                <Label>Bedtime:</Label>
-                <Label>Wakeup:</Label>
+                <Label fx:id="bedTimeLabel">Bedtime:</Label>
+                <Label fx:id="wakeUpLabel">Wakeup:</Label>
             </HBox>
             <HBox spacing="30">
-                <ComboBox prefWidth="70" promptText="21:30" editable="true" />
-                <ComboBox prefWidth="70" promptText="07:00" editable="true"/>
+                <ComboBox fx:id="bedTimeComboBox" prefWidth="70" promptText="21:30" editable="true" />
+                <ComboBox fx:id="wakeTimeComboBox" prefWidth="70" promptText="07:00" editable="true"/>
             </HBox>
             <VBox prefHeight="6"/>
             <HBox spacing="17">
                 <Label style="-fx-font-size: 10px;" >Enable Sleep Schedule: </Label>
-                <CheckBox />
+                <CheckBox fx:id="sleepCheckBox" onAction="#handleEnableSleep"/>
             </HBox>
             <VBox prefHeight="9"/>
             <Label style="-fx-font-size: 14px;" >Set Location:</Label>
             <VBox prefHeight="4"/>
             <VBox spacing="8">
-                <TextField prefWidth="80" promptText="Enter Country..." />
-                <TextField prefWidth="80" promptText="Enter City..." />
+                <TextField fx:id="countryTextField" prefWidth="80" promptText="Enter Country..." />
+                <TextField fx:id="cityTextField" prefWidth="80" promptText="Enter City..." />
             </VBox>
             <VBox prefHeight="6"/>
             <HBox spacing="47">
                 <Label style="-fx-font-size: 10px;" >Enable Location: </Label>
-                <CheckBox />
+                <CheckBox fx:id="locationCheckBox" onAction="#handleEnableLocation"/>
             </HBox>
             <VBox prefHeight="6"/>
 

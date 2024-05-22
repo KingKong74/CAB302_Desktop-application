@@ -10,4 +10,5 @@ module com.example.main_sem_proj {
     exports com.example.main_sem_proj.model.notifications;
     exports com.example.main_sem_proj.model.users;
     exports com.example.main_sem_proj.model.database;
+    exports com.example.main_sem_proj.model;
 }

@@ -35,7 +35,6 @@ public class MainController {
 
     private final TimerController timerController = new TimerController(this::updateButtonLabel);
 
-
     public void setWelcomeLabel(String welcomeMessage) {
         welcomeLabel.setText(welcomeMessage);
     }
@@ -166,7 +165,7 @@ public class MainController {
     //
     @FXML
     protected void onSignoutButtonClick(ActionEvent event) throws IOException {
-//        stopTimer();
+        timerController.stopTimer();
         System.out.println("User Signed out");
         Stage stageToClose = (Stage) ((Node) event.getSource()).getScene().getWindow();
         LoginController.openLoginWindow(stageToClose);
