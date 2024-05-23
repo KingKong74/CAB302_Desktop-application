@@ -6,9 +6,11 @@ import javafx.util.Duration;
 
 public class TimerController {
     private Timeline timeline;
-    private int notificationTime = 6; // Predefined duration in seconds
+    private int notificationTime = 8; // Predefined duration in seconds
     private final Runnable updateUI;
     NotificationsController notification = new NotificationsController();
+    SoundController sound = new SoundController();
+    private boolean soundPlayed = false;
 
     /**
      * Constructor to initialize the TimerController with a Runnable to update the UI.
@@ -59,12 +61,17 @@ public class TimerController {
 
     /**
      * Updates the stopwatch label to display the current time.
-     * If the time runs out, it resets the timer and triggers a notification.
+     * If the time runs out, it resets the timer and triggers a notification/notificationSound.
      */
     private void updateButtonLabel() {
+        if (notificationTime <= 0 && !soundPlayed){
+            sound.notificationSound("big-button");
+            soundPlayed = true;
+        }
         if (notificationTime <= -1) {
             // Reset the timer
-            notificationTime = 6;
+            notificationTime = 8;
+            soundPlayed = false;
             notification.displayNotification();
         }
         updateUI.run();
