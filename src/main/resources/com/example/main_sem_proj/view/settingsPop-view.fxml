@@ -10,41 +10,66 @@
       fx:controller="com.example.main_sem_proj.controller.SettingsPopController"
       stylesheets="@../css/styles.css">
 
-    <!-- Custom top bar -->
-    <HBox styleClass="title-bar" prefHeight="50">
-        <!-- You can add any content here for the title bar -->
-    </HBox>
-
-    <!-- Main content area -->
     <HBox>
-        <!-- Left side content -->
-        <VBox alignment="CENTER_LEFT" spacing="10">
-            <!-- Adjusted slider to take up the whole left side -->
-            <Slider prefHeight="400" orientation="VERTICAL" />
+        <HBox prefWidth="25"/>
+        <VBox alignment="CENTER" spacing="10">
+            <Slider fx:id="slider" prefHeight="260" orientation="VERTICAL" />
         </VBox>
 
-        <VBox prefWidth="50"/>
+        <HBox prefWidth="25"/>
 
-        <!-- Right side content -->
-        <VBox spacing="10">
-            <!-- Your existing content goes here -->
-            <Label>Start Time:</Label>
-            <Label>End Time:</Label>
-            <HBox spacing="10">
-                <ComboBox prefWidth="80" promptText="Enter something..." />
-                <ComboBox prefWidth="80" promptText="Enter something..." />
+        <VBox>
+            <VBox prefHeight="5"/>
+            <Label style="-fx-font-size: 14px;">Set Schedule:</Label>
+            <VBox prefHeight="4"/>
+            <HBox spacing="45">
+                <Label>Start Time:</Label>
+                <Label>End Time:</Label>
             </HBox>
-            <Label>Bedtime:</Label>
-            <Label>Wake-up:</Label>
-            <HBox spacing="10">
-                <ComboBox prefWidth="80" promptText="Enter something..." />
-                <ComboBox prefWidth="80" promptText="Enter something..." />
-                <ToggleButton text="Toggle Me" selected="true" />
+            <HBox spacing="30">
+                <ComboBox prefWidth="70" promptText="18:00" editable="true"/>
+                <ComboBox prefWidth="70" promptText="22:00" editable="true"/>
             </HBox>
-            <Label>Set Location:</Label>
-            <TextField prefWidth="80" promptText="Enter Country..." />
-            <TextField prefWidth="80" promptText="Enter City..." />
-            <ToggleButton text="Toggle Me" selected="true" />
+            <VBox prefHeight="6"/>
+            <HBox spacing="15">
+                <Label style="-fx-font-size: 10px;" >Enable Alerts Schedule: </Label>
+                <CheckBox />
+            </HBox>
+            <VBox prefHeight="9"/>
+            <Label style="-fx-font-size: 14px;">Set Bedtime / Wakeup: </Label>
+            <VBox prefHeight="4"/>
+            <HBox spacing="55">
+                <Label>Bedtime:</Label>
+                <Label>Wakeup:</Label>
+            </HBox>
+            <HBox spacing="30">
+                <ComboBox prefWidth="70" promptText="21:30" editable="true" />
+                <ComboBox prefWidth="70" promptText="07:00" editable="true"/>
+            </HBox>
+            <VBox prefHeight="6"/>
+            <HBox spacing="17">
+                <Label style="-fx-font-size: 10px;" >Enable Sleep Schedule: </Label>
+                <CheckBox />
+            </HBox>
+            <VBox prefHeight="9"/>
+            <Label style="-fx-font-size: 14px;" >Set Location:</Label>
+            <VBox prefHeight="4"/>
+            <VBox spacing="8">
+                <TextField prefWidth="80" promptText="Enter Country..." />
+                <TextField prefWidth="80" promptText="Enter City..." />
+            </VBox>
+            <VBox prefHeight="6"/>
+            <HBox spacing="47">
+                <Label style="-fx-font-size: 10px;" >Enable Location: </Label>
+                <CheckBox />
+            </HBox>
+            <VBox prefHeight="6"/>
+
+            <HBox alignment="CENTER">
+                <Button prefWidth="85" text="Save"/>
+            </HBox>
+
+
         </VBox>
     </HBox>
 </VBox>

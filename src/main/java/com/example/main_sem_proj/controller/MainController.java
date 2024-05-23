@@ -1,7 +1,5 @@
 package com.example.main_sem_proj.controller;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -9,7 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.util.Duration;
+import javafx.scene.layout.*;
+import javafx.scene.control.ChoiceBox;
 
 import java.io.IOException;
 
@@ -19,11 +18,23 @@ import java.io.IOException;
  */
 public class MainController {
 
+    @FXML
+    public VBox mainPage;
+    public Button darkModeButton;
+    public Button notificationsButton;
+    public Button settingsButton;
+    public Button signoutButton;
+    public HBox timerBox;
+    public ChoiceBox dropdownMenu;
+
     public Label scheduleLabel;
 
     @FXML
     private Label welcomeLabel;
-    NotificationsController notification = new NotificationsController();
+
+    private int count;
+    private final TimerController timerController = new TimerController(this::updateButtonLabel);
+    private LoginController loginController;
 
 
     public void setWelcomeLabel(String welcomeMessage) {
@@ -32,6 +43,10 @@ public class MainController {
 
     public void setScheduleLabel(String scheduleMessage) {scheduleLabel.setText(scheduleMessage);}
 
+    // Method to set LoginController reference
+    public void setLoginController(LoginController loginController) {
+        this.loginController = loginController;
+    }
 
     //
     // Switch
@@ -39,9 +54,18 @@ public class MainController {
 
     @FXML
     protected void onDarkModeButtonClick() {
-        System.out.println("Dark mode enabled");
-//        setScheduleLabel("Sunrise in 8hrs, Bedtime in 1hr ...");
+        count++;
+        if (count == 1)
+        {
+            darkMode_MAIN();
+        }
+        if (count == 2 || count == 0)
+        {
+            lightMode_MAIN();
+            count = count - 2;
+        }
     }
+
 
     //
     // Pop up windows
@@ -86,63 +110,74 @@ public class MainController {
     @FXML
     private Button timerButton;
 
-    private Timeline timeline;
-    private int notificationTime = 6; // Predefined duration in seconds
-
     @FXML
-    protected void pushedTimer(ActionEvent event) {
-        if (timeline == null) {
-            startTimer();
+    public void pushedTimer() {
+        if (timerController.getTimeline() == null) {
+            timerController.startTimer();
             timerButton.setText("⏵");
         } else {
-            stopTimer();
-        }
-    }
-
-    public void startTimer() {
-        timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
-            notificationTime--;
-            updateButtonLabel();
-        }));
-        timeline.setCycleCount(Timeline.INDEFINITE); // Set the cycle count to indefinite
-        timeline.play();
-        updateButtonLabel();
-    }
-
-    public void stopTimer() {
-        if (timeline != null) {
-            timeline.stop();
-            timeline = null;
-            updateButtonLabel();
+            timerController.stopTimer();
         }
     }
 
     private void updateButtonLabel() {
-        if (notificationTime <= -1) {
-            // Reset the timer
-            notificationTime = 6;
-            notification.displayNotification();
-        }
-
-        int hours = notificationTime / 3600;
-        int minutes = (notificationTime % 3600) / 60;
-        int seconds = notificationTime % 60;
-        String timeString = String.format("%02d:%02d:%02d", hours, minutes, seconds);
+        String timeString = timerController.formatTime(timerController.getNotificationTime());
         timerButton.setText(timeString);
     }
-
 
     //
     // Sign out
     //
     @FXML
     protected void onSignoutButtonClick(ActionEvent event) throws IOException {
+//        stopTimer();
         System.out.println("User Signed out");
         Stage stageToClose = (Stage) ((Node) event.getSource()).getScene().getWindow();
         LoginController.openLoginWindow(stageToClose);
     }
+
+    //
+    // Colour Modes
+    //
+    protected void lightMode_MAIN(){
+        darkModeButton.setText("Dark Mode");
+
+        timerButton.setStyle("-fx-background-color: E0E0E0;");
+
+        dropdownMenu.setStyle("-fx-background-color: E0E0E0;");
+        dropdownMenu.lookup(".label").setStyle("-fx-text-fill: black;");
+
+        mainPage.setStyle("-fx-background-color: white");
+        welcomeLabel.setStyle("-fx-text-fill: black");
+
+//        sliderValue.setStyle("-fx-text-fill: black");
+//        colourSlider.lookup(".thumb").setStyle("-fx-background-color: white;");
+
+        signoutButton.setStyle("-fx-background-color: BFBEBE; -fx-text-fill: black;");
+
+        darkModeButton.setStyle("-fx-background-radius: 10; -fx-background-color: E0E0E0; -fx-text-fill: black; -fx-padding: 0 0 0 0;");
+        notificationsButton.setStyle("-fx-background-radius: 10; -fx-background-color: E0E0E0; -fx-text-fill: black; -fx-padding: 0 0 0 0;");
+        settingsButton.setStyle("-fx-background-radius: 10; -fx-background-color: E0E0E0; -fx-text-fill: black; -fx-padding: 0 0 0 0;");
+    }
+
+    protected void darkMode_MAIN(){
+        darkModeButton.setText("Light Mode");
+
+        timerButton.setStyle("-fx-background-color: #414141; -fx-text-fill: white;");
+
+        dropdownMenu.setStyle("-fx-background-color: #414141;");
+        dropdownMenu.lookup(".label").setStyle("-fx-text-fill: white;");
+
+        mainPage.setStyle("-fx-background-color:#252525");
+        welcomeLabel.setStyle("-fx-text-fill: white");
+
+//        sliderValue.setStyle("-fx-text-fill: white");
+//        colourSlider.lookup(".thumb").setStyle("-fx-background-color: grey;");
+
+        signoutButton.setStyle("-fx-background-color: #353435; -fx-text-fill: white;");
+
+        darkModeButton.setStyle("-fx-background-radius: 10; -fx-background-color: #414141; -fx-text-fill: white; -fx-padding: 0 0 0 0;");
+        notificationsButton.setStyle("-fx-background-radius: 10; -fx-background-color: #414141;-fx-text-fill: white; -fx-padding: 0 0 0 0;");
+        settingsButton.setStyle("-fx-background-radius: 10; -fx-background-color: #414141;-fx-text-fill: white; -fx-padding: 0 0 0 0;");
+    }
 }
-
-
-
-

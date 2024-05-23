@@ -12,8 +12,8 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 
 public class PopupController extends MainController {
-    private static final double WIDTH = 250;
-    private static final double HEIGHT = 300;
+    private static final double WIDTH = 270;
+    private static final double HEIGHT = 350;
     public static Stage popupStage;
 
     /**
@@ -43,8 +43,8 @@ public class PopupController extends MainController {
      */
     private static void openPopup(String view, double x, double y, String title) {
         try {
-            FXMLLoader fxmlLoader = loadFXML(view);
-            Scene scene = createScene(fxmlLoader);
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/" + view + "-view.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), WIDTH, HEIGHT);
 
             double[] screenParams = getScreenParams();
             double screenWidth = screenParams[0];
@@ -55,33 +55,12 @@ public class PopupController extends MainController {
             double popupY = popupPosition[1];
 
             popupStage = createPopupStage(scene, popupX, popupY, title);
+            popupStage.setResizable(false);
 
             popupStage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Loads the FXML file for the popup.
-     *
-     * @param view The name of the FXML view file.
-     * @return FXMLLoader object for the loaded FXML file.
-     * @throws IOException If an error occurs while loading the FXML file.
-     */
-    public static FXMLLoader loadFXML(String view) throws IOException {
-        return new FXMLLoader(HelloApplication.class.getResource("view/" + view + "-view.fxml"));
-    }
-
-    /**
-     * Creates the scene for the popup.
-     *
-     * @param fxmlLoader FXMLLoader object for the loaded FXML file.
-     * @return Scene object for the popup.
-     * @throws IOException If an error occurs while creating the scene.
-     */
-    public static Scene createScene(FXMLLoader fxmlLoader) throws IOException {
-        return new Scene(fxmlLoader.load(), WIDTH, HEIGHT);
     }
 
 

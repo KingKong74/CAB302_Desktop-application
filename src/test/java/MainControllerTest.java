@@ -1,12 +1,15 @@
 import com.example.main_sem_proj.controller.MainController;
+import javafx.animation.Animation;
 import org.junit.jupiter.api.*;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 public class MainControllerTest {
 
-    private int notificationTime = 6;
+    private final int notificationTime = 6;
 
     private MainController controller;
 
@@ -14,5 +17,6 @@ public class MainControllerTest {
     void setUp() {
         controller = new MainController(); // Initialize
     }
-    
+
+
 }

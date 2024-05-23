@@ -1,4 +1,4 @@
-package com.example.main_sem_proj.model.Notifications;
+package com.example.main_sem_proj.model.notifications;
 
 public interface DisplayComponent {
     void showPopup();

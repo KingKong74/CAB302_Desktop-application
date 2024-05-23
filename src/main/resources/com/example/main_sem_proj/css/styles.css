@@ -6,15 +6,15 @@
 }
 
 
-.slider-thumb {
+.slider .thumb {
     /* -fx-background-radius: 10px; /* Set the radius to make it round */
-    /*-fx-pref-height: 20px; /* Set the height of the thumb */
-    /*-fx-pref-width: 20px; /* Set the width of the thumb */
-} /* Leave adjusted out gonna play around with later -- BK */
+    -fx-pref-height: 15px; /* Set the height of the thumb */
+    -fx-pref-width: 15px; /* Set the width of the thumb */
+}
 
-.slider-thumb .thumb {
-    -fx-scale-x: 2;
-    -fx-scale-y: 2;
+.slider .thumb {
+    -fx-scale-x: 1.4;
+    -fx-scale-y: 1.4;
 }
 
 #mainHbox {
