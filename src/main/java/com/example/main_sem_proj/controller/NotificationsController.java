@@ -13,6 +13,8 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.io.InputStream;
+
 import javafx.scene.control.Label;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -28,7 +30,6 @@ public class NotificationsController{
         Point2D notificationPosition = calculateStagePosition();
         Stage notificationStage = createNotificationWindow(notificationPosition.getX(), notificationPosition.getY());
         if (notificationStage != null) {
-            // Schedule the notification window to close after 3 seconds
             scheduleNotificationClose(notificationStage);
         }
     }
@@ -54,7 +55,7 @@ public class NotificationsController{
     }
 
     private void scheduleNotificationClose(Stage stage) {
-        Timeline closeNotificationTimeline = new Timeline(new KeyFrame(Duration.seconds(3), e -> {
+        Timeline closeNotificationTimeline = new Timeline(new KeyFrame(Duration.seconds(4), e -> {
             stage.close();
         }));
         closeNotificationTimeline.play();

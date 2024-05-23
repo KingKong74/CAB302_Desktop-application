@@ -3,7 +3,7 @@ package com.example.main_sem_proj.controller;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 
-public class ContrastSliderController extends MainController {
+public class ContrastSliderController {
 
     private Slider colourSlider;
     private Label sliderValue;

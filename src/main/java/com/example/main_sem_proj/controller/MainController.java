@@ -20,16 +20,20 @@ public class MainController {
 
     @FXML
     public VBox mainPage;
+    @FXML
     public Button darkModeButton;
-    public Button focusModeButton;
+    @FXML
     public Button notificationsButton;
+    @FXML
     public Button settingsButton;
+    @FXML
     public Button signoutButton;
+    @FXML
     public HBox timerBox;
+    @FXML
     public ChoiceBox dropdownMenu;
-
+    @FXML
     public Label scheduleLabel;
-
     @FXML
     private Label welcomeLabel;
 
