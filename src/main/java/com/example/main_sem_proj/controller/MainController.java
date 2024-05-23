@@ -32,7 +32,9 @@ public class MainController {
     @FXML
     private Label welcomeLabel;
 
+    private int count;
     private final TimerController timerController = new TimerController(this::updateButtonLabel);
+    private LoginController loginController;
 
 
     public void setWelcomeLabel(String welcomeMessage) {
@@ -41,66 +43,29 @@ public class MainController {
 
     public void setScheduleLabel(String scheduleMessage) {scheduleLabel.setText(scheduleMessage);}
 
+    // Method to set LoginController reference
+    public void setLoginController(LoginController loginController) {
+        this.loginController = loginController;
+    }
 
     //
     // Switch
     //
 
-    private int count;
     @FXML
     protected void onDarkModeButtonClick() {
         count++;
         if (count == 1)
         {
-            darkMode();
+            darkMode_MAIN();
         }
         if (count == 2 || count == 0)
         {
-            lightMode();
+            lightMode_MAIN();
+            count = count - 2;
         }
     }
-    protected void lightMode(){
-        darkModeButton.setText("Dark Mode");
 
-        timerButton.setStyle("-fx-background-color: E0E0E0;");
-
-        dropdownMenu.setStyle("-fx-background-color: E0E0E0;");
-        dropdownMenu.lookup(".label").setStyle("-fx-text-fill: black;");
-
-        mainPage.setStyle("-fx-background-color: white");
-        welcomeLabel.setStyle("-fx-text-fill: black");
-
-//        sliderValue.setStyle("-fx-text-fill: black");
-//        colourSlider.lookup(".thumb").setStyle("-fx-background-color: white;");
-
-        signoutButton.setStyle("-fx-background-color: BFBEBE; -fx-text-fill: black;");
-
-        darkModeButton.setStyle("-fx-background-radius: 10; -fx-background-color: E0E0E0; -fx-text-fill: black; -fx-padding: 0 0 0 0;");
-        notificationsButton.setStyle("-fx-background-radius: 10; -fx-background-color: E0E0E0; -fx-text-fill: black; -fx-padding: 0 0 0 0;");
-        settingsButton.setStyle("-fx-background-radius: 10; -fx-background-color: E0E0E0; -fx-text-fill: black; -fx-padding: 0 0 0 0;");
-        count = count - 2;
-    }
-
-    protected void darkMode(){
-        darkModeButton.setText("Light Mode");
-
-        timerButton.setStyle("-fx-background-color: #414141; -fx-text-fill: white;");
-
-        dropdownMenu.setStyle("-fx-background-color: #414141;");
-        dropdownMenu.lookup(".label").setStyle("-fx-text-fill: white;");
-
-        mainPage.setStyle("-fx-background-color:#252525");
-        welcomeLabel.setStyle("-fx-text-fill: white");
-
-//        sliderValue.setStyle("-fx-text-fill: white");
-//        colourSlider.lookup(".thumb").setStyle("-fx-background-color: grey;");
-
-        signoutButton.setStyle("-fx-background-color: #353435; -fx-text-fill: white;");
-
-        darkModeButton.setStyle("-fx-background-radius: 10; -fx-background-color: #414141; -fx-text-fill: white; -fx-padding: 0 0 0 0;");
-        notificationsButton.setStyle("-fx-background-radius: 10; -fx-background-color: #414141;-fx-text-fill: white; -fx-padding: 0 0 0 0;");
-        settingsButton.setStyle("-fx-background-radius: 10; -fx-background-color: #414141;-fx-text-fill: white; -fx-padding: 0 0 0 0;");
-    }
 
     //
     // Pop up windows
@@ -169,5 +134,50 @@ public class MainController {
         System.out.println("User Signed out");
         Stage stageToClose = (Stage) ((Node) event.getSource()).getScene().getWindow();
         LoginController.openLoginWindow(stageToClose);
+    }
+
+    //
+    // Colour Modes
+    //
+    protected void lightMode_MAIN(){
+        darkModeButton.setText("Dark Mode");
+
+        timerButton.setStyle("-fx-background-color: E0E0E0;");
+
+        dropdownMenu.setStyle("-fx-background-color: E0E0E0;");
+        dropdownMenu.lookup(".label").setStyle("-fx-text-fill: black;");
+
+        mainPage.setStyle("-fx-background-color: white");
+        welcomeLabel.setStyle("-fx-text-fill: black");
+
+//        sliderValue.setStyle("-fx-text-fill: black");
+//        colourSlider.lookup(".thumb").setStyle("-fx-background-color: white;");
+
+        signoutButton.setStyle("-fx-background-color: BFBEBE; -fx-text-fill: black;");
+
+        darkModeButton.setStyle("-fx-background-radius: 10; -fx-background-color: E0E0E0; -fx-text-fill: black; -fx-padding: 0 0 0 0;");
+        notificationsButton.setStyle("-fx-background-radius: 10; -fx-background-color: E0E0E0; -fx-text-fill: black; -fx-padding: 0 0 0 0;");
+        settingsButton.setStyle("-fx-background-radius: 10; -fx-background-color: E0E0E0; -fx-text-fill: black; -fx-padding: 0 0 0 0;");
+    }
+
+    protected void darkMode_MAIN(){
+        darkModeButton.setText("Light Mode");
+
+        timerButton.setStyle("-fx-background-color: #414141; -fx-text-fill: white;");
+
+        dropdownMenu.setStyle("-fx-background-color: #414141;");
+        dropdownMenu.lookup(".label").setStyle("-fx-text-fill: white;");
+
+        mainPage.setStyle("-fx-background-color:#252525");
+        welcomeLabel.setStyle("-fx-text-fill: white");
+
+//        sliderValue.setStyle("-fx-text-fill: white");
+//        colourSlider.lookup(".thumb").setStyle("-fx-background-color: grey;");
+
+        signoutButton.setStyle("-fx-background-color: #353435; -fx-text-fill: white;");
+
+        darkModeButton.setStyle("-fx-background-radius: 10; -fx-background-color: #414141; -fx-text-fill: white; -fx-padding: 0 0 0 0;");
+        notificationsButton.setStyle("-fx-background-radius: 10; -fx-background-color: #414141;-fx-text-fill: white; -fx-padding: 0 0 0 0;");
+        settingsButton.setStyle("-fx-background-radius: 10; -fx-background-color: #414141;-fx-text-fill: white; -fx-padding: 0 0 0 0;");
     }
 }

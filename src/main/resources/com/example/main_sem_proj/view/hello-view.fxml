@@ -7,16 +7,47 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="350.0" prefWidth="250.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.main_sem_proj.controller.HelloController">
+<AnchorPane prefHeight="380.0" prefWidth="250.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.main_sem_proj.controller.HelloController">
    <children>
-     <Button fx:id="loginButton" alignment="CENTER" layoutX="48.0" layoutY="200.0" onAction="#onHelloButtonClick" prefHeight="35.0" prefWidth="175.0" style="-fx-background-color: white; -fx-background-radius: 30; -fx-border-color: #5D93E2; -fx-border-width: 3; -fx-border-radius: 30;" text="Login" textAlignment="CENTER" AnchorPane.leftAnchor="48.0" AnchorPane.topAnchor="200.0" />
-      <Label prefHeight="155.0" prefWidth="270.0" style="-fx-background-color: E0E0E0;" />
-      <ImageView fitHeight="100.0" fitWidth="262.0" layoutX="6.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
+     <Button fx:id="loginButton" alignment="CENTER" layoutX="37.0" layoutY="196.0" onAction="#onHelloButtonClick" prefHeight="26.0" prefWidth="175.0" style="-fx-background-color: white; -fx-background-radius: 30; -fx-border-color: #5D93E2; -fx-border-width: 3; -fx-border-radius: 30;" text="Login" textAlignment="CENTER" AnchorPane.leftAnchor="37.0" AnchorPane.topAnchor="196.0" />
+      <Label prefHeight="128.0" prefWidth="250.0" style="-fx-background-color: EEEEEE;" />
+      <Button fx:id="signupButton" alignment="CENTER" layoutX="37.0" layoutY="240.0" onAction="#handleSigninHyperlink" prefHeight="31.0" prefWidth="175.0" style="-fx-background-color: white; -fx-background-radius: 30; -fx-border-color: #5D93E2; -fx-border-width: 3; -fx-border-radius: 30;" text="Sign Up" textAlignment="CENTER" />
+      <Label layoutX="91.0" layoutY="160.0" text="Welcome" textFill="#c3c3c3">
+         <font>
+            <Font name="Arial Bold" size="15.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="38.0" fitWidth="37.0" layoutX="50.0" layoutY="328.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../imgs/EyeStrain.png" />
+            <Image url="@../../../../imgs/GreyCircle.png" />
          </image>
       </ImageView>
-      <Button fx:id="signupButton" alignment="CENTER" layoutX="48.0" layoutY="246.0" onAction="#handleSigninHyperlink" prefHeight="35.0" prefWidth="175.0" style="-fx-background-color: white; -fx-background-radius: 30; -fx-border-color: #5D93E2; -fx-border-width: 3; -fx-border-radius: 30;" text="Sign Up" textAlignment="CENTER" />
+      <ImageView fitHeight="44.0" fitWidth="175.0" layoutX="40.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../imgs/EyeStrain2.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="68.0" layoutY="304.0" prefHeight="24.0" prefWidth="119.0" text="Find us on social media:" textFill="#5e5e5e">
+         <font>
+            <Font name="System Italic" size="11.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="38.0" fitWidth="37.0" layoutX="87.0" layoutY="328.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../imgs/GreyCircle.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="37.0" layoutX="125.0" layoutY="328.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../imgs/GreyCircle.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="37.0" layoutX="162.0" layoutY="328.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../imgs/GreyCircle.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

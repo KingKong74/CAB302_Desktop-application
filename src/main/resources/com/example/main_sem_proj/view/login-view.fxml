@@ -1,41 +1,56 @@
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.PasswordField?>
+<?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.Button?>
-
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Hyperlink?>
-<VBox xmlns:fx="http://javafx.com/javafx"
-      fx:controller="com.example.main_sem_proj.controller.LoginController"
-      alignment="CENTER"
-      spacing="5">
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-    <Label text="Login" style="-fx-font-size: 18px;"/>
-
-    <Label fx:id="errorMessageLabel" style="-fx-text-fill: red;" />
-
-    <HBox alignment="CENTER">
-        <TextField fx:id="usernameField" promptText="Email" styleClass="Hbox_Login"/>
-    </HBox>
-
-    <HBox alignment="CENTER">
-        <PasswordField fx:id="passwordField" promptText="Password" styleClass="Hbox_Login"/>
-    </HBox>
-
-    <HBox alignment="CENTER">
-        <Label text="No Account? Register" style="-fx-font-size: 9px;"/>
-        <Hyperlink text="Here" onAction="#handleRegisterHyperlink" style="-fx-font-size: 9px;"/>
-    </HBox>
-
-    <VBox>
-        <HBox alignment="CENTER">
-            <Button fx:id="signInButton" text="Login" onAction="#handleSignIn" styleClass="Hbox_Login" prefWidth="100" />
-        </HBox>
-        <HBox alignment="CENTER">
-            <Label text="Continue as" style="-fx-font-size: 7px;"/>
-            <Hyperlink fx:id="GuestButton" text="Guest" onAction="#handleGuestHyperlink" style="-fx-font-size: 7px;"/>
-        </HBox>
-    </VBox>
-
-</VBox>
+<AnchorPane prefHeight="250.0" prefWidth="400.0" style="-fx-background-color: #5e94e0;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.main_sem_proj.controller.LoginController">
+   <children>
+      <Label layoutX="10.0" layoutY="11.0" prefHeight="227.0" prefWidth="202.0" style="-fx-background-color: white; -fx-background-radius: 20;" />
+      <VBox fx:id="loginPage" alignment="CENTER" layoutX="37.0" layoutY="17.0" prefHeight="217.0" prefWidth="149.0" spacing="5" style="-fx-background-color: white;">
+      
+                         <Label alignment="TOP_CENTER" prefHeight="27.0" prefWidth="99.0" style="-fx-font-size: 18px;" text="Login" textFill="#5e94e0">
+            <font>
+               <Font name="Arial Black" size="16.0" />
+            </font>
+         </Label>
+      
+          <HBox alignment="CENTER">
+              <TextField fx:id="usernameField" promptText="Email" style="-fx-background-radius: 10; -fx-background-color: E0e0e0;" styleClass="Hbox_Login" />
+          </HBox>
+      
+          <HBox alignment="CENTER">
+              <PasswordField fx:id="passwordField" promptText="Password" style="-fx-background-radius: 10; -fx-background-color: E0e0e0;" styleClass="Hbox_Login" />
+          </HBox>
+      
+          <HBox alignment="CENTER">
+              <Label style="-fx-font-size: 9px;" text="No Account? Register" />
+              <Hyperlink onAction="#handleRegisterHyperlink" style="-fx-font-size: 9px;" text="Here" />
+          </HBox>
+      
+          <VBox>
+              <HBox alignment="CENTER">
+                  <Button fx:id="signInButton" onAction="#handleSignIn" prefWidth="100" style="-fx-background-color: E0e0e0; -fx-background-radius: 10;" styleClass="Hbox_Login" text="Login" />
+              </HBox>
+              <HBox alignment="CENTER">
+                  <Label style="-fx-font-size: 7px;" text="Continue as" />
+                  <Hyperlink fx:id="GuestButton" onAction="#handleGuestHyperlink" style="-fx-font-size: 7px;" text="Guest" />
+              </HBox>
+          </VBox>
+      
+      </VBox>
+      <ImageView fitHeight="126.0" fitWidth="135.0" layoutX="248.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../imgs/working.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

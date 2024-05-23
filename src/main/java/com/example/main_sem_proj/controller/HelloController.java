@@ -26,7 +26,7 @@ public class HelloController {
             Parent root = fxmlLoader.load();
 
             // Set the scene with the login window
-            Scene scene = new Scene(root, 350, 200);
+            Scene scene = new Scene(root, 400, 250);
             stage.setScene(scene);
             stage.setTitle("Login");
             stage.show();

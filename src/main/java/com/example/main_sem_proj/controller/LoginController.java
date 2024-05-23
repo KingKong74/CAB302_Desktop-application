@@ -171,7 +171,7 @@ public class LoginController extends StageController {
 
     public static void openLoginWindow(Stage stageToClose) throws IOException {
         FXMLLoader fxmlLoader = stageController.loadFXML("login");
-        stageController.openStage(fxmlLoader, "Login", 350, 200, stageToClose);
+        stageController.openStage(fxmlLoader, "Login", 400, 250, stageToClose);
     }
 
     private void setErrorMessage(String string) {
