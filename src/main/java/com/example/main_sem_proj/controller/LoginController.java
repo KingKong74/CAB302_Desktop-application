@@ -51,7 +51,7 @@ public class LoginController extends StageController {
             User user = authenticateUser(email, password);
             if (user != null) {
                 Stage stageToClose = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-                openMainGUI(stageToClose, "Welcome " + user.getFirstName() + " " + user.getLastName() + "!");
+                openMainGUI(stageToClose, "Welcome " + user.getFirstName() + " " + user.getLastName() + "!", user.getEmail());
             } else {
                 setErrorMessage("Invalid email or password");
             }
@@ -189,7 +189,7 @@ public class LoginController extends StageController {
 
     public void handleGuestHyperlink(ActionEvent actionEvent) throws IOException {
         Stage stageToClose = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        openMainGUI(stageToClose,"Welcome Guest!");
+        openMainGUI(stageToClose,"Welcome Guest!", "guest");
     }
 
     /**
@@ -199,7 +199,7 @@ public class LoginController extends StageController {
      * @param welcomeMessage The welcome message to be displayed in the main GUI.
      * @throws IOException If an error occurs while loading the FXML file.
      */
-    private void openMainGUI(Stage stageToClose, String welcomeMessage) throws IOException {
+    private void openMainGUI(Stage stageToClose, String welcomeMessage, String email) throws IOException {
         final int WIDTH = 460;
         final int HEIGHT = 240;
 
@@ -208,6 +208,7 @@ public class LoginController extends StageController {
 
         MainController mainController = fxmlLoader.getController();
         mainController.setWelcomeLabel(welcomeMessage);
+        mainController.setUserEmail(email);
 
         openStage(fxmlLoader, "Iz.Lumen", WIDTH, HEIGHT, stageToClose, bottomRightPosition.getX(), bottomRightPosition.getY());
 

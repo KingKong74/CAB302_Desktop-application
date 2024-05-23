@@ -1,15 +1,20 @@
 package com.example.main_sem_proj.controller;
 
+import com.example.main_sem_proj.model.database.SqliteUserTimerDAO;
+import com.example.main_sem_proj.model.users.UserTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
+import static com.example.main_sem_proj.controller.MainController.userEmail;
 
 public class TimerController {
     private Timeline timeline;
-    private int notificationTime = 8; // Predefined duration in seconds
+    private int notificationTime = 60; // Predefined duration in seconds
+
     private final Runnable updateUI;
     NotificationsController notification = new NotificationsController();
     SoundController sound = new SoundController();
+    SqliteUserTimerDAO userTimerDAO = new SqliteUserTimerDAO();
     private boolean soundPlayed = false;
 
     /**
@@ -18,6 +23,7 @@ public class TimerController {
      */
     public TimerController(Runnable updateUI) {
         this.updateUI = updateUI;
+        this.notificationTime = getUpdatedNotificationTime();
     }
 
     /**
@@ -25,15 +31,15 @@ public class TimerController {
      * The timer counts down every second and updates the button label.
      */
     public void startTimer() {
+        int resetTime = getUpdatedNotificationTime();
         if (timeline != null) return;
-
         timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
             notificationTime--;
-            updateButtonLabel();
+            updateButtonLabel(resetTime);
         }));
         timeline.setCycleCount(Timeline.INDEFINITE); // Set the cycle count to indefinite
         timeline.play();
-        updateButtonLabel();
+        updateButtonLabel(resetTime);
     }
 
     /**
@@ -43,7 +49,6 @@ public class TimerController {
         if (timeline != null) {
             timeline.stop();
             timeline = null;
-            updateButtonLabel();
         }
     }
 
@@ -63,14 +68,14 @@ public class TimerController {
      * Updates the stopwatch label to display the current time.
      * If the time runs out, it resets the timer and triggers a notification/notificationSound.
      */
-    private void updateButtonLabel() {
+    private void updateButtonLabel(int resetTime) {
         if (notificationTime <= 0 && !soundPlayed){
             sound.notificationSound("big-button");
             soundPlayed = true;
         }
         if (notificationTime <= -1) {
             // Reset the timer
-            notificationTime = 8;
+            notificationTime = resetTime;
             soundPlayed = false;
             notification.displayNotification();
         }
@@ -91,5 +96,13 @@ public class TimerController {
      */
     public Timeline getTimeline() {
         return timeline;
+    }
+
+    public int getUpdatedNotificationTime() {
+        UserTimer userTimer = userTimerDAO.select(userEmail);
+        if (userTimer != null) {
+            this.notificationTime = userTimer.getTimerValue() * 60;
+        }
+        return notificationTime;
     }
 }

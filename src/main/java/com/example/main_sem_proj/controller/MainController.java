@@ -1,5 +1,6 @@
 package com.example.main_sem_proj.controller;
 
+import com.example.main_sem_proj.model.users.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -18,7 +19,6 @@ import java.io.IOException;
  * This class handles the user interactions in the Main view.
  */
 public class MainController {
-
     @FXML
     public VBox mainPage;
     @FXML
@@ -48,6 +48,8 @@ public class MainController {
 
     public void setScheduleLabel(String scheduleMessage) {scheduleLabel.setText(scheduleMessage);}
 
+    public void setUserEmail(String email) { userEmail = email;}
+    public static String userEmail;
 
     //
     // Switch
@@ -183,6 +185,7 @@ public class MainController {
         Stage stageToClose = (Stage) ((Node) event.getSource()).getScene().getWindow();
         LoginController.openLoginWindow(stageToClose);
     }
+
 
 
 }
