@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.scene.layout.*;
@@ -34,6 +35,8 @@ public class MainController {
     public ChoiceBox dropdownMenu;
     @FXML
     public Label scheduleLabel;
+    @FXML
+    public ToggleButton hamburgerButton;
     @FXML
     private Label welcomeLabel;
 
@@ -74,9 +77,6 @@ public class MainController {
         mainPage.setStyle("-fx-background-color: white");
         welcomeLabel.setStyle("-fx-text-fill: black");
 
-//        sliderValue.setStyle("-fx-text-fill: black");
-//        colourSlider.lookup(".thumb").setStyle("-fx-background-color: white;");
-
         signoutButton.setStyle("-fx-background-color: BFBEBE; -fx-text-fill: black;");
 
         darkModeButton.setStyle("-fx-background-radius: 10; -fx-background-color: E0E0E0; -fx-text-fill: black; -fx-padding: 0 0 0 0;");
@@ -96,15 +96,24 @@ public class MainController {
         mainPage.setStyle("-fx-background-color:#252525");
         welcomeLabel.setStyle("-fx-text-fill: white");
 
-//        sliderValue.setStyle("-fx-text-fill: white");
-//        colourSlider.lookup(".thumb").setStyle("-fx-background-color: grey;");
-
         signoutButton.setStyle("-fx-background-color: #353435; -fx-text-fill: white;");
 
         darkModeButton.setStyle("-fx-background-radius: 10; -fx-background-color: #414141; -fx-text-fill: white; -fx-padding: 0 0 0 0;");
         notificationsButton.setStyle("-fx-background-radius: 10; -fx-background-color: #414141;-fx-text-fill: white; -fx-padding: 0 0 0 0;");
         settingsButton.setStyle("-fx-background-radius: 10; -fx-background-color: #414141;-fx-text-fill: white; -fx-padding: 0 0 0 0;");
     }
+
+    //
+    // Hamburger Button
+    //
+
+    public void toggleBurgerMenu(MouseEvent event) throws IOException {
+        double[] coordinates = getScreenCoordinates(event);
+        double x = coordinates[0];
+        double y = coordinates[1];
+        HamburgerController.toggleBurgerMenu(x, y);
+    }
+
 
     //
     // Pop up windows
@@ -174,4 +183,6 @@ public class MainController {
         Stage stageToClose = (Stage) ((Node) event.getSource()).getScene().getWindow();
         LoginController.openLoginWindow(stageToClose);
     }
+
+
 }

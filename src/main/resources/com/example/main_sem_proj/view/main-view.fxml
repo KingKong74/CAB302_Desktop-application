@@ -14,27 +14,30 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.control.ToggleButton?>
 <VBox fx:id="mainPage" xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.main_sem_proj.controller.MainController"
       stylesheets="@../css/styles.css"
       alignment="CENTER">
 
     <AnchorPane>
-        <Label fx:id="welcomeLabel" style="-fx-text-fill: black; -fx-font-size: 10px;" AnchorPane.topAnchor="5" AnchorPane.rightAnchor="5" />
+        <Label fx:id="welcomeLabel" style="-fx-text-fill: black; -fx-font-size: 10px;" AnchorPane.topAnchor="5" AnchorPane.rightAnchor="7" />
     </AnchorPane>
 
     <VBox prefHeight="30.0" />
 
     <padding>
-        <Insets bottom="20.0" left="5.0" right="5.0" top="0.0"/>
+        <Insets bottom="20.0" left="5.0" right="5.0"/>
     </padding>
 
 
-    <HBox spacing="210">
-        <HBox fx:id="timerBox" alignment="TOP_LEFT">
+    <HBox spacing="190">
+        <HBox fx:id="timerBox">
             <padding>
-                <Insets left="24.0"/>
+                <Insets left="18.0"/>
             </padding>
+            <ToggleButton fx:id="hamburgerButton" text="☰" onMouseClicked="#toggleBurgerMenu"/>
+            <HBox prefWidth="12"/>
             <Button fx:id="timerButton" text="00:00:00" prefWidth="80" onAction="#pushedTimer" />
         </HBox>
 

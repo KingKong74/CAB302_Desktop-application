@@ -1,7 +1,6 @@
 package com.example.main_sem_proj.controller;
 
 import com.example.main_sem_proj.HelloApplication;
-import com.example.main_sem_proj.controller.MainController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -33,6 +32,20 @@ public class PopupController extends MainController {
         openPopup(view, x, y, title);
     }
 
+    @FXML
+    public static void handleOpenPopup(String view, double x, double y, String title, double width, double height) throws IOException {
+        if (isPopupOpen) {
+            closePopup();
+            return;
+        }
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/" + view + "-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), width, height);
+        title = "Alert intervals";
+        popupStage = createPopupStage(scene, x, y, title, "UTILITY");
+        popupStage.setResizable(false);
+        popupStage.showAndWait();
+    }
+
     /**
      * Opens the popup window.
      *
@@ -54,12 +67,12 @@ public class PopupController extends MainController {
             double popupX = popupPosition[0];
             double popupY = popupPosition[1];
 
-            popupStage = createPopupStage(scene, popupX, popupY, title);
+            popupStage = createPopupStage(scene, popupX, popupY, title, "UTILITY");
             popupStage.setResizable(false);
 
             popupStage.showAndWait();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e);
         }
     }
 
@@ -118,10 +131,10 @@ public class PopupController extends MainController {
      * @param TITLE   The title of the popup window.
      * @return Stage object for the popup window.
      */
-    private static Stage createPopupStage(Scene scene, double popupX, double popupY, String TITLE) {
+    private static Stage createPopupStage(Scene scene, double popupX, double popupY, String TITLE, String decoration) {
         Stage popupStage = new Stage();
         popupStage.setScene(scene);
-        popupStage.initStyle(StageStyle.UTILITY);
+        popupStage.initStyle(StageStyle.valueOf(decoration));
         popupStage.setOnCloseRequest(event -> {
             System.out.println("Popup is closing");
             isPopupOpen = false;
