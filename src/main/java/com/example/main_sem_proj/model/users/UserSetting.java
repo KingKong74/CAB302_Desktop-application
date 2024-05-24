@@ -37,80 +37,40 @@ public class UserSetting {
         return alertSchedule;
     }
 
-    public void setAlertSchedule(Boolean alertSchedule) {
-        this.alertSchedule = alertSchedule;
-    }
-
     public Boolean getSleepSchedule() {
         return sleepSchedule;
-    }
-
-    public void setSleepSchedule(Boolean sleepSchedule) {
-        this.sleepSchedule = sleepSchedule;
     }
 
     public Boolean getLocation() {
         return location;
     }
 
-    public void setLocation(Boolean location) {
-        this.location = location;
-    }
-
     public String getStartTime() {
         return startTime;
-    }
-
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
     }
 
     public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
-    }
-
     public String getBedTime() {
         return bedTime;
-    }
-
-    public void setBedTime(String bedTime) {
-        this.bedTime = bedTime;
     }
 
     public String getWakeTime() {
         return wakeTime;
     }
 
-    public void setWakeTime(String wakeTime) {
-        this.wakeTime = wakeTime;
-    }
-
     public String getCountry() {
         return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
     }
 
     public String getCity() {
         return city;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
-
     public Integer getSliderValue() {
         return sliderValue;
-    }
-
-    public void setSliderValue(int sliderValue) {
-        this.sliderValue = sliderValue;
     }
 
 }

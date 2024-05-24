@@ -12,44 +12,31 @@ import javafx.scene.control.*;
 import static com.example.main_sem_proj.controller.MainController.userEmail;
 
 public class SettingsPopController extends PopupController {
-    @FXML
-    private ComboBox<String> startTimeComboBox;
-    @FXML
-    private ComboBox<String> endTimeComboBox;
-    @FXML
-    private ComboBox<String> bedTimeComboBox;
-    @FXML
-    private ComboBox<String> wakeTimeComboBox;
-    @FXML
-    private CheckBox alertsCheckBox;
-    @FXML
-    private Label startTimeLabel;
-    @FXML
-    private Label endTimeLabel;
-    @FXML
-    private CheckBox sleepCheckBox;
-    @FXML
-    private Label bedTimeLabel;
-    @FXML
-    private Label wakeUpLabel;
-    @FXML
-    private TextField countryTextField;
-    @FXML
-    private TextField cityTextField;
-    @FXML
-    private CheckBox locationCheckBox;
-    @FXML
-    private ToggleButton amToggleStart;
-    @FXML
-    private ToggleButton pmToggleStart;
-    @FXML
-    private ToggleGroup startTime;
-    @FXML
-    private ToggleButton amToggleEnd;
-    @FXML
-    private ToggleButton pmToggleEnd;
-    @FXML
-    private ToggleGroup endTime;
+    @FXML private ComboBox<String> startTimeComboBox;
+    @FXML private ComboBox<String> endTimeComboBox;
+    @FXML private ComboBox<String> bedTimeComboBox;
+    @FXML private ComboBox<String> wakeTimeComboBox;
+    @FXML private CheckBox alertsCheckBox;
+    @FXML private Label startTimeLabel;
+    @FXML private Label endTimeLabel;
+    @FXML private CheckBox sleepCheckBox;
+    @FXML private Label bedTimeLabel;
+    @FXML private Label wakeUpLabel;
+    @FXML private TextField countryTextField;
+    @FXML private TextField cityTextField;
+    @FXML private CheckBox locationCheckBox;
+    @FXML private ToggleButton amToggleStart;
+    @FXML private ToggleButton pmToggleStart;
+    @FXML private ToggleGroup startTime;
+    @FXML private ToggleButton amToggleEnd;
+    @FXML private ToggleButton pmToggleEnd;
+    @FXML private ToggleGroup endTime;
+    @FXML private ToggleButton amToggleBed;
+    @FXML private ToggleButton pmToggleBed;
+    @FXML private ToggleGroup bedTime;
+    @FXML private ToggleButton amToggleWake;
+    @FXML private ToggleButton pmToggleWake;
+    @FXML private ToggleGroup wakeTime;
 
     private static final String TITLE = "Settings";
     private static final String VIEW = "settingsPop";
@@ -78,6 +65,12 @@ public class SettingsPopController extends PopupController {
 
         endTime = new ToggleGroup();
         initializeToggleGroup(endTime, amToggleEnd, pmToggleEnd, endTimeComboBox);
+
+        bedTime = new ToggleGroup();
+        initializeToggleGroup(bedTime, amToggleBed, pmToggleBed, bedTimeComboBox);
+
+        wakeTime = new ToggleGroup();
+        initializeToggleGroup(wakeTime, amToggleWake, pmToggleWake, wakeTimeComboBox);
     }
 
     /**
@@ -117,6 +110,10 @@ public class SettingsPopController extends PopupController {
         pmToggleStart.setDisable(true);
         amToggleEnd.setDisable(true);
         pmToggleEnd.setDisable(true);
+        amToggleBed.setDisable(true);
+        pmToggleBed.setDisable(true);
+        amToggleWake.setDisable(true);
+        pmToggleWake.setDisable(true);
     }
 
     /**
@@ -284,6 +281,10 @@ public class SettingsPopController extends PopupController {
         setComboBoxesEnabled(wakeTimeComboBox, enabled);
         adjustLabelsOpacity(bedTimeLabel, enabled);
         adjustLabelsOpacity(wakeUpLabel, enabled);
+        amToggleBed.setDisable(!enabled);
+        pmToggleBed.setDisable(!enabled);
+        amToggleWake.setDisable(!enabled);
+        pmToggleWake.setDisable(!enabled);
     }
 
     /**

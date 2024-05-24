@@ -1,6 +1,7 @@
 package com.example.main_sem_proj.controller;
 
-import com.example.main_sem_proj.model.users.User;
+import com.example.main_sem_proj.model.database.SqliteUserSettingDAO;
+import com.example.main_sem_proj.model.users.UserSetting;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -13,6 +14,10 @@ import javafx.scene.layout.*;
 import javafx.scene.control.ChoiceBox;
 
 import java.io.IOException;
+import java.time.Duration;
+import java.time.LocalTime;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 
 /**
  * The controller class for the Main view of the application.
@@ -39,8 +44,11 @@ public class MainController {
     public ToggleButton hamburgerButton;
     @FXML
     private Label welcomeLabel;
+    private Timeline timeline;
+    private Timeline initialize;
 
     private final TimerController timerController = new TimerController(this::updateButtonLabel);
+    private final SqliteUserSettingDAO userSettingDAO = new SqliteUserSettingDAO();
 
     public void setWelcomeLabel(String welcomeMessage) {
         welcomeLabel.setText(welcomeMessage);
@@ -50,6 +58,53 @@ public class MainController {
 
     public void setUserEmail(String email) { userEmail = email;}
     public static String userEmail;
+
+    @FXML
+    private void initialize(){
+//        startLabel();
+        startTimeline();
+    }
+    private void startTimeline() {
+        timeline = new Timeline(new KeyFrame(javafx.util.Duration.seconds(1), this::updateScheduleLabelText));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+    }
+
+//    public void startLabel(){
+//        initialize  = new Timeline(new KeyFrame(javafx.util.Duration.seconds(1), this::updateScheduleLabelText));
+//        initialize.setCycleCount(2);
+//        initialize.play();
+//    }
+
+    public void updateScheduleLabelText(ActionEvent event) {
+        // Retrieve the user's sleep schedule from the database
+        UserSetting userSetting = userSettingDAO.select(userEmail);
+        if (userSetting != null && userSetting.getSleepSchedule() != null && userSetting.getSleepSchedule()) {
+            // Get the current time
+            LocalTime currentTime = LocalTime.now();
+
+            // Calculate the time until bedtime or wake-up time
+            LocalTime bedtime = LocalTime.parse(userSetting.getBedTime());
+            LocalTime wakeupTime = LocalTime.parse(userSetting.getWakeTime());
+
+            if (currentTime.isBefore(bedtime) && (bedtime.isBefore(wakeupTime))) {
+                // Calculate time until bedtime
+                Duration untilBedtime = Duration.between(currentTime, bedtime);
+                setScheduleLabel(String.format("Bedtime in %d hour(s) %d minute(s)", untilBedtime.toHours(), untilBedtime.toMinutesPart()));
+            } else if (currentTime.isBefore(wakeupTime)) {
+                // Calculate time until wakeup time
+                Duration untilWakeup = Duration.between(currentTime, wakeupTime);
+                setScheduleLabel(String.format("Wake-up in %d hour(s) %d minute(s)", untilWakeup.toHours(), untilWakeup.toMinutesPart()));
+            } else {
+                setScheduleLabel("");
+            }
+        } else {
+            // If the user's sleep schedule is not enabled, clear the schedule label text
+            setScheduleLabel("");
+        }
+    }
+
+
 
     //
     // Switch
