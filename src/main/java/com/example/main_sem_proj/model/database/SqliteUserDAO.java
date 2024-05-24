@@ -10,34 +10,21 @@ import java.util.List;
 public class SqliteUserDAO implements IUserDAO {
     private static Connection connection;
 
+    SqliteCreateTable sqlite = new SqliteCreateTable();
+
     /**
      * Constructs a new SQliteContactDAO with a connection to the SQLite database,
      * and creates the users table if it does not exist.
      */
     public SqliteUserDAO(){
         connection = SqliteConnection.getInstance();
-        createTable();
-    }
-
-    /**
-     * Creates a table in DB
-     */
-    public void createTable() {
-        // Create table if not exists
-        try {
-            Statement statement = connection.createStatement();
-            String query =
-                    "CREATE TABLE IF NOT EXISTS users ("
-                    + "email VARCHAR PRIMARY KEY,"
-                    + "firstName VARCHAR NOT NULL,"
-                    + "lastName VARCHAR NOT NULL,"
-                    + "password VARCHAR NOT NULL"
-                    + ")";
-            statement.execute(query);
-        } catch (Exception e) {
-            System.err.println("Error creating table: " + e.getMessage());
-            e.printStackTrace();
-        }
+        String query = "CREATE TABLE IF NOT EXISTS users ("
+                + "email VARCHAR PRIMARY KEY,"
+                + "firstName VARCHAR NOT NULL,"
+                + "lastName VARCHAR NOT NULL,"
+                + "password VARCHAR NOT NULL"
+                + ")";
+        sqlite.createTable(query);
     }
 
     /**

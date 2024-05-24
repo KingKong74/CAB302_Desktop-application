@@ -8,23 +8,15 @@ public class SqliteUserTimerDAO {
 
     private static Connection connection;
 
+    SqliteCreateTable sqlite = new SqliteCreateTable();
+
     public SqliteUserTimerDAO(){
         connection = SqliteConnection.getInstance();
-        createTable();
-    }
-
-    public void createTable(){
-        try {
-            Statement statement = connection.createStatement();
-            String query =
-                    "CREATE TABLE IF NOT EXISTS usersTimer ("
-                            + "email VARCHAR PRIMARY KEY,"
-                            + "timerValue INTEGER"
-                            + ")";
-            statement.execute(query);
-        } catch (Exception e) {
-            System.err.println("Error creating table: " + e.getMessage());
-        }
+        String query = "CREATE TABLE IF NOT EXISTS usersTimer ("
+                + "email VARCHAR PRIMARY KEY,"
+                + "timerValue INTEGER"
+                + ")";
+        sqlite.createTable(query);
     }
 
     public void insert(UserTimer preference) {

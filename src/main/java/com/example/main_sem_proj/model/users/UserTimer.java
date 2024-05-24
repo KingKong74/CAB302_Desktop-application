@@ -1,7 +1,7 @@
 package com.example.main_sem_proj.model.users;
 
 public class UserTimer {
-    private String email;
+    private final String email;
     private int timerValue;
 
     public UserTimer(String email, int timerValue) {
@@ -13,9 +13,9 @@ public class UserTimer {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+//    public void setEmail(String email) {
+//        this.email = email;
+//    }
 
     public int getTimerValue() {
         return timerValue;
