@@ -34,6 +34,16 @@ public class SqliteUserDAO implements IUserDAO {
                     + "password VARCHAR NOT NULL"
                     + ")";
             statement.execute(query);
+
+            String createPreferencesTable =
+                    "CREATE TABLE IF NOT EXISTS user_preferences ("
+                            + "email VARCHAR NOT NULL,"
+                            + "preference_key VARCHAR NOT NULL,"
+                            + "preference_value VARCHAR,"
+                            + "PRIMARY KEY (email, preference_key),"
+                            + "FOREIGN KEY (email) REFERENCES users(email) ON DELETE CASCADE"
+                            + ")";
+            statement.execute(createPreferencesTable);
         } catch (Exception e) {
             System.err.println("Error creating table: " + e.getMessage());
             e.printStackTrace();
@@ -123,4 +133,35 @@ public class SqliteUserDAO implements IUserDAO {
                 System.err.println(ex);
             }
         }
+    public void setUserPreference(String email, String key, String value) {
+        String sql = "INSERT INTO user_preferences (email, preference_key, preference_value) VALUES (?, ?, ?) "
+                + "ON CONFLICT(email, preference_key) DO UPDATE SET preference_value = excluded.preference_value";
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, email);
+            pstmt.setString(2, key);
+            pstmt.setString(3, value);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Error setting user preference: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public String getUserPreference(String email, String key, String defaultValue) {
+        String sql = "SELECT preference_value FROM user_preferences WHERE email = ? AND preference_key = ?";
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, email);
+            pstmt.setString(2, key);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getString("preference_value");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error getting user preference: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return defaultValue;
+    }
+
+
 }
