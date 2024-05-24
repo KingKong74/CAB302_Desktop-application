@@ -13,8 +13,13 @@
 }
 
 .slider .thumb {
-    -fx-scale-x: 1.4;
-    -fx-scale-y: 1.4;
+    -fx-scale-x: 1.5;
+    -fx-scale-y: 1.5;
+    -fx-background-color: white;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
+}
+.slider-thumb .track {
+    -fx-background-color: #e0e0e0;
 }
 
 #mainHbox {
