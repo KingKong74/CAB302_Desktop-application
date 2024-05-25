@@ -1,5 +1,6 @@
 package com.example.main_sem_proj.controller;
 
+import com.example.main_sem_proj.model.users.UserNotification;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
@@ -63,5 +64,9 @@ public class NotificationsPopController extends PopupController {
         notifTextField.setDisable(!enabled);
         notifTitleField.setDisable(!enabled);
     }
+    @FXML
+    public void handleSave() {
+    }
+
 }
 

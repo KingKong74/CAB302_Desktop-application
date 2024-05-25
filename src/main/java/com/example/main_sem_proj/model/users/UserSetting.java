@@ -15,7 +15,7 @@ public class UserSetting {
 
     public UserSetting(String email, Boolean alertSchedule, Boolean sleepSchedule, Boolean location,
                        String startTime, String endTime, String bedTime, String wakeTime, String country,
-                       String city, int sliderValue ){
+                       String city, int sliderValue) {
         this.email = email;
         this.alertSchedule = alertSchedule;
         this.sleepSchedule = sleepSchedule;
@@ -72,5 +72,4 @@ public class UserSetting {
     public Integer getSliderValue() {
         return sliderValue;
     }
-
 }
