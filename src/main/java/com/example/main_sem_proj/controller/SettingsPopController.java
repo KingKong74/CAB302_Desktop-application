@@ -84,7 +84,6 @@ public class SettingsPopController extends PopupController {
     private void initializeToggleGroup(ToggleGroup group, ToggleButton amToggle, ToggleButton pmToggle, ComboBox<String> comboBox) {
         amToggle.setToggleGroup(group);
         pmToggle.setToggleGroup(group);
-        pmToggle.setSelected(true);
 
         group.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue == null) {

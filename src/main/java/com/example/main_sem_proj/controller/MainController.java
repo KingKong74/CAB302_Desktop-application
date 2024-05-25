@@ -79,7 +79,7 @@ public class MainController {
     public void updateScheduleLabelText(ActionEvent event) {
         // Retrieve the user's sleep schedule from the database
         UserSetting userSetting = userSettingDAO.select(userEmail);
-        if (userSetting != null && userSetting.getSleepSchedule() != null && userSetting.getSleepSchedule()) {
+        if (userSetting != null && Boolean.TRUE.equals(userSetting.getSleepSchedule())) {
             // Get the current time
             LocalTime currentTime = LocalTime.now();
 
@@ -87,16 +87,18 @@ public class MainController {
             LocalTime bedtime = LocalTime.parse(userSetting.getBedTime());
             LocalTime wakeupTime = LocalTime.parse(userSetting.getWakeTime());
 
-            if (currentTime.isBefore(bedtime) && (bedtime.isBefore(wakeupTime))) {
+            if (currentTime.isBefore(bedtime)) {
                 // Calculate time until bedtime
                 Duration untilBedtime = Duration.between(currentTime, bedtime);
                 setScheduleLabel(String.format("Bedtime in %d hour(s) %d minute(s)", untilBedtime.toHours(), untilBedtime.toMinutesPart()));
-            } else if (currentTime.isBefore(wakeupTime)) {
-                // Calculate time until wakeup time
-                Duration untilWakeup = Duration.between(currentTime, wakeupTime);
-                setScheduleLabel(String.format("Wake-up in %d hour(s) %d minute(s)", untilWakeup.toHours(), untilWakeup.toMinutesPart()));
             } else {
-                setScheduleLabel("");
+                // Calculate time until wakeup time, accounting for wakeup time on the next day
+                LocalTime adjustedWakeupTime = wakeupTime;
+                if (currentTime.isAfter(wakeupTime)) {
+                    adjustedWakeupTime = wakeupTime.plusHours(24);
+                }
+                Duration untilWakeup = Duration.between(currentTime, adjustedWakeupTime);
+                setScheduleLabel(String.format("Wake-up in %d hour(s) %d minute(s)", untilWakeup.toHours(), untilWakeup.toMinutesPart()));
             }
         } else {
             // If the user's sleep schedule is not enabled, clear the schedule label text
