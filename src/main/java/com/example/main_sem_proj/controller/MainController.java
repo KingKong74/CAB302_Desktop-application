@@ -61,7 +61,6 @@ public class MainController {
 
     @FXML
     private void initialize(){
-//        startLabel();
         startTimeline();
     }
     private void startTimeline() {
@@ -69,12 +68,6 @@ public class MainController {
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
     }
-
-//    public void startLabel(){
-//        initialize  = new Timeline(new KeyFrame(javafx.util.Duration.seconds(1), this::updateScheduleLabelText));
-//        initialize.setCycleCount(2);
-//        initialize.play();
-//    }
 
     public void updateScheduleLabelText(ActionEvent event) {
         // Retrieve the user's sleep schedule from the database
@@ -105,7 +98,6 @@ public class MainController {
             setScheduleLabel("");
         }
     }
-
 
 
     //

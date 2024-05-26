@@ -343,7 +343,7 @@ public class SettingsPopController extends PopupController {
                 wakeTimeComboBox.getValue(),
                 countryTextField.getText(),
                 cityTextField.getText(),
-                0 // Assuming sliderValue is not relevant here
+                0 // sliderValue is not relevant here
         );
 
         UserSetting existingPreference = userSettingDAO.select(userEmail);

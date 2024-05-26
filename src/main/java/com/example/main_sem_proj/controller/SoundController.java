@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class SoundController {
+    private MediaPlayer mediaPlayer;
+
     public void playSound(InputStream inputStream) {
         try {
             File tempFile = File.createTempFile("temp", ".mp3");
@@ -22,25 +24,34 @@ public class SoundController {
             outputStream.close();
 
             Media sound = new Media(tempFile.toURI().toString());
-            MediaPlayer mediaPlayer = new MediaPlayer(sound);
+            mediaPlayer = new MediaPlayer(sound);
+
             mediaPlayer.play();
         } catch (Exception e) {
             System.out.println("Error playing sound: " + e.getMessage());
         }
     }
 
-    public void notificationSound(String soundName){
+    public void notificationSound(String soundName) {
         try {
             // Load the MP3 file as an InputStream
             InputStream inputStream = getClass().getResourceAsStream("/sounds/" + soundName + ".mp3");
 
+            // Play the sound with the default volume
             playSound(inputStream);
 
             // Close the InputStream when done
-            assert inputStream != null;
-            inputStream.close();
-        } catch (IOException e) {
+            if (inputStream != null) {
+                inputStream.close();
+            }
+        } catch (Exception e) {
             System.out.println("Error loading MP3 file: " + e.getMessage());
+        }
+    }
+
+    public void setVolume(double volume) {
+        if (mediaPlayer != null) {
+            mediaPlayer.setVolume(volume); // volume should be between 0.0 and 1.0
         }
     }
 }

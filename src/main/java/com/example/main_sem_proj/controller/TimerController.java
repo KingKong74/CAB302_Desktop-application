@@ -1,6 +1,8 @@
 package com.example.main_sem_proj.controller;
 
+import com.example.main_sem_proj.model.database.SqliteUserNotificationDAO;
 import com.example.main_sem_proj.model.database.SqliteUserTimerDAO;
+import com.example.main_sem_proj.model.users.UserNotification;
 import com.example.main_sem_proj.model.users.UserTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -16,6 +18,8 @@ public class TimerController {
     SoundController sound = new SoundController();
     SqliteUserTimerDAO userTimerDAO = new SqliteUserTimerDAO();
     private boolean soundPlayed = false;
+    public static String notificationSound = "Notification sound";
+    public static double notificationVolume = 1.0;
 
     /**
      * Constructor to initialize the TimerController with a Runnable to update the UI.
@@ -24,6 +28,14 @@ public class TimerController {
     public TimerController(Runnable updateUI) {
         this.updateUI = updateUI;
         this.notificationTime = getUpdatedNotificationTime();
+    }
+
+    public static void setNotificationSound(String sound){
+        notificationSound = sound;
+    }
+
+    public static void setNotificiationVolume(double volume){
+        notificationVolume = volume;
     }
 
     /**
@@ -70,7 +82,8 @@ public class TimerController {
      */
     private void updateButtonLabel(int resetTime) {
         if (notificationTime <= 0 && !soundPlayed){
-            sound.notificationSound("big-button");
+            sound.notificationSound(notificationSound);
+            sound.setVolume(notificationVolume);
             soundPlayed = true;
         }
         if (notificationTime <= -1) {
@@ -101,7 +114,7 @@ public class TimerController {
     public int getUpdatedNotificationTime() {
         UserTimer userTimer = userTimerDAO.select(userEmail);
         if (userTimer != null) {
-            this.notificationTime = userTimer.getTimerValue() * 60;
+            this.notificationTime = userTimer.getTimerValue();
         }
         return notificationTime;
     }

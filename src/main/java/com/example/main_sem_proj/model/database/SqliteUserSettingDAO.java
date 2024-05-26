@@ -31,7 +31,6 @@ public class SqliteUserSettingDAO {
         String sql = "INSERT INTO usersSettings (email, alertSchedule, sleepSchedule, location, " +
                 "startTime, endTime, bedTime, wakeTime, country, city, sliderValue) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
         try {
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setString(1, userSetting.getEmail());

@@ -209,7 +209,6 @@ public class LoginController extends StageController {
         MainController mainController = fxmlLoader.getController();
         mainController.setWelcomeLabel(welcomeMessage);
         mainController.setUserEmail(email);
-//        mainController.updateScheduleLabelText(null);
 
         openStage(fxmlLoader, "Iz.Lumen", WIDTH, HEIGHT, stageToClose, bottomRightPosition.getX(), bottomRightPosition.getY());
 
