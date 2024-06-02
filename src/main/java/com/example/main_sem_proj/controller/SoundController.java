@@ -51,7 +51,7 @@ public class SoundController {
 
     public void setVolume(double volume) {
         if (mediaPlayer != null) {
-            mediaPlayer.setVolume(volume); // volume should be between 0.0 and 1.0
+            mediaPlayer.setVolume(volume);
         }
     }
 }

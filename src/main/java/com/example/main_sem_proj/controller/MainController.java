@@ -47,8 +47,10 @@ public class MainController {
     private Timeline timeline;
     private Timeline initialize;
 
+    private LoginController loginController;
     private final TimerController timerController = new TimerController(this::updateButtonLabel);
     private final SqliteUserSettingDAO userSettingDAO = new SqliteUserSettingDAO();
+    NotificationsController notification = new NotificationsController();
 
     public void setWelcomeLabel(String welcomeMessage) {
         welcomeLabel.setText(welcomeMessage);
@@ -67,6 +69,11 @@ public class MainController {
         timeline = new Timeline(new KeyFrame(javafx.util.Duration.seconds(1), this::updateScheduleLabelText));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
+    }
+
+    // Method to set LoginController reference
+    public void setLoginController(LoginController loginController) {
+        this.loginController = loginController;
     }
 
     public void updateScheduleLabelText(ActionEvent event) {
@@ -115,8 +122,12 @@ public class MainController {
         if (count == 2 || count == 0)
         {
             lightMode();
+            count = count - 2;
         }
     }
+    //
+    // Colour Modes
+    //
     protected void lightMode(){
         darkModeButton.setText("Dark Mode");
 
@@ -133,7 +144,6 @@ public class MainController {
         darkModeButton.setStyle("-fx-background-radius: 10; -fx-background-color: E0E0E0; -fx-text-fill: black; -fx-padding: 0 0 0 0;");
         notificationsButton.setStyle("-fx-background-radius: 10; -fx-background-color: E0E0E0; -fx-text-fill: black; -fx-padding: 0 0 0 0;");
         settingsButton.setStyle("-fx-background-radius: 10; -fx-background-color: E0E0E0; -fx-text-fill: black; -fx-padding: 0 0 0 0;");
-        count = count - 2;
     }
 
     protected void darkMode(){

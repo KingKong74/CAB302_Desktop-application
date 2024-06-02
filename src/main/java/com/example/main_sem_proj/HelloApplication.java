@@ -9,8 +9,8 @@ public class HelloApplication extends Application {
 
         // Constants defining the window title and size
         private static final String TITLE = "Iz.Lumin";
-        private static final int WIDTH = 270;
-        private static final int HEIGHT = 330;
+        private static final int WIDTH = 250;
+        private static final int HEIGHT = 380;
 
     @Override
     public void start(Stage stage) throws IOException {

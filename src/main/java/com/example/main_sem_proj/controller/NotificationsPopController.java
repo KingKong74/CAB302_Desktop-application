@@ -89,8 +89,8 @@ public class NotificationsPopController extends PopupController {
             if(customMessageCheck){
                 notifTitleField.setDisable(false);
                 notifTextField.setDisable(false);
-                notifTitleField.setText(userNotification.getNotificationText());
-                notifTextField.setText(userNotification.getNotificationTitle());
+                notifTitleField.setText(userNotification.getNotificationTitle());
+                notifTextField.setText(userNotification.getNotificationText());
             }
         }
 
@@ -112,6 +112,9 @@ public class NotificationsPopController extends PopupController {
         );
 
         UserNotification existingPreference = userNotificationDAO.select(userEmail);
+        if (customNotificationCheckBox.isSelected() && (notifTitleField.getText() == null) || notifTitleField.getText() == null ){
+            return;
+        }
         if (existingPreference == null){
             userNotificationDAO.insert(preference);
         }else {
@@ -127,7 +130,9 @@ public class NotificationsPopController extends PopupController {
         }else {
             TimerController.setNotificiationVolume(1.0);
         }
-
+//        if (customNotificationCheckBox.isSelected()){
+//
+//        }
         closePopup();
     }
 }

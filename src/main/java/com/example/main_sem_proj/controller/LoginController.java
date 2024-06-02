@@ -35,6 +35,12 @@ public class LoginController extends StageController {
     // User login
     //
 
+    /**
+     * Handles the sign-in action when the sign-in button is clicked.
+     * It validates the email and password, then attempts to authenticate the user.
+     * If authentication is successful, it opens the main GUI window.
+     * @param actionEvent The action event triggered by clicking the sign-in button.
+     */
     @FXML
     public void handleSignIn(ActionEvent actionEvent) {
         try {
@@ -73,7 +79,6 @@ public class LoginController extends StageController {
 
     /**
      * Authenticates the user with the provided email and password.
-     *
      * @param email    The email of the user.
      * @param password The password of the user.
      * @return The authenticated user if found, otherwise null.
@@ -90,9 +95,12 @@ public class LoginController extends StageController {
         registerButton.setDisable(!agreeCheckBox.isSelected());
     }
 
+
     /**
-     * Handles the registration of a new user.
-     * This method is invoked when the register button is clicked.
+     * Handles the registration of a new user when the register button is clicked.
+     * It validates the input fields and registers the user if all inputs are valid.
+     * @param actionEvent The action event triggered by clicking the register button.
+     * @throws IOException If an error occurs during user registration.
      */
     @FXML
     public void handleRegisterUser(ActionEvent actionEvent) throws IOException {
@@ -163,14 +171,24 @@ public class LoginController extends StageController {
     // Methods related to GUI navigation
     //
 
+    /**
+     * Opens the registration window.
+     * @param stageToClose The stage to close before opening the registration window.
+     * @throws IOException If an error occurs while loading the FXML file.
+     */
     public static void openRegistrationWindow(Stage stageToClose) throws IOException {
         FXMLLoader fxmlLoader = stageController.loadFXML("register");
         stageController.openStage(fxmlLoader, "Register", 450, 300, stageToClose);
     }
 
+    /**
+     * Opens the login window.
+     * @param stageToClose The stage to close before opening the login window.
+     * @throws IOException If an error occurs while loading the FXML file.
+     */
     public static void openLoginWindow(Stage stageToClose) throws IOException {
         FXMLLoader fxmlLoader = stageController.loadFXML("login");
-        stageController.openStage(fxmlLoader, "Login", 350, 200, stageToClose);
+        stageController.openStage(fxmlLoader, "Login", 400, 250, stageToClose);
     }
 
     private void setErrorMessage(String string) {

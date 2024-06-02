@@ -27,8 +27,8 @@ public class NotificationsController{
     private Label titleLabel;
     @FXML
     private Label messageLabel;
-    private String messageLabelText;
-    private String titleLabelText;
+    private String messageText;
+    private String titleText;
     private final int HEIGHT = 70;
     private final int WIDTH = 150;
 
@@ -49,6 +49,12 @@ public class NotificationsController{
         if(userNotification.getCustomMessage()){
            setMessageLabel(userNotification.getNotificationText());
            setTitleLabel(userNotification.getNotificationTitle());
+        }
+        if (userNotification.getCustomSound()){
+            TimerController.setNotificationSound(userNotification.getSoundEffect());
+        }
+        if (userNotification.getSoftAlert()){
+            TimerController.setNotificiationVolume(0.1);
         }
     }
 
