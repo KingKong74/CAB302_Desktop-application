@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.scene.layout.*;
 import javafx.scene.control.ChoiceBox;
@@ -133,6 +134,9 @@ public class MainController {
 
         timerButton.setStyle("-fx-background-color: E0E0E0;");
 
+        hamburgerButton.setStyle("-fx-background-color: E0E0E0;");
+        hamburgerButton.setTextFill(Paint.valueOf("black"));
+
         dropdownMenu.setStyle("-fx-background-color: E0E0E0;");
         dropdownMenu.lookup(".label").setStyle("-fx-text-fill: black;");
 
@@ -150,6 +154,9 @@ public class MainController {
         darkModeButton.setText("Light Mode");
 
         timerButton.setStyle("-fx-background-color: #414141; -fx-text-fill: white;");
+
+        hamburgerButton.setStyle("-fx-background-color: #414141;");
+        hamburgerButton.setTextFill(Paint.valueOf("white"));
 
         dropdownMenu.setStyle("-fx-background-color: #414141;");
         dropdownMenu.lookup(".label").setStyle("-fx-text-fill: white;");
