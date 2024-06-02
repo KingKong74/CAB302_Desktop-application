@@ -1,68 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
 <?import javafx.scene.control.CheckBox?>
-
 <?import javafx.scene.control.Hyperlink?>
-<VBox xmlns:fx="http://javafx.com/javafx"
-      fx:controller="com.example.main_sem_proj.controller.LoginController"
-      alignment="CENTER"
-      spacing="5">
+<?import javafx.scene.control.Button?>
+<AnchorPane prefHeight="300.0" prefWidth="450.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.main_sem_proj.controller.LoginController">
+    <children>
+        <VBox alignment="CENTER" layoutX="51.0" layoutY="5.0" prefHeight="290.0" prefWidth="349.0" spacing="5" style="-fx-background-color: white;">
 
-    <Label fx:id="errorMessageLabel" style="-fx-text-fill: red;" />
+            <Label fx:id="errorMessageLabel" prefHeight="0.0" prefWidth="80.0" />
+            <ImageView fitHeight="53.0" fitWidth="88.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@../../../../imgs/EyeStrain2.png" />
+                </image>
+            </ImageView>
 
-    <HBox alignment="CENTER" spacing="30">
-        <VBox spacing="0" alignment="TOP_LEFT">
-            <Label text="Full Name:"/>
-            <TextField fx:id="firstNameField" promptText="Enter your first name" prefWidth="135" maxWidth="135"/>
+            <HBox alignment="CENTER" spacing="30">
+                <VBox alignment="TOP_LEFT" spacing="0">
+                    <Label text="Full Name:" textFill="#5e94e0">
+                        <font>
+                            <Font name="System Bold" size="12.0" />
+                        </font></Label>
+                    <TextField fx:id="firstNameField" maxWidth="135" prefWidth="135" promptText="Enter your first name" style="-fx-background-color: E0e0e0; -fx-background-radius: 10;" />
+                </VBox>
+
+                <HBox alignment="BOTTOM_CENTER" spacing="0">
+                    <TextField fx:id="lastNameField" maxWidth="135" prefWidth="135" promptText="Enter your last name" style="-fx-background-color: E0e0e0; -fx-background-radius: 10;" />
+                </HBox>
+            </HBox>
+
+            <HBox alignment="CENTER">
+                <VBox alignment="TOP_LEFT" spacing="0">
+                    <Label text="Email:" textFill="#5e94e0">
+                        <font>
+                            <Font name="System Bold" size="12.0" />
+                        </font></Label>
+                    <TextField fx:id="emailField" maxWidth="300" prefWidth="300" promptText="Enter your email" style="-fx-background-color: E0e0e0; -fx-background-radius: 10;" />
+                </VBox>
+            </HBox>
+
+            <HBox alignment="CENTER">
+                <VBox alignment="TOP_LEFT" spacing="0">
+                    <Label text="Password:" textFill="#5e94e0">
+                        <font>
+                            <Font name="System Bold" size="12.0" />
+                        </font></Label>
+                    <PasswordField fx:id="passwordField" maxWidth="300" prefWidth="300" promptText="Enter your password" style="-fx-background-color: E0e0e0; -fx-background-radius: 10;" />
+                </VBox>
+            </HBox>
+
+            <HBox alignment="CENTER" spacing="10">
+                <PasswordField fx:id="confirmPasswordField" maxWidth="300" prefWidth="300" promptText="Confirm your password" style="-fx-background-color: E0e0e0; -fx-background-radius: 10;" />
+            </HBox>
+
+            <CheckBox fx:id="agreeCheckBox" onAction="#onAgreeCheckBoxClick" text="I agree to the terms and conditions." />
+
+            <VBox spacing="0">
+                <HBox alignment="CENTER">
+                    <Button fx:id="registerButton" disable="true" onAction="#handleRegisterUser" prefWidth="150" text="Register" />
+                </HBox>
+
+                <HBox alignment="CENTER">
+                    <Label style="-fx-font-size: 9px;" text="Already Registered? Login" />
+                    <Hyperlink onAction="#handleLoginHyperlink" style="-fx-font-size: 9px;" text="Here" />
+                </HBox>
+            </VBox>
+
+
         </VBox>
-
-        <HBox spacing="0" alignment="BOTTOM_CENTER">
-            <TextField fx:id="lastNameField" promptText="Enter your last name" prefWidth="135" maxWidth="135"/>
-        </HBox>
-    </HBox>
-
-    <HBox alignment="CENTER">
-        <VBox spacing="0" alignment="TOP_LEFT">
-            <Label text="Email:"/>
-            <TextField fx:id="emailField" promptText="Enter your email" prefWidth="300" maxWidth="300"/>
-        </VBox>
-    </HBox>
-
-    <HBox alignment="CENTER">
-        <VBox spacing="0" alignment="TOP_LEFT">
-            <Label text="Password:"/>
-            <PasswordField fx:id="passwordField" promptText="Enter your password" prefWidth="300" maxWidth="300"/>
-        </VBox>
-    </HBox>
-
-    <HBox alignment="CENTER" spacing="10">
-            <PasswordField fx:id="confirmPasswordField" promptText="Confirm your password" prefWidth="300" maxWidth="300"/>
-    </HBox>
-
-    <CheckBox fx:id="agreeCheckBox"
-              text="I agree to the terms and conditions."
-              onAction="#onAgreeCheckBoxClick"
-    />
-
-    <VBox spacing="0">
-        <HBox  alignment="CENTER" >
-            <Button fx:id="registerButton" text="Register" onAction="#handleRegisterUser" prefWidth="150"  disable="true" />
-        </HBox>
-
-        <HBox alignment="CENTER">
-            <Label text="Already Registered? Login" style="-fx-font-size: 9px;"/>
-            <Hyperlink text="Here" onAction="#handleLoginHyperlink" style="-fx-font-size: 9px;"/>
-        </HBox>
-    </VBox>
-
-
-</VBox>
-
+    </children>
+</AnchorPane>
 
 

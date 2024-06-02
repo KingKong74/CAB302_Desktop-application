@@ -10,6 +10,8 @@
     /* -fx-background-radius: 10px; /* Set the radius to make it round */
     -fx-pref-height: 15px; /* Set the height of the thumb */
     -fx-pref-width: 15px; /* Set the width of the thumb */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
+
 }
 
 .slider .thumb {

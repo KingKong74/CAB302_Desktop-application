@@ -1,6 +1,8 @@
 package com.example.main_sem_proj.controller;
 
 import com.example.main_sem_proj.HelloApplication;
+import com.example.main_sem_proj.model.database.SqliteUserNotificationDAO;
+import com.example.main_sem_proj.model.users.UserNotification;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -13,7 +15,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.io.InputStream;
+import static com.example.main_sem_proj.controller.MainController.userEmail;
 
 import javafx.scene.control.Label;
 import javafx.stage.StageStyle;
@@ -22,9 +24,39 @@ import javafx.util.Duration;
 public class NotificationsController{
 
     @FXML
+    private Label titleLabel;
+    @FXML
     private Label messageLabel;
-    private final int HEIGHT = 50;
+    private String messageText;
+    private String titleText;
+    private final int HEIGHT = 70;
     private final int WIDTH = 150;
+
+    private final SqliteUserNotificationDAO userNotificationDAO = new SqliteUserNotificationDAO();
+
+    public void initialize(){
+        loadUserSettings();
+    }
+
+    private void loadUserSettings() {
+        UserNotification userNotification = userNotificationDAO.select(userEmail);
+        if (userNotification != null){
+            initializeUserSettings(userNotification);
+        }
+    }
+
+    private void initializeUserSettings(UserNotification userNotification) {
+        if(userNotification.getCustomMessage()){
+           setMessageLabel(userNotification.getNotificationText());
+           setTitleLabel(userNotification.getNotificationTitle());
+        }
+        if (userNotification.getCustomSound()){
+            TimerController.setNotificationSound(userNotification.getSoundEffect());
+        }
+        if (userNotification.getSoftAlert()){
+            TimerController.setNotificiationVolume(0.1);
+        }
+    }
 
     public void displayNotification() {
         Point2D notificationPosition = calculateStagePosition();
@@ -61,7 +93,6 @@ public class NotificationsController{
         closeNotificationTimeline.play();
     }
 
-    public void updateNotification(String message) {messageLabel.setText(message);}
 
     public Point2D calculateStagePosition() {
         Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
@@ -70,6 +101,14 @@ public class NotificationsController{
         double y = screenBounds.getMinY() + screenBounds.getHeight() / 4;
 
         return new Point2D(x,y);
+    }
+
+    public void setMessageLabel(String message){
+        messageLabel.setText(message);
+    }
+
+    public void setTitleLabel(String title){
+        titleLabel.setText(title);
     }
 }
 

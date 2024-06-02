@@ -1,23 +1,29 @@
 package com.example.main_sem_proj.controller;
 
+import com.example.main_sem_proj.model.database.SqliteUserSettingDAO;
+import com.example.main_sem_proj.model.users.UserSetting;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.scene.layout.*;
 import javafx.scene.control.ChoiceBox;
 
 import java.io.IOException;
+import java.time.Duration;
+import java.time.LocalTime;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 
 /**
  * The controller class for the Main view of the application.
  * This class handles the user interactions in the Main view.
  */
 public class MainController {
-
     @FXML
     public VBox mainPage;
     @FXML
@@ -35,15 +41,70 @@ public class MainController {
     @FXML
     public Label scheduleLabel;
     @FXML
+    public ToggleButton hamburgerButton;
+    @FXML
     private Label welcomeLabel;
+    private Timeline timeline;
+    private Timeline initialize;
 
+    private LoginController loginController;
     private final TimerController timerController = new TimerController(this::updateButtonLabel);
+    private final SqliteUserSettingDAO userSettingDAO = new SqliteUserSettingDAO();
+    NotificationsController notification = new NotificationsController();
 
     public void setWelcomeLabel(String welcomeMessage) {
         welcomeLabel.setText(welcomeMessage);
     }
 
     public void setScheduleLabel(String scheduleMessage) {scheduleLabel.setText(scheduleMessage);}
+
+    public void setUserEmail(String email) { userEmail = email;}
+    public static String userEmail;
+
+    @FXML
+    private void initialize(){
+        startTimeline();
+    }
+    private void startTimeline() {
+        timeline = new Timeline(new KeyFrame(javafx.util.Duration.seconds(1), this::updateScheduleLabelText));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+    }
+
+    // Method to set LoginController reference
+    public void setLoginController(LoginController loginController) {
+        this.loginController = loginController;
+    }
+
+    public void updateScheduleLabelText(ActionEvent event) {
+        // Retrieve the user's sleep schedule from the database
+        UserSetting userSetting = userSettingDAO.select(userEmail);
+        if (userSetting != null && Boolean.TRUE.equals(userSetting.getSleepSchedule())) {
+            // Get the current time
+            LocalTime currentTime = LocalTime.now();
+
+            // Calculate the time until bedtime or wake-up time
+            LocalTime bedtime = LocalTime.parse(userSetting.getBedTime());
+            LocalTime wakeupTime = LocalTime.parse(userSetting.getWakeTime());
+
+            if (currentTime.isBefore(bedtime)) {
+                // Calculate time until bedtime
+                Duration untilBedtime = Duration.between(currentTime, bedtime);
+                setScheduleLabel(String.format("Bedtime in %d hour(s) %d minute(s)", untilBedtime.toHours(), untilBedtime.toMinutesPart()));
+            } else {
+                // Calculate time until wakeup time, accounting for wakeup time on the next day
+                LocalTime adjustedWakeupTime = wakeupTime;
+                if (currentTime.isAfter(wakeupTime)) {
+                    adjustedWakeupTime = wakeupTime.plusHours(24);
+                }
+                Duration untilWakeup = Duration.between(currentTime, adjustedWakeupTime);
+                setScheduleLabel(String.format("Wake-up in %d hour(s) %d minute(s)", untilWakeup.toHours(), untilWakeup.toMinutesPart()));
+            }
+        } else {
+            // If the user's sleep schedule is not enabled, clear the schedule label text
+            setScheduleLabel("");
+        }
+    }
 
 
     //
@@ -61,8 +122,12 @@ public class MainController {
         if (count == 2 || count == 0)
         {
             lightMode();
+            count = count - 2;
         }
     }
+    //
+    // Colour Modes
+    //
     protected void lightMode(){
         darkModeButton.setText("Dark Mode");
 
@@ -74,15 +139,11 @@ public class MainController {
         mainPage.setStyle("-fx-background-color: white");
         welcomeLabel.setStyle("-fx-text-fill: black");
 
-//        sliderValue.setStyle("-fx-text-fill: black");
-//        colourSlider.lookup(".thumb").setStyle("-fx-background-color: white;");
-
         signoutButton.setStyle("-fx-background-color: BFBEBE; -fx-text-fill: black;");
 
         darkModeButton.setStyle("-fx-background-radius: 10; -fx-background-color: E0E0E0; -fx-text-fill: black; -fx-padding: 0 0 0 0;");
         notificationsButton.setStyle("-fx-background-radius: 10; -fx-background-color: E0E0E0; -fx-text-fill: black; -fx-padding: 0 0 0 0;");
         settingsButton.setStyle("-fx-background-radius: 10; -fx-background-color: E0E0E0; -fx-text-fill: black; -fx-padding: 0 0 0 0;");
-        count = count - 2;
     }
 
     protected void darkMode(){
@@ -96,15 +157,24 @@ public class MainController {
         mainPage.setStyle("-fx-background-color:#252525");
         welcomeLabel.setStyle("-fx-text-fill: white");
 
-//        sliderValue.setStyle("-fx-text-fill: white");
-//        colourSlider.lookup(".thumb").setStyle("-fx-background-color: grey;");
-
         signoutButton.setStyle("-fx-background-color: #353435; -fx-text-fill: white;");
 
         darkModeButton.setStyle("-fx-background-radius: 10; -fx-background-color: #414141; -fx-text-fill: white; -fx-padding: 0 0 0 0;");
         notificationsButton.setStyle("-fx-background-radius: 10; -fx-background-color: #414141;-fx-text-fill: white; -fx-padding: 0 0 0 0;");
         settingsButton.setStyle("-fx-background-radius: 10; -fx-background-color: #414141;-fx-text-fill: white; -fx-padding: 0 0 0 0;");
     }
+
+    //
+    // Hamburger Button
+    //
+
+    public void toggleBurgerMenu(MouseEvent event) throws IOException {
+        double[] coordinates = getScreenCoordinates(event);
+        double x = coordinates[0];
+        double y = coordinates[1];
+        HamburgerController.toggleBurgerMenu(x, y);
+    }
+
 
     //
     // Pop up windows
@@ -174,4 +244,7 @@ public class MainController {
         Stage stageToClose = (Stage) ((Node) event.getSource()).getScene().getWindow();
         LoginController.openLoginWindow(stageToClose);
     }
+
+
+
 }

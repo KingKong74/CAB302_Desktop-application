@@ -2,6 +2,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.scene.text.Font?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.main_sem_proj.controller.SettingsPopController"
@@ -19,13 +20,38 @@
             <VBox prefHeight="5"/>
             <Label style="-fx-font-size: 14px;">Set Schedule:</Label>
             <VBox prefHeight="4"/>
-            <HBox spacing="45">
+            <HBox spacing="47">
                 <Label fx:id="startTimeLabel">Start Time:</Label>
                 <Label fx:id="endTimeLabel">End Time:</Label>
             </HBox>
-            <HBox spacing="30">
+            <HBox spacing="5">
                 <ComboBox fx:id="startTimeComboBox" prefWidth="70" promptText="06:00" editable="true"/>
+                <VBox>
+                    <ToggleButton fx:id="amToggleStart" text="AM" prefWidth="16" prefHeight="7.5" toggleGroup="$startTime">
+                        <font>
+                            <Font size="5"/>
+                        </font>
+                    </ToggleButton>
+                    <ToggleButton fx:id="pmToggleStart" text="PM" prefWidth="16" prefHeight="7.5" toggleGroup="$startTime">
+                        <font>
+                            <Font size="5"/>
+                        </font>
+                    </ToggleButton>
+                </VBox>
+                <HBox prefWidth="1"/>
                 <ComboBox fx:id="endTimeComboBox" prefWidth="70" promptText="10:00" editable="true"/>
+                <VBox>
+                    <ToggleButton fx:id="amToggleEnd" text="AM" prefWidth="16" prefHeight="7.5" toggleGroup="$endTime">
+                        <font>
+                            <Font size="5"/>
+                        </font>
+                    </ToggleButton>
+                    <ToggleButton fx:id="pmToggleEnd" text="PM" prefWidth="16" prefHeight="7.5" toggleGroup="$endTime">
+                        <font>
+                            <Font size="5"/>
+                        </font>
+                    </ToggleButton>
+                </VBox>
             </HBox>
             <VBox prefHeight="6"/>
             <HBox spacing="15">
@@ -35,13 +61,38 @@
             <VBox prefHeight="9"/>
             <Label style="-fx-font-size: 14px;">Set Bedtime / Wakeup: </Label>
             <VBox prefHeight="4"/>
-            <HBox spacing="55">
+            <HBox spacing="57">
                 <Label fx:id="bedTimeLabel">Bedtime:</Label>
                 <Label fx:id="wakeUpLabel">Wakeup:</Label>
             </HBox>
-            <HBox spacing="30">
+            <HBox spacing="5">
                 <ComboBox fx:id="bedTimeComboBox" prefWidth="70" promptText="21:30" editable="true" />
+                <VBox>
+                    <ToggleButton fx:id="amToggleBed" text="AM" prefWidth="16" prefHeight="7.5" toggleGroup="$bedTime">
+                        <font>
+                            <Font size="5"/>
+                        </font>
+                    </ToggleButton>
+                    <ToggleButton fx:id="pmToggleBed" text="PM" prefWidth="16" prefHeight="7.5" toggleGroup="$bedTime">
+                        <font>
+                            <Font size="5"/>
+                        </font>
+                    </ToggleButton>
+                </VBox>
+                <HBox prefWidth="1"/>
                 <ComboBox fx:id="wakeTimeComboBox" prefWidth="70" promptText="07:00" editable="true"/>
+                <VBox>
+                    <ToggleButton fx:id="amToggleWake" text="AM" prefWidth="16" prefHeight="7.5" toggleGroup="$wakeTime">
+                        <font>
+                            <Font size="5"/>
+                        </font>
+                    </ToggleButton>
+                    <ToggleButton fx:id="pmToggleWake" text="PM" prefWidth="16" prefHeight="7.5" toggleGroup="$wakeTime">
+                        <font>
+                            <Font size="5"/>
+                        </font>
+                    </ToggleButton>
+                </VBox>
             </HBox>
             <VBox prefHeight="6"/>
             <HBox spacing="17">
@@ -61,12 +112,9 @@
                 <CheckBox fx:id="locationCheckBox" onAction="#handleEnableLocation"/>
             </HBox>
             <VBox prefHeight="6"/>
-
             <HBox alignment="CENTER">
-                <Button prefWidth="85" text="Save"/>
+                <Button prefWidth="85" text="Save" onAction="#handleSave"/>
             </HBox>
-
-
         </VBox>
     </HBox>
 </VBox>
